@@ -1,7 +1,7 @@
 # Project FingerCoaster
 
 Igra Finger Coaster je takmičenje u brzom kucanju. 
-Od funkcijonalnosti izdvajamo:
+Od funkcionalnosti izdvajamo:
 
      1. Mogućnost igranja igrice online i offline
      2. Igranje više korisnika i takmičenje
