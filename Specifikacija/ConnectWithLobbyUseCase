@@ -1,0 +1,44 @@
+=========================================================================
+Kratak opis:
+
+Client pritiskom na dugme "Connect with lobby" iz glavnog menija
+dobija pop-up gde se prikazuje polje za unos kljuca.
+Nakon unosa,pritiskom na dugme "Join" client se prebacuje u lobby
+prozor i salje poruku host-u da je spreman.Kada su svi pristigli igraci spremni tada host zapocinje igru.
+=========================================================================
+Akteri:
+	-Host(kreira i otvara lobby)
+	-Client (Ulazi u lobby)
+=========================================================================
+Preduslovi:
+
+Aplikacija je otvorena i prikazuje glavni meni.
+==========================================================================
+Osnovni tok:
+	1. Client bira dugme "Connect with lobby" iz glavnog menija
+	------------------------------------------------------------------
+	2. Aplikacija izbacuje pop-up pomocu koga client pristupa lobby-ju
+		2.1 Sve dok korisnik ne unese ispravan kljuc:
+			2.1.1 Client unosi kljuc u odgovarajuce polje
+			2.1.2 Pritiskom na dugme "Join" client pokusava da pristupi sobi
+			2.1.3 Ukoliko je client uneo neispravan kljuc,ispisuje mu se odgovarajuca poruka o gresci.
+	------------------------------------------------------------------
+	3. Client salje zahtev serveru:
+		3.1 Ako server prihvati zahtev prelazi se na korak 4	
+		3.2 Ako server odbije zahtev ispisuje se neuspeh
+	------------------------------------------------------------------
+	4. Aplikacija otvara novi prozor pod nazivom "Lobby"
+		4.1 Primanje konfiguracione poruke od servera
+	------------------------------------------------------------------
+	5. Klijent salje konfiguracionu poruku serveru
+	------------------------------------------------------------------
+	6. Klijent salje poruku hostu da je spreman
+	------------------------------------------------------------------
+	7. Host dobija mogucnost pokretanja igre pritiskom na dugme play
+==========================================================================
+Alternativni tok:
+	Host obavestava client-a da je prevremeno prekinuo igru.
+==========================================================================
+Specijalni zahtevi:
+	Aplikacija je povezana na internet radi komunikacije host-client.
+==========================================================================
