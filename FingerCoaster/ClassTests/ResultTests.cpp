@@ -38,7 +38,7 @@ TEST_CASE("Result class tests"){
             Result result(*date,wpm,correct,failed,username);
             //std::string formatedOutput = result.formatResult();
             
-            std::cout << formatedOutput << std::endl;
+            //std::cout << formatedOutput << std::endl;
             CHECK(formatedOutput.size() > 0);
     }
 
