@@ -21,7 +21,9 @@ public:
         _failed = failed;
         _username = username;
     }
-    
+
+    //Format here should be something like this:
+    //12:3:2021-200-63.10-53-31-username
     Result(std::vector<std::string>& formatedResult){
 
         if(formatedResult.size() == 0){
@@ -34,10 +36,6 @@ public:
         _correct = std::stoi(formatedResult[3]);
         _failed = std::stoi(formatedResult[4]);
         _username = formatedResult[5];
-    }
-
-    unsigned giveWpm() const{
-        return _wpm;
     }
 
     std::string formatResultDisplay() {
@@ -71,7 +69,29 @@ public:
         return formatedResult.str();
     }
 
-    float calcAccuracy(){
+    friend bool operator>(Result r1,Result r2){
+        if(r1._wpm >= r2._wpm)
+            return true;
+        
+        return false;
+    }
+
+    friend bool operator<(Result r1,Result r2){
+        if(r1._wpm > r2._wpm)
+            return true;
+
+        return false;
+    }
+
+    friend bool operator==(Result r1,Result r2){
+        if(r1._wpm == r2._wpm)
+            return true;
+
+        return false;
+    }
+
+private:
+    float calcAccuracy() const{
         
         int totalWords = _correct + _failed;
 
@@ -80,6 +100,7 @@ public:
 
         return (_correct * 100) / float(totalWords); 
     }
+
 
 private:
     std::string _date;
