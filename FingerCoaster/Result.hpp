@@ -68,7 +68,7 @@ public:
 
         return formatedResult.str();
     }
-
+        
     friend bool operator>(Result r1,Result r2){
         if(r1._wpm >= r2._wpm)
             return true;

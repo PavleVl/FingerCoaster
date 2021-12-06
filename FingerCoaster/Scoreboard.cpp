@@ -53,10 +53,13 @@ void Scoreboard::loadResults(){
 }
 
 void Scoreboard::writeUsername(std::string& username){
-    std::ofstream file(FPATH);
-    file << username;
+    if(_isFirstTime){
+        std::ofstream file(FPATH)
+        file << username;
 
-    file.close();
+        file.close();
+        _isFirstTime = false;
+    }
 }
 
 void Scoreboard::updateScoreboard(Result& result){
@@ -79,4 +82,29 @@ void Scoreboard::updateScoreboard(Result& result){
 
 
     file.close();
+}
+
+std::string Scoreboard::giveFormatedScoreboard(){
+
+    std::stringstream output;
+
+    for(unsigned i=0;i<_results.size();i++)
+        output << _results[i].formatResultDisplay();
+
+    return output.str();
+}
+
+int main(){
+
+    Scoreboard sc;
+
+    std::vector<std::string> arr = split("12:3:2021-250-63.10-53-31-username",'-');
+    Result res(arr);
+    sc.updateScoreboard(res);
+    
+    std::string str = "NePavle";
+    sc.writeUsername(str);
+
+    std::cout << sc.giveFormatedScoreboard();
+    return 0;
 }

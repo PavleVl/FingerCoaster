@@ -23,10 +23,12 @@ public:
 
     void writeUsername(std::string& username);
 
-//private:
+    std::string giveFormatedScoreboard();
+
+private:
     void loadResults();
 
-//private:
+private:
     std::vector<Result> _results;
     bool _isFirstTime;
 
