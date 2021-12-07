@@ -1,5 +1,5 @@
 #include "Scoreboard.hpp"
-#define FPATH "SavedFiles/scoreboard.txt"
+#define FPATH "../SavedFiles/scoreboard.txt"
 
 
 std::vector<std::string> split (const std::string &s, char delim) {

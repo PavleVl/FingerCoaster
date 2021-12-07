@@ -7,7 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include "Result.hpp"
+#include "../Result/Result.hpp"
 
 class Scoreboard{
 

@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
-#include "catch.hpp"
-#include "../Result.hpp"
+#include "../SavedFiles/catch.hpp"
+#include "Result.hpp"
 
 #include <ctime>
 #include <string>
