@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/storageTests.dir/StorageTests.cpp.o  -o storageTests  libStorage.a 

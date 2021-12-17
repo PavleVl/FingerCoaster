@@ -1,0 +1,4 @@
+/home/pavle/Desktop/18-FingerCoaster/FingerCoaster/Storage/build/CMakeFiles/rebuild_cache.dir
+/home/pavle/Desktop/18-FingerCoaster/FingerCoaster/Storage/build/CMakeFiles/edit_cache.dir
+/home/pavle/Desktop/18-FingerCoaster/FingerCoaster/Storage/build/CMakeFiles/storageTests.dir
+/home/pavle/Desktop/18-FingerCoaster/FingerCoaster/Storage/build/CMakeFiles/Storage.dir

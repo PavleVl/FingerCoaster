@@ -12,7 +12,7 @@
 class Scoreboard{
 
 public:
-    Scoreboard(){
+    inline Scoreboard(){
         _isFirstTime = false;
         loadResults();
     }

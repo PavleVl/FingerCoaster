@@ -10,7 +10,7 @@
 
 TEST_CASE("Result class tests"){
 
-    SECTION("Constructor - Wpm out of bounds throws exception"){
+        SECTION("Constructor - Wpm out of bounds throws exception"){
 
             std::string date = "12:3:2021";
             unsigned wpm = 500;
@@ -20,9 +20,9 @@ TEST_CASE("Result class tests"){
 
             
             REQUIRE_THROWS(Result(date,wpm,correct,failed,username));
-    }
+        }
 
-    SECTION("Format - No empty string"){
+        SECTION("Format - No empty string"){
             
             std::string date = "12:3:2021";
             unsigned wpm = 100;
@@ -35,6 +35,9 @@ TEST_CASE("Result class tests"){
             
             std::cout << formatedOutput << std::endl;
             CHECK(formatedOutput.size() > 0);
-    }
+        }
+
+
+
 
 }
