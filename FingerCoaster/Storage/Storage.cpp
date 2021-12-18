@@ -24,6 +24,10 @@ unsigned Storage::getDifficulty() const{
 unsigned Storage::getNumberOfPlayers() const{
     return numberOfPlayers;
 }
+
+std::string Storage::getChoosenFile() const{
+    return choosenFile;
+}
 //-----------------------------------------------------------------------------------------------------
 
 //Seters
@@ -43,9 +47,18 @@ void Storage::setNumberOfPlayers(unsigned newNumberOfPlayers){
 
     numberOfPlayers = newNumberOfPlayers;
 }
+
+void Storage::setChoosenFIle(std::string newChoosenFile){
+
+    if(newChoosenFile == "")
+        throw std::invalid_argument("File name is missing");
+
+    choosenFile = newChoosenFile;
+}
+
 //-----------------------------------------------------------------------------------------------------
 
-std::string Storage::pickRandomFile(){
+void Storage::pickRandomFile(){
 
     std::string fName = "";
     switch(difficulty){
@@ -64,12 +77,13 @@ std::string Storage::pickRandomFile(){
     fName += std::to_string(rand() % 3 + 1);
     fName += ".txt";
 
-    return fName;
+    choosenFile = fName;
 }
 
-void Storage::loadRandText(){
+void Storage::loadText(bool randomTextFlag){
 
-    std::string fullPath = PATH + pickRandomFile();
+    pickRandomFile();
+    std::string fullPath = PATH + choosenFile;
 
     std::ifstream inFile;
     inFile.open(fullPath);

@@ -12,28 +12,32 @@ class Storage{
 
 public:
     inline Storage():
-    difficulty{0},numberOfPlayers(1),text(""){};
+    difficulty{0},numberOfPlayers(1),text(""),choosenFile(""){};
 
     void setDifficulty(unsigned newDifficulty);
 
     void setNumberOfPlayers(unsigned newNumberOfPlayer);
     
+    void setChoosenFIle(std::string newChoosenFile);
+
     unsigned getDifficulty() const;
 
     unsigned getNumberOfPlayers() const;
 
-    void loadRandText();
+    std::string getChoosenFile() const;
+
+    void loadText(bool randomTextFlag);
     
     std::vector<std::string> formatTextForGame() const;
 
 private:
-    std::string pickRandomFile();
+    void pickRandomFile();
 
 private:
     unsigned difficulty;
     unsigned numberOfPlayers;
+    std::string choosenFile;
     std::string text;
-
 };
 
 #endif

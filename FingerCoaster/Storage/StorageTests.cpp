@@ -24,6 +24,16 @@ TEST_CASE("Storage class tests"){
         REQUIRE_THROWS(ourStorage.setNumberOfPlayers(newNumberOfPlayers));
     }
 
+    SECTION("setChoosenFile throws exception if file name is missing"){
+        
+        Storage ourStorage;
+        std::string newFname = "";
+
+        REQUIRE_THROWS(ourStorage.setChoosenFIle(newFname));
+    }
+
+
+
     SECTION("formatTextForGame throws exception if text is missing"){
 
         Storage ourStorage;
