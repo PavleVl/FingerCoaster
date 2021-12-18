@@ -1,4 +1,4 @@
-QT       += core gui multimedia
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,20 +9,19 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Sources/gameEngine.cpp \
-    Sources/main.cpp \
-    Sources/mainMenu.cpp \
-    Sources/mainwindow.cpp \
-    Sources/map.cpp \
-    Sources/menuBtn.cpp
+    gameEngine.cpp \
+    main.cpp \
+    mainMenu.cpp \
+    mainwindow.cpp \
+    map.cpp \
+    menuBtn.cpp
 
 HEADERS += \
-    Headers/configuration.h \
-    Headers/gameEngine.h \
-    Headers/mainMenu.h \
-    Headers/mainwindow.h \
-    Headers/map.h \
-    Headers/menuBtn.h
+    gameEngine.h \
+    mainMenu.h \
+    mainwindow.h \
+    map.h \
+    menuBtn.h
 
 FORMS += \
     mainwindow.ui

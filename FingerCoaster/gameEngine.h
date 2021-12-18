@@ -8,9 +8,8 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QDebug>
-#include <QMediaPlayer>
-#include <QUrl>
 #include "configuration.h"
+#include "mainwindow.h"
 #include "mainMenu.h"
 #include "map.h"
 
@@ -21,19 +20,23 @@ public:
     ~GameEngine();
 //    void keyPressEvent(QKeyEvent* event)override;
     void resizeEvent(QResizeEvent* event)override;
-    void playMusic(QString path);
+    void playMusic();
 public slots:
     void exit();
     void openMenu();
+    void showScore();
 private:
     QImage background;
     int windowWidth;
     int windowHeight;
     mainMenu* menuScene;
+    mainMenu* newScene;
     bool spacePressed;
     QGraphicsScene* levelScene;
+    MainWindow* mainWindow;
     Map* map;
-    QMediaPlayer* musicPlayer;
+    Ui::MainWindow* gui;
+    //    QMediaPlayer* musicPlayer;
 };
 
 #endif // GAMEENGINE_H

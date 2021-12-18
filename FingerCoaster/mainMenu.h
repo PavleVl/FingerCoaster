@@ -12,9 +12,11 @@ public:
     ~mainMenu();
     QList<menuBtn*> getButtonList()const;
     menuBtn* getQuitButton()const;
+    menuBtn* getScoreboardButton()const;
 private:
     QList<menuBtn*> buttonList;
     menuBtn* QuitButton;
+    menuBtn* scoreboardButton;
 };
 
 

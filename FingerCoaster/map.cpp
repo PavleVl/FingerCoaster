@@ -1,4 +1,4 @@
-#include "Headers/map.h"
+#include "map.h"
 
 Map::Map(){
     width = MAP_WIDTH;

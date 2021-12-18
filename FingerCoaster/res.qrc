@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/images/prefix1">
+        <file>button.jpeg</file>
         <file>cursor.jpeg</file>
+        <file>Exit.png</file>
+        <file>Exit_ccexpress.png</file>
         <file>main-menu.jpg</file>
-        <file>exit.png</file>
     </qresource>
 </RCC>

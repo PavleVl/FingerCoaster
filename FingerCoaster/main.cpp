@@ -1,6 +1,5 @@
-#include "Headers/mainwindow.h"
-#include "Headers/gameEngine.h"
 #include <QApplication>
+#include "gameEngine.h"
 
 int main(int argc, char *argv[])
 {
