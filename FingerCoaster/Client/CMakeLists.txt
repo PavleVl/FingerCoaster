@@ -7,6 +7,6 @@ add_library(
     Client.hpp
 )
 
-add_executable(clientTests client.cpp)
+add_executable(clientTests ClientTests.cpp)
 
 target_link_libraries(clientTests PRIVATE Client)
