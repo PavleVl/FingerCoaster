@@ -1,0 +1,9 @@
+# This file is used to ignore files which are generated
+#----------------------------------------------------------------------------
+*.o
+*.out
+.DS_Store
+FingerCoaster.*
+*.ui
+*.qrc
+build
