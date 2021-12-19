@@ -3,10 +3,8 @@
 *.o
 *.out
 .DS_Store
-FingerCoaster/FingerCoaster.*
-FingerCoaster/*.ui
-FingerCoaster/*.qrc
-*.ui
-*.qrc
+*/FingerCoaster.*
+*/*.ui
+*/*.qrc
 build
 
