@@ -5,5 +5,5 @@
 *.out
 .DS_Store
 build
-:w
+build.*
 
