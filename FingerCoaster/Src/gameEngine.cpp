@@ -1,6 +1,7 @@
-#include "gameEngine.h"
+#include "Headers/gameEngine.h"
+#include "Headers/mainwindow.h"
+#include "Headers/configuration.h"
 #include "ui_mainwindow.h"
-#include "mainwindow.h"
 #include <qwidget.h>
 
 GameEngine::GameEngine(){
@@ -53,7 +54,7 @@ void GameEngine::exit()
 
 void GameEngine::resizeEvent(QResizeEvent *event){
     if(levelScene)
-            levelScene->setSceneRect(0,0,map->getWidth(),map->getHeight());
+            levelScene->setSceneRect(0,0,MAP_WIDTH,MAP_HEIGHT);
     QRect rect = QRect(0,0,WINDOW_WIDTH,map->getHeight());
     fitInView(rect);
 }

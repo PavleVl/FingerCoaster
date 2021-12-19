@@ -1,0 +1,7 @@
+FingerCoaster.*
+*.o
+*.out
+*.DS_Store
+*.ui
+*.qrc
+build

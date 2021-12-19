@@ -1,4 +1,4 @@
-#include "mainMenu.h"
+#include "Headers/mainMenu.h"
 
 mainMenu::mainMenu():QGraphicsScene(){
     int xBtn = 1680;

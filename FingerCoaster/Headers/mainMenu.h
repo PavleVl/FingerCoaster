@@ -3,8 +3,8 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include "menuBtn.h"
-#include "configuration.h"
+#include "Headers/menuBtn.h"
+#include "Headers/configuration.h"
 
 class mainMenu:public QGraphicsScene{
 public:

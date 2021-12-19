@@ -9,19 +9,20 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    gameEngine.cpp \
-    main.cpp \
-    mainMenu.cpp \
-    mainwindow.cpp \
-    map.cpp \
-    menuBtn.cpp
+    Src/gameEngine.cpp \
+    Src/main.cpp \
+    Src/mainMenu.cpp \
+    Src/mainwindow.cpp \
+    Src/map.cpp \
+    Src/menuBtn.cpp \
 
 HEADERS += \
-    gameEngine.h \
-    mainMenu.h \
-    mainwindow.h \
-    map.h \
-    menuBtn.h
+    Headers/configuration.h \
+    Headers/gameEngine.h \
+    Headers/mainMenu.h \
+    Headers/mainwindow.h \
+    Headers/map.h \
+    Headers/menuBtn.h \
 
 FORMS += \
     mainwindow.ui

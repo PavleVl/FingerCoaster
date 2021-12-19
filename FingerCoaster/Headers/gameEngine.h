@@ -8,10 +8,10 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QDebug>
-#include "configuration.h"
-#include "mainwindow.h"
-#include "mainMenu.h"
-#include "map.h"
+#include "Headers/configuration.h"
+#include "Headers/mainwindow.h"
+#include "Headers/mainMenu.h"
+#include "Headers/map.h"
 
 class GameEngine:public QGraphicsView{
     Q_OBJECT

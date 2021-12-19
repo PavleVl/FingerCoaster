@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "Headers/mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -25,8 +25,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableView->setModel(Scoreboard);
 
     ui->tableView->horizontalHeader()->setVisible(true);
-    //qDebug()<<ui->tableView->geometry();
-//    ui->tableView->show();
 }
 
 
