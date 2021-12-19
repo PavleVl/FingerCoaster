@@ -5,5 +5,8 @@
 *.out
 .DS_Store
 build
-:w
+build*
+<<<<<<< HEAD
 
+=======
+>>>>>>> Scoreboard-0.0
