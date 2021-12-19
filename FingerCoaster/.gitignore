@@ -3,6 +3,5 @@
 *.o
 *.out
 FingerCoaster.*
-*.ui
-*.qrc
+!FingerCoaster.pro
 build
