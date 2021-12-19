@@ -1,8 +1,12 @@
 # This file is used to ignore files which are generated
-# ----------------------------------------------------------------------------
-
+#----------------------------------------------------------------------------
 *.o
 *.out
-.DS_store
+.DS_Store
+FingerCoaster/FingerCoaster.*
+FingerCoaster/*.ui
+FingerCoaster/*.qrc
+*.ui
+*.qrc
 build
 
