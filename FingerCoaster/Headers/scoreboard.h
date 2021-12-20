@@ -21,8 +21,8 @@ class Model : public QAbstractTableModel
 
 public:
     Model(QObject *parent = 0);
-
-    void populateData(const QVector<QString> &place,const QVector<int> &wpm);
+        //OVDE JE STAJAO Model::populateData
+    void populateData(const QVector<QString> &place, const QVector<QString> &date, const QVector<int> &wpm, const QVector<float> &acc);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
@@ -34,6 +34,8 @@ public:
 private:
     QVector<QString> tm_place;
     QVector<int> tm_wpm;
+    QVector<QString> tm_date;
+    QVector<float> tm_acc;
 
 
 };

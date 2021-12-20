@@ -15,6 +15,9 @@ Scoreboard::Scoreboard(QWidget *parent) :
 
     QVector<QString> places;
     QVector<int> wpm;
+    QVector<QString> dates;
+    QVector<float> accuracy;
+
     wpm.fill(0,10);
 
     //Prvi put username
@@ -37,7 +40,8 @@ Scoreboard::Scoreboard(QWidget *parent) :
               index++;
     }
 
-    Scoreboard->populateData(places,wpm);
+
+    Scoreboard->populateData(places, dates, wpm, accuracy);
 
     ui->tableView->setModel(Scoreboard);
 
@@ -62,19 +66,25 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
 {
 }
 
-void Model::populateData(const QVector<QString> &place,const QVector<int> &wpm)
+void Model::populateData(const QVector<QString> &place, const QVector<QString> &date, const QVector<int> &wpm, const QVector<float> &acc)
 {
 tm_place.clear();
 tm_place = place.toList();
+tm_date.clear();
+tm_date = date.toList();
 tm_wpm.clear();
 tm_wpm = wpm.toList();
+tm_acc.clear();
+tm_acc = acc.toList();
+
 return;
 }
 
 int Model::rowCount(const QModelIndex &parent) const
 {
 Q_UNUSED(parent);
-return tm_place.length();
+//return 10;
+  return tm_place.length();
 }
 
 int Model::columnCount(const QModelIndex &parent) const
@@ -91,8 +101,13 @@ if (!index.isValid() || role != Qt::DisplayRole) {
 if (index.column() == 0) {
     return tm_place[index.row()];
 } else if (index.column() == 1) {
+    return tm_date[index.row()];
+} else if (index.column() == 2) {
     return tm_wpm[index.row()];
+} else if (index.column() == 3) {
+    return tm_acc[index.row()];
 }
+
 return QVariant();
 }
 
@@ -102,8 +117,14 @@ if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
     if (section == 0) {
         return QString("Place");
     } else if (section == 1) {
+        return QString("Date");
+    } else if (section == 2) {
         return QString("WPM");
+    } else if (section == 3) {
+        return QString("Accuracy");
     }
+
 }
 return QVariant();
 }
+
