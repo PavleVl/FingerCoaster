@@ -1,5 +1,5 @@
-#include "Scoreboard.hpp"
-#define FPATH "../SavedFiles/scoreboard.txt"
+#include "ScoreboardBackend.hpp"
+#define FPATH "../../SavedFiles/scoreboard.txt"
 
 
 std::vector<std::string> split (const std::string &s, char delim) {
@@ -16,21 +16,22 @@ std::vector<std::string> split (const std::string &s, char delim) {
 
 void initFile(){
     std::ofstream file(FPATH);  
+    file << "Pavle";
     file.close();
 }
 
-bool Scoreboard::isFirstTimeCheck(){
+bool ScoreboardBackend::isFirstTimeCheck(){
     return _isFirstTime;
 }
 
-void Scoreboard::loadResults(){
+void ScoreboardBackend::loadResults(){
 
     std::ifstream inFile;
     inFile.open(FPATH);
 
     //If there is no file for writing we init the file
     if(inFile.fail()){
-        Scoreboard::_isFirstTime = true;
+        _isFirstTime = true;
         initFile();
     }
     
@@ -44,7 +45,7 @@ void Scoreboard::loadResults(){
         std::vector<std::string> components = split(line,'-');
     
         Result curRes(components);
-        Scoreboard::_results.push_back(curRes);
+        _results.push_back(curRes);
     }
 
     
@@ -52,7 +53,7 @@ void Scoreboard::loadResults(){
     inFile.close();
 }
 
-void Scoreboard::writeUsername(std::string& username){
+void ScoreboardBackend::writeUsername(std::string& username){
     if(_isFirstTime){
         std::ofstream file(FPATH);
         file << username;
@@ -62,7 +63,7 @@ void Scoreboard::writeUsername(std::string& username){
     }
 }
 
-void Scoreboard::updateScoreboard(Result& result){
+void ScoreboardBackend::updateScoreboard(Result& result){
 
     _results.push_back(result);
     
@@ -84,7 +85,7 @@ void Scoreboard::updateScoreboard(Result& result){
     file.close();
 }
 
-std::string Scoreboard::giveFormatedScoreboard(){
+std::string ScoreboardBackend::giveFormatedScoreboard(){
 
     std::stringstream output;
 

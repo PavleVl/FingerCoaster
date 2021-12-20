@@ -21,6 +21,9 @@ Scoreboard::Scoreboard(QWidget *parent) :
     ui->vr_user->setText("Ovo se menja");
 
     Model *Scoreboard = new Model(this);
+    Scoreboard->savedScoreboard = new ScoreboardBackend();
+
+    std::cout << Scoreboard->savedScoreboard->giveFormatedScoreboard() << std::endl;
 
     Scoreboard->populateData(places,wpm);
 
@@ -29,7 +32,8 @@ Scoreboard::Scoreboard(QWidget *parent) :
     ui->tableView->horizontalHeader()->setVisible(true);
     //    ui->tableView->show();
 
-    }
+
+}
     /*
     Ui::MainWindow* MainWindow::getU(){
     return ui;

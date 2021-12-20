@@ -6,6 +6,9 @@
 #include <QApplication>
 
 #include <QDialog>
+#include "../Scoreboard/ScoreboardBackend.hpp"
+//---------------
+#include<iostream>
 
 namespace Ui {
 class Scoreboard;
@@ -25,9 +28,12 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+
+    ScoreboardBackend* savedScoreboard;
 private:
     QList<QString> tm_place;
     QList<int> tm_wpm;
+
 
 };
 

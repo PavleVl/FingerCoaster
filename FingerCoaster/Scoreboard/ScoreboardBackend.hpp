@@ -1,5 +1,5 @@
-#ifndef SCOREBOARD_HPP
-#define SCOREBOARD_HPP
+#ifndef SCOREBOARDBACKEND_HPP
+#define SCOREBOARDBACKEND_HPP
 
 #include <fstream>
 #include <filesystem>
@@ -9,10 +9,10 @@
 #include <iostream>
 #include "../Result/Result.hpp"
 
-class Scoreboard{
+class ScoreboardBackend{
 
 public:
-    inline Scoreboard(){
+    inline ScoreboardBackend(){
         _isFirstTime = false;
         loadResults();
     }
