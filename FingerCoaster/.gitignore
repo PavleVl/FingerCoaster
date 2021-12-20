@@ -4,8 +4,11 @@
 *.o
 *.out
 .DS_Store
+<<<<<<< HEAD
 FingerCoaster.*
 !FingerCoaster.pro
+=======
+>>>>>>> Server-0.0
 build
 build*
 <<<<<<< HEAD
