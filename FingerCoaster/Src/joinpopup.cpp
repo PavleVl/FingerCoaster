@@ -1,4 +1,4 @@
-#include "joinpopup.h"
+#include "Headers/joinpopup.h"
 #include "ui_joinpopup.h"
 
 JoinPopUp::JoinPopUp(QWidget *parent) :

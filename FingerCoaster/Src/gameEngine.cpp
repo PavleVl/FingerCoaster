@@ -1,9 +1,9 @@
-#include "gameEngine.h"
+#include "Headers/gameEngine.h"
 #include "ui_mainwindow.h"
-#include "mainwindow.h"
+#include "Headers/mainwindow.h"
 #include <qwidget.h>
-#include "joinpopup.h"
-#include "scoreboard.h"
+#include "Headers/joinpopup.h"
+#include "Headers/scoreboard.h"
 //#include "ui_joinpopup.h"
 
 GameEngine::GameEngine(){

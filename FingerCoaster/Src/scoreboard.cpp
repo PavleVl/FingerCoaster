@@ -1,4 +1,4 @@
-#include "scoreboard.h"
+#include "Headers/scoreboard.h"
 #include "ui_scoreboard.h"
 
 Scoreboard::Scoreboard(QWidget *parent) :
