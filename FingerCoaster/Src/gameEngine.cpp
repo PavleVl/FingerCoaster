@@ -20,10 +20,16 @@ GameEngine::GameEngine(){
 
     menuScene = new mainMenu();
 
+    //Ako smo prvi put usli i nije nam postavljen username
+    ScoreboardBackend* checkUsername = new ScoreboardBackend();
+    if(checkUsername->isFirstTimeCheck())
+        this->showUsernameInput();
+
     connect(menuScene->getQuitButton(),SIGNAL(clicked()),this,SLOT(exit()));
     connect(menuScene->getScoreboardButton(),SIGNAL(clicked()),this,SLOT(showScore()));
     connect(menuScene->getJoinButton(),SIGNAL(clicked()), this, SLOT(showLobby()));
- //   connect(menuScene->getCreateRoomButton(), SIGNAL(clicked()), this, SLOT(showLobby()));
+
+//   connect(menuScene->getCreateRoomButton(), SIGNAL(clicked()), this, SLOT(showLobby()));
 //    musicPlayer = new QMediaPlayer();
     openMenu();
 //    showFullScreen();
@@ -72,6 +78,13 @@ void GameEngine::resizeEvent(QResizeEvent *event){
     QRect rect = QRect(0,0,WINDOW_WIDTH,map->getHeight());
     fitInView(rect);
 }
+
+
+//If its the first time application is opening and
+//Scoreboard.txt is missing this will be run
+void GameEngine::showUsernameInput(){
+    //this->showLobby();
+};
 
 //void playMusic(QString path){
 //    musicPlayer->setMedia(QUrl(path));

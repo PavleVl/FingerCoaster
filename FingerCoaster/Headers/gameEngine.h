@@ -13,6 +13,7 @@
 #include "mainMenu.h"
 #include "joinpopup.h"
 #include "map.h"
+#include "../Scoreboard/ScoreboardBackend.hpp"
 
 class GameEngine:public QGraphicsView{
     Q_OBJECT
@@ -22,11 +23,15 @@ public:
 //    void keyPressEvent(QKeyEvent* event)override;
     void resizeEvent(QResizeEvent* event)override;
     void playMusic();
+    bool isFirstTime(ScoreboardBackend* sc);
+    void showUsernameInput();
+
 public slots:
     void exit();
     void openMenu();
     void showScore();
     void showLobby();
+
 private:
     QImage background;
     int windowWidth;
