@@ -5,10 +5,13 @@
 #include <QApplication>
 
 
+
+
+
 namespace Ui {
     class MainWindow;
 }
-
+/*
 class Model : public QAbstractTableModel
 {
     Q_OBJECT
@@ -28,7 +31,7 @@ private:
     QList<int> tm_wpm;
 
 };
-
+*/
 
 class MainWindow : public QMainWindow
 {

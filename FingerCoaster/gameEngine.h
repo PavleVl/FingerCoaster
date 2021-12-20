@@ -8,10 +8,11 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QDebug>
-#include "Headers/configuration.h"
-#include "Headers/mainwindow.h"
-#include "Headers/mainMenu.h"
-#include "Headers/map.h"
+#include "configuration.h"
+#include "mainwindow.h"
+#include "mainMenu.h"
+#include "joinpopup.h"
+#include "map.h"
 
 class GameEngine:public QGraphicsView{
     Q_OBJECT
@@ -25,12 +26,12 @@ public slots:
     void exit();
     void openMenu();
     void showScore();
+    void showLobby();
 private:
     QImage background;
     int windowWidth;
     int windowHeight;
     mainMenu* menuScene;
-    mainMenu* newScene;
     bool spacePressed;
     QGraphicsScene* levelScene;
     MainWindow* mainWindow;
@@ -39,4 +40,4 @@ private:
     //    QMediaPlayer* musicPlayer;
 };
 
-#endif // GAMEENGINE_H
+#endif // GAMEENGINE_ma

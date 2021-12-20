@@ -1,4 +1,4 @@
-#include "Headers/mainMenu.h"
+#include "mainMenu.h"
 
 mainMenu::mainMenu():QGraphicsScene(){
     int xBtn = 1680;
@@ -15,12 +15,18 @@ mainMenu::mainMenu():QGraphicsScene(){
     scoreboardButton->move(xBtn,yStartBtn+index*(scoreboardButton->height() +  BTN_GAP));
     this->addWidget(scoreboardButton);
 
+    createRoomButton = new menuBtn("Create room");
+    createRoomButton->move(BTN_GAP,yStartBtn+index*(createRoomButton->height() +  BTN_GAP));
+    this->addWidget(createRoomButton);
+
     index++;
     QuitButton = new menuBtn("Exit");
     QuitButton->move(xBtn,yStartBtn + index*(QuitButton->height() + BTN_GAP));
     this->addWidget(QuitButton);
 
-
+    joinButton = new menuBtn("Join");
+    joinButton->move (BTN_GAP, yStartBtn + index*(joinButton->height() + BTN_GAP));
+    this->addWidget(joinButton);
 
     QGraphicsTextItem* title = new QGraphicsTextItem();
     title->setPlainText(TITLE);
@@ -34,6 +40,7 @@ mainMenu::mainMenu():QGraphicsScene(){
 mainMenu::~mainMenu(){
 delete QuitButton;
 delete scoreboardButton;
+delete joinButton;
 }
 
 menuBtn* mainMenu::getQuitButton() const{
@@ -42,4 +49,12 @@ menuBtn* mainMenu::getQuitButton() const{
 
 menuBtn* mainMenu::getScoreboardButton()const{
     return scoreboardButton;
+}
+
+menuBtn* mainMenu::getJoinButton() const{
+    return joinButton;
+}
+
+menuBtn* mainMenu::getCreateRoomButton() const{
+    return getCreateRoomButton();
 }

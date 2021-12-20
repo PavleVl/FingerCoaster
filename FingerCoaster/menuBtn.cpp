@@ -1,4 +1,4 @@
-#include "Headers/menuBtn.h"
+#include "menuBtn.h"
 #include <QFont>
 #include <QPixmap>
 menuBtn::menuBtn(QString text){

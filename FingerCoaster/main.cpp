@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "Headers/gameEngine.h"
+#include "gameEngine.h"
 
 int main(int argc, char *argv[])
 {

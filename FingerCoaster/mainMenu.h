@@ -3,8 +3,8 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include "Headers/menuBtn.h"
-#include "Headers/configuration.h"
+#include "menuBtn.h"
+#include "configuration.h"
 
 class mainMenu:public QGraphicsScene{
 public:
@@ -13,10 +13,14 @@ public:
     QList<menuBtn*> getButtonList()const;
     menuBtn* getQuitButton()const;
     menuBtn* getScoreboardButton()const;
+    menuBtn* getJoinButton() const;
+    menuBtn* getCreateRoomButton() const;
 private:
     QList<menuBtn*> buttonList;
     menuBtn* QuitButton;
     menuBtn* scoreboardButton;
+    menuBtn* joinButton;
+    menuBtn* createRoomButton;
 };
 
 

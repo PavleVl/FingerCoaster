@@ -1,12 +1,13 @@
-#include "Headers/mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+/*
     QList<QString> places;
     QList<int> wpm;
 
@@ -25,14 +26,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableView->setModel(Scoreboard);
 
     ui->tableView->horizontalHeader()->setVisible(true);
+//    ui->tableView->show();
+
+*/
 }
+/*
+Ui::MainWindow* MainWindow::getU(){
+    return ui;
+}*/
 
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/*
 Model::Model(QObject *parent) : QAbstractTableModel(parent)
 {
 }
@@ -82,3 +90,4 @@ QVariant Model::headerData(int section, Qt::Orientation orientation, int role) c
     }
     return QVariant();
 }
+*/

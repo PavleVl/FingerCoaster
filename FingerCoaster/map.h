@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "Headers/configuration.h"
+#include "configuration.h"
 
 class Map
 {

@@ -9,23 +9,33 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Src/gameEngine.cpp \
-    Src/main.cpp \
-    Src/mainMenu.cpp \
-    Src/mainwindow.cpp \
-    Src/map.cpp \
-    Src/menuBtn.cpp \
+    createroom.cpp \
+    gameEngine.cpp \
+    joinpopup.cpp \
+    main.cpp \
+    mainMenu.cpp \
+    mainwindow.cpp \
+    map.cpp \
+    menuBtn.cpp \
+    scoreboard.cpp \
+    storage.cpp
 
 HEADERS += \
-    Headers/configuration.h \
-    Headers/gameEngine.h \
-    Headers/mainMenu.h \
-    Headers/mainwindow.h \
-    Headers/map.h \
-    Headers/menuBtn.h \
+    createroom.h \
+    gameEngine.h \
+    joinpopup.h \
+    mainMenu.h \
+    mainwindow.h \
+    map.h \
+    menuBtn.h \
+    scoreboard.h \
+    storage.h
 
 FORMS += \
-    mainwindow.ui
+    createroom.ui \
+    joinpopup.ui \
+    mainwindow.ui \
+    scoreboard.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
