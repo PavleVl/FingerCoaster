@@ -1,25 +1,29 @@
-#ifndef CLIENT_HPP
-#define CLIENT_HPP
+#ifndef CLIENT_H
+#define CLIENT_H
 
-#include <sys/socket.h>
-#include <cerrno>
-#include <stdexcept>
+#include <QObject>
+#include <QString>
+#include <QTcpSocket>
+#include <QAbstractSocket>
+#include <QDebug>
 
-class Client{
-    
+class Client : public QObject
+{
+    Q_OBJECT
 public:
+    explicit Client(QString name,QObject *parent = nullptr);
+    void connectToHost(const QHostAddress& addr,quint16 port);
+    void disconnectFromHost();
+signals:
 
-    inline Client(){
-        connectToServer();
-    };
-
-    void connectToServer();
-
-
+private slots:
+    void connected();
+    void disconnected();
 private:
-    int socketFd;
-
-
+    QHostAddress address;
+    quint16 port;
+    QString name;
+    QTcpSocket* socket;
 };
 
-#endif 
+#endif // CLIENT_H
