@@ -1,5 +1,5 @@
 #include "ScoreboardBackend.hpp"
-#define FPATH "../../SavedFiles/scoreboard.txt"
+#define FPATH "../FingerCoaster/SavedFiles/scoreboard.txt"
 
 
 std::vector<std::string> split (const std::string &s, char delim) {
@@ -38,7 +38,7 @@ void ScoreboardBackend::loadResults(){
 
     std::string line;
     //We are gona skip the first line because it contains username
-    std::getline(inFile,line);
+    std::getline(inFile,_username);
 
     //Adding each result into priority_que
     while(std::getline(inFile,line)){
@@ -83,6 +83,14 @@ void ScoreboardBackend::updateScoreboard(Result& result){
 
 
     file.close();
+}
+
+std::vector<Result> ScoreboardBackend::giveResults(){
+       return _results;
+}
+
+std::string ScoreboardBackend::giveUsername(){
+    return _username;
 }
 
 std::string ScoreboardBackend::giveFormatedScoreboard(){

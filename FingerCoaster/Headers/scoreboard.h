@@ -7,6 +7,7 @@
 
 #include <QDialog>
 #include "../Scoreboard/ScoreboardBackend.hpp"
+#include "../Result/Result.hpp"
 //---------------
 #include<iostream>
 
@@ -21,7 +22,7 @@ class Model : public QAbstractTableModel
 public:
     Model(QObject *parent = 0);
 
-    void populateData(const QList<QString> &place,const QList<int> &wpm);
+    void populateData(const QVector<QString> &place,const QVector<int> &wpm);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
@@ -31,8 +32,8 @@ public:
 
     ScoreboardBackend* savedScoreboard;
 private:
-    QList<QString> tm_place;
-    QList<int> tm_wpm;
+    QVector<QString> tm_place;
+    QVector<int> tm_wpm;
 
 
 };

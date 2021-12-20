@@ -9,21 +9,33 @@ Scoreboard::Scoreboard(QWidget *parent) :
 
     this->setWindowTitle("Scoreboard");
 
-    QList<QString> places;
-    QList<int> wpm;
-
-    for (int i=1; i<11; i++){
-        places.append(QString::number(i) + ".");
-        //Stoji samo zbog izgleda i bice vrv i string
-        wpm.append(0);
-    }
-    // Uraditi dohvatanje iz fajla
-    ui->vr_user->setText("Ovo se menja");
 
     Model *Scoreboard = new Model(this);
     Scoreboard->savedScoreboard = new ScoreboardBackend();
 
-    std::cout << Scoreboard->savedScoreboard->giveFormatedScoreboard() << std::endl;
+    QVector<QString> places;
+    QVector<int> wpm;
+    wpm.fill(0,10);
+
+    //Prvi put username
+    if(Scoreboard->savedScoreboard->isFirstTimeCheck()){
+        //TODO
+        //SIGNAL
+        //SIgnal that asks you to input the username
+    }
+
+    //Unosi se username u tabelu
+    ui->vr_user->setText(QString::fromStdString(Scoreboard->savedScoreboard->giveUsername()));
+
+    //Popunjavamo redna mesta
+    for (int i=1; i<11; i++)
+        places.append(QString::number(i) + ".");
+
+   int index = 0;
+   for(Result result : Scoreboard->savedScoreboard->giveResults()){
+              wpm[index] = result.giveWpm();
+              index++;
+    }
 
     Scoreboard->populateData(places,wpm);
 
@@ -50,12 +62,12 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
 {
 }
 
-void Model::populateData(const QList<QString> &place,const QList<int> &wpm)
+void Model::populateData(const QVector<QString> &place,const QVector<int> &wpm)
 {
 tm_place.clear();
-tm_place = place;
+tm_place = place.toList();
 tm_wpm.clear();
-tm_wpm = wpm;
+tm_wpm = wpm.toList();
 return;
 }
 
@@ -68,7 +80,7 @@ return tm_place.length();
 int Model::columnCount(const QModelIndex &parent) const
 {
 Q_UNUSED(parent);
-return 2;
+return 4;
 }
 
 QVariant Model::data(const QModelIndex &index, int role) const

@@ -17,7 +17,8 @@ SOURCES += \
     Src/mainwindow.cpp \
     Src/map.cpp \
     Src/menuBtn.cpp \
-    Src/scoreboard.cpp
+    Src/scoreboard.cpp \
+    Scoreboard/ScoreboardBackend.cpp
 
 HEADERS += \
     Headers/createroom.h \
@@ -27,7 +28,9 @@ HEADERS += \
     Headers/mainwindow.h \
     Headers/map.h \
     Headers/menuBtn.h \
-    Headers/scoreboard.h
+    Headers/scoreboard.h \
+    Scoreboard/ScoreboardBackend.hpp
+
 
 FORMS += \
     createroom.ui \

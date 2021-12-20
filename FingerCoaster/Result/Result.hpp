@@ -90,7 +90,6 @@ public:
         return false;
     }
 
-private:
     float calcAccuracy() const{
         
         int totalWords = _correct + _failed;
@@ -101,6 +100,9 @@ private:
         return (_correct * 100) / float(totalWords); 
     }
 
+    int giveWpm() const{
+        return _wpm;
+    }
 
 private:
     std::string _date;

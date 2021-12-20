@@ -25,10 +25,15 @@ public:
 
     std::string giveFormatedScoreboard();
 
+    std::string giveUsername();
+
+    std::vector<Result> giveResults();
+
 private:
     void loadResults();
 
 private:
+    std::string _username;
     std::vector<Result> _results;
     bool _isFirstTime;
 
