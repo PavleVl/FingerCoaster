@@ -2,6 +2,7 @@
 #define SERVER_HPP
 
 #include "Thread.h"
+#include "../../Storage/Storage.hpp"
 #include <QDebug>
 #include <iostream>
 #include <QTcpServer>
@@ -27,7 +28,7 @@ protected:
 
 private:
     QVector<Thread*> clients;
-
+    Storage serverStorage;
 };
 
 #endif

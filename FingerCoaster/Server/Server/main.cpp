@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include "Server.hpp"
+#include "../../Storage/Storage.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -8,9 +9,6 @@ int main(int argc, char *argv[])
     Server ourServer;
     ourServer.startServer();
 
-    ourServer.waitForNewConnection(3000);
-    ourServer.waitForNewConnection(3000);
-    ourServer.broadcast("Hello!");
 
     return a.exec();
 }

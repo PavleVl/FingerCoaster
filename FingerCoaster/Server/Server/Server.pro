@@ -12,6 +12,7 @@ CONFIG -= app_bundle
 SOURCES += \
         Server.cpp \
         Thread.cpp \
+        ../../Storage/Storage.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -21,4 +22,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Server.hpp \
+    ../../Storage/Storage.hpp \
     Thread.h
