@@ -14,19 +14,13 @@ Scoreboard::Scoreboard(QWidget *parent) :
     Scoreboard->savedScoreboard = new ScoreboardBackend();
 
     QVector<QString> places;
-    QVector<int> wpm;
+    QVector<QString> wpm;
     QVector<QString> dates;
-    QVector<float> accuracy;
+    QVector<QString> accuracy;
 
-    wpm.fill(0,10);
-
-    //Prvi put username
-    if(Scoreboard->savedScoreboard->isFirstTimeCheck()){
-        //TODO
-        //SIGNAL
-        //SIgnal that asks you to input the username
-    }
-
+    wpm.fill("-",10);
+    dates.fill("-",10);
+    accuracy.fill("-",10);
     //Unosi se username u tabelu
     ui->vr_user->setText(QString::fromStdString(Scoreboard->savedScoreboard->giveUsername()));
 
@@ -36,7 +30,9 @@ Scoreboard::Scoreboard(QWidget *parent) :
 
    int index = 0;
    for(Result result : Scoreboard->savedScoreboard->giveResults()){
-              wpm[index] = result.giveWpm();
+              wpm[index] = QString::number(result.giveWpm());
+              dates[index] = QString::fromStdString(result.giveDate());
+              accuracy[index] = QString::fromStdString(result.giveAccuracy());
               index++;
     }
 
@@ -66,7 +62,7 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
 {
 }
 
-void Model::populateData(const QVector<QString> &place, const QVector<QString> &date, const QVector<int> &wpm, const QVector<float> &acc)
+void Model::populateData(const QVector<QString> &place, const QVector<QString> &date, const QVector<QString> &wpm, const QVector<QString> &acc)
 {
 tm_place.clear();
 tm_place = place.toList();

@@ -22,7 +22,7 @@ class Model : public QAbstractTableModel
 public:
     Model(QObject *parent = 0);
         //OVDE JE STAJAO Model::populateData
-    void populateData(const QVector<QString> &place, const QVector<QString> &date, const QVector<int> &wpm, const QVector<float> &acc);
+    void populateData(const QVector<QString> &place, const QVector<QString> &date, const QVector<QString> &wpm, const QVector<QString> &acc);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
@@ -33,9 +33,9 @@ public:
     ScoreboardBackend* savedScoreboard;
 private:
     QVector<QString> tm_place;
-    QVector<int> tm_wpm;
+    QVector<QString> tm_wpm;
     QVector<QString> tm_date;
-    QVector<float> tm_acc;
+    QVector<QString> tm_acc;
 
 
 };

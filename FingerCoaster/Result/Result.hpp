@@ -2,9 +2,9 @@
 #define STUDENT_HPP
 
 #include <string>
+#include <sstream>
 #include <stdexcept>
 #include <iomanip>
-
 
 class Result{
 
@@ -102,6 +102,18 @@ public:
 
     int giveWpm() const{
         return _wpm;
+    }
+
+    std::string giveDate() const{
+        return _date;
+    }
+
+    std::string giveAccuracy(){
+        std::stringstream ss;
+
+        ss << std::fixed << std::setprecision(2) << calcAccuracy();
+
+        return ss.str();
     }
 
 private:
