@@ -2,6 +2,12 @@
 #----------------------------------------------------------------------------
 *.o
 *.out
+*.autosave
+**/.DS_Store
+# **/build-FingerCoaster-Qt_6_2_2_for_macOS-Debug/
 FingerCoaster.*
 !FingerCoaster.pro
 build
+
+
+
