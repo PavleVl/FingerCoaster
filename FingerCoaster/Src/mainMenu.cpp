@@ -41,6 +41,7 @@ mainMenu::~mainMenu(){
 delete QuitButton;
 delete scoreboardButton;
 delete joinButton;
+delete createRoomButton;
 }
 
 menuBtn* mainMenu::getQuitButton() const{
@@ -56,5 +57,5 @@ menuBtn* mainMenu::getJoinButton() const{
 }
 
 menuBtn* mainMenu::getCreateRoomButton() const{
-    return getCreateRoomButton();
+    return createRoomButton;
 }

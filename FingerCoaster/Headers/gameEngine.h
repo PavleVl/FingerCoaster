@@ -12,6 +12,7 @@
 #include "mainwindow.h"
 #include "mainMenu.h"
 #include "joinpopup.h"
+#include "createroom.h"
 #include "map.h"
 #include "../Scoreboard/ScoreboardBackend.hpp"
 
@@ -25,18 +26,19 @@ public:
     void playMusic();
     bool isFirstTime(ScoreboardBackend* sc);
     void showUsernameInput();
+    mainMenu* menuScene;
 
 public slots:
     void exit();
     void openMenu();
     void showScore();
-    void showLobby();
-
+    void joinRoom();
+    void createRoom();
 private:
     QImage background;
     int windowWidth;
     int windowHeight;
-    mainMenu* menuScene;
+//    mainMenu* menuScene;
     bool spacePressed;
     QGraphicsScene* levelScene;
     MainWindow* mainWindow;

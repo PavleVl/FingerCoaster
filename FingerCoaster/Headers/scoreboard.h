@@ -32,10 +32,10 @@ public:
 
     ScoreboardBackend* savedScoreboard;
 private:
-    QVector<QString> tm_place;
-    QVector<QString> tm_wpm;
-    QVector<QString> tm_date;
-    QVector<QString> tm_acc;
+    QVector<QString> _place;
+    QVector<QString> _wpm;
+    QVector<QString> _date;
+    QVector<QString> _acc;
 
 
 };

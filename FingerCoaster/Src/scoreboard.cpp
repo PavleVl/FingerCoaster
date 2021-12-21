@@ -64,14 +64,14 @@ Model::Model(QObject *parent) : QAbstractTableModel(parent)
 
 void Model::populateData(const QVector<QString> &place, const QVector<QString> &date, const QVector<QString> &wpm, const QVector<QString> &acc)
 {
-tm_place.clear();
-tm_place = place.toList();
-tm_date.clear();
-tm_date = date.toList();
-tm_wpm.clear();
-tm_wpm = wpm.toList();
-tm_acc.clear();
-tm_acc = acc.toList();
+_place.clear();
+_place = place.toList();
+_date.clear();
+_date = date.toList();
+_wpm.clear();
+_wpm = wpm.toList();
+_acc.clear();
+_acc = acc.toList();
 
 return;
 }
@@ -80,7 +80,7 @@ int Model::rowCount(const QModelIndex &parent) const
 {
 Q_UNUSED(parent);
 //return 10;
-  return tm_place.length();
+  return _place.length();
 }
 
 int Model::columnCount(const QModelIndex &parent) const
@@ -95,13 +95,13 @@ if (!index.isValid() || role != Qt::DisplayRole) {
     return QVariant();
 }
 if (index.column() == 0) {
-    return tm_place[index.row()];
+    return _place[index.row()];
 } else if (index.column() == 1) {
-    return tm_date[index.row()];
+    return _date[index.row()];
 } else if (index.column() == 2) {
-    return tm_wpm[index.row()];
+    return _wpm[index.row()];
 } else if (index.column() == 3) {
-    return tm_acc[index.row()];
+    return _acc[index.row()];
 }
 
 return QVariant();

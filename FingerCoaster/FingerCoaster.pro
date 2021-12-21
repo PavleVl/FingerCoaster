@@ -18,7 +18,8 @@ SOURCES += \
     Src/map.cpp \
     Src/menuBtn.cpp \
     Src/scoreboard.cpp \
-    Scoreboard/ScoreboardBackend.cpp
+    Scoreboard/ScoreboardBackend.cpp \
+    enterusername.cpp
 
 HEADERS += \
     Headers/createroom.h \
@@ -29,11 +30,13 @@ HEADERS += \
     Headers/map.h \
     Headers/menuBtn.h \
     Headers/scoreboard.h \
-    Scoreboard/ScoreboardBackend.hpp
+    Scoreboard/ScoreboardBackend.hpp \
+    enterusername.h
 
 
 FORMS += \
     createroom.ui \
+    enterusername.ui \
     joinpopup.ui \
     mainwindow.ui \
     scoreboard.ui

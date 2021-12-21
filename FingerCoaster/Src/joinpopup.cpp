@@ -17,3 +17,9 @@ JoinPopUp::~JoinPopUp()
 {
     delete ui;
 }
+
+void JoinPopUp::on_joinButton_clicked()
+{
+
+}
+

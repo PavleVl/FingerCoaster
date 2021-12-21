@@ -15,6 +15,13 @@ public:
     explicit createroom(QWidget *parent = nullptr);
     ~createroom();
 
+private slots:
+    void on_create_key_button_clicked();
+
+    void on_create_lobby_button_pressed();
+
+    void on_create_lobby_button_clicked();
+
 private:
     Ui::createroom *ui;
 };

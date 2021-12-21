@@ -15,6 +15,9 @@ public:
     explicit JoinPopUp(QWidget *parent = nullptr);
     ~JoinPopUp();
 
+private slots:
+    void on_joinButton_clicked();
+
 private:
     Ui::JoinPopUp *ui;
 };

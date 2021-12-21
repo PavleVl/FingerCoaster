@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>createroom</class>
- <widget class="QDialog" name="createroom">
+ <class>enterUsername</class>
+ <widget class="QDialog" name="enterUsername">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,46 +13,43 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="vr_key">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>55</y>
-     <width>80</width>
-     <height>17</height>
+     <x>90</x>
+     <y>20</y>
+     <width>120</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
+    <string>Enter Username</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="create_key_button">
+  <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>105</x>
-     <y>20</y>
-     <width>90</width>
+     <x>90</x>
+     <y>50</y>
+     <width>120</width>
      <height>25</height>
     </rect>
-   </property>
-   <property name="text">
-    <string>Create Key</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="create_lobby_button">
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>90</x>
      <y>160</y>
-     <width>89</width>
+     <width>120</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>Enter</string>
+    <string>Save Username</string>
    </property>
   </widget>
  </widget>
