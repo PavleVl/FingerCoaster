@@ -1,4 +1,4 @@
-#include "enterusername.h"
+#include "Headers/enterusername.h"
 #include "ui_enterusername.h"
 
 enterUsername::enterUsername(QWidget *parent) :
@@ -18,7 +18,13 @@ enterUsername::~enterUsername()
 void enterUsername::on_pushButton_clicked()
 {
     QString username = ui->lineEdit->text();
-    this->close();
+    if(username.size() == 0)
+        return;
 
+    ScoreboardBackend* scoreboardWrite = new ScoreboardBackend();
+    std::string name = username.toStdString();
+    scoreboardWrite->writeUsername(name);
+
+    this->close();
 }
 

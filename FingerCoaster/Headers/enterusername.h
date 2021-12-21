@@ -2,6 +2,7 @@
 #define ENTERUSERNAME_H
 
 #include <QDialog>
+#include "Scoreboard/ScoreboardBackend.hpp"
 
 namespace Ui {
 class enterUsername;

@@ -23,8 +23,7 @@ void createroom::on_create_key_button_clicked()
 }
 
 
-void createroom::on_create_lobby_button_clicked()
-{
+void createroom::on_create_lobby_button_clicked(){
 
 }
 

@@ -18,8 +18,8 @@ SOURCES += \
     Src/map.cpp \
     Src/menuBtn.cpp \
     Src/scoreboard.cpp \
+    Src/enterusername.cpp \
     Scoreboard/ScoreboardBackend.cpp \
-    enterusername.cpp
 
 HEADERS += \
     Headers/createroom.h \
@@ -30,8 +30,9 @@ HEADERS += \
     Headers/map.h \
     Headers/menuBtn.h \
     Headers/scoreboard.h \
+    Headers/enterusername.h \
     Scoreboard/ScoreboardBackend.hpp \
-    enterusername.h
+
 
 
 FORMS += \

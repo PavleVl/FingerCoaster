@@ -6,7 +6,7 @@
 #include "Headers/joinpopup.h"
 #include "Headers/scoreboard.h"
 //#include "ui_joinpopup.h"
-#include "enterusername.h"
+#include "Headers/enterusername.h"
 
 GameEngine::GameEngine(){
     windowWidth = WINDOW_WIDTH;
@@ -31,6 +31,7 @@ GameEngine::GameEngine(){
     connect(menuScene->getScoreboardButton(),SIGNAL(clicked()),this,SLOT(showScore()));
     connect(menuScene->getJoinButton(),SIGNAL(clicked()), this, SLOT(joinRoom()));
     connect(menuScene->getCreateRoomButton(), SIGNAL(clicked()), this, SLOT(createRoom()));
+
 //    musicPlayer = new QMediaPlayer();
     openMenu();
 //    showFullScreen();

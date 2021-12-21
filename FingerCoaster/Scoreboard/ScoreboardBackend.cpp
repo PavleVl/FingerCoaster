@@ -16,7 +16,7 @@ std::vector<std::string> split (const std::string &s, char delim) {
 
 void initFile(){
     std::ofstream file(FPATH);  
-    file << "Pavle";
+    //file << "Pavle";
     file.close();
 }
 
@@ -54,13 +54,10 @@ void ScoreboardBackend::loadResults(){
 }
 
 void ScoreboardBackend::writeUsername(std::string& username){
-    if(_isFirstTime){
-        std::ofstream file(FPATH);
-        file << username;
+    std::ofstream file(FPATH);
+    file << username;
 
-        file.close();
-        _isFirstTime = false;
-    }
+    file.close();
 }
 
 void ScoreboardBackend::updateScoreboard(Result& result){
