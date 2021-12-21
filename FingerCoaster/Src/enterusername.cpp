@@ -7,7 +7,7 @@ enterUsername::enterUsername(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Initial Username");
+    this->setWindowTitle("Welcome");
 }
 
 enterUsername::~enterUsername()

@@ -9,17 +9,11 @@ createroom::createroom(QWidget *parent) :
     ui->setupUi(this);
 
     this->setWindowTitle("Create room");
-    ui->vr_key->setBackgroundRole(QPalette::Midlight);
 }
 
 createroom::~createroom()
 {
     delete ui;
-}
-
-void createroom::on_create_key_button_clicked()
-{
-    ui->vr_key->setText(QString::number(random()/1000));
 }
 
 
