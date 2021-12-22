@@ -2,25 +2,41 @@
 
 Client::Client(QString name,QObject *parent)
     : QObject{parent},
-      name(name),
+      username(name),
       tcpSocket(new QTcpSocket(this))
 {
     connect(tcpSocket,SIGNAL(connected()),this,SLOT(connectedCl()));
     connect(tcpSocket,SIGNAL(disconnected()),this,SLOT(disconnectedCl()));
     connect(tcpSocket,&QAbstractSocket::errorOccurred,this,&Client::printError);
-    qDebug()<<" Connecting...";
-    tcpSocket->connectToHost(QHostAddress::LocalHost,12345);
+    connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readyRead()));
+    connect(tcpSocket,SIGNAL(bytesWritten(qint64)),this,SLOT(bytesWritten()));
 
+    qDebug()<<"Connecting...";
+//    tcpSocket->connectToHost(QHostAddress::LocalHost,12345);
+
+    tcpSocket->connectToHost("192.168.10.90",8080);
 }
 
 
 void Client::connectedCl(){
     qDebug()<<"Connected!";
+    QByteArray br = "username:" + this->username.toUtf8() + "\n";
+    tcpSocket->write(br);
 }
 
 void Client::disconnectedCl(){
     tcpSocket->close();
+    tcpSocket->deleteLater();
     qDebug()<<"Disconnected from host";
+}
+
+void Client::bytesWritten(){
+    qDebug()<<"we wrote username to host";
+}
+
+void Client::readyRead(){
+    qDebug()<<"Reading...";
+    qDebug()<<tcpSocket->readAll();
 }
 
 
@@ -33,6 +49,6 @@ void Client::printError(QAbstractSocket::SocketError socketError){
             qDebug()<<"The connection was refused. "
                       "Make sure the server is running "
                       "and check that the hostname and port settings are correct";break;
-        default:qDebug()<<"The following error occured:%1."<<tcpSocket->errorString();
+        default:qDebug()<<"The following error occured: " + tcpSocket->errorString();
     }
 }

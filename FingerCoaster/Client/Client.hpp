@@ -20,10 +20,12 @@ private slots:
     void connectedCl();
     void disconnectedCl();
     void printError(QAbstractSocket::SocketError socketError);
+    void bytesWritten();
+    void readyRead();
 private:
     QHostAddress address;
     quint16 port;
-    QString name;
+    QString username;
     QTcpSocket* tcpSocket;
 };
 
