@@ -1,11 +1,16 @@
 #include "Server.hpp"
 
+#define SERVER_PORT 8080
+
 Server::Server(QObject* parent) : QTcpServer(parent){
-    serverStorage = Storage();
+    serverStorage = new Storage();
+    serverStorage->loadText(true);
+    serverStorage->setNumberOfPlayers(3);
+
 }
 
 void Server::startServer(){
-    if(!this->listen(QHostAddress::Any,8080)){
+    if(!this->listen(QHostAddress::Any,SERVER_PORT)){
         std::cout << "Server could not start" << std::endl;
     }
     else{
@@ -14,31 +19,28 @@ void Server::startServer(){
 }
 
 int Server::numOfClients() const{
-    return clients.size();
-}
-
-void Server::broadcast(QByteArray message){
-    for(Thread* thread: clients){
-        sendMessage(thread,message);
-    }
-}
-
-void Server::sendMessage(Thread *thread, QByteArray message){
-    thread->sendMessage(message);
+    return clientSockets.size();
 }
 
 void Server::incomingConnection(qintptr socketFd){
-    if(unsigned(clients.size()) < serverStorage.getNumberOfPlayers()){
+    if(unsigned(clientSockets.size()) < serverStorage->getNumberOfPlayers()){
         Thread* thread = new Thread(socketFd,this);
-        clients.append(thread);
+        clientSockets.append(socketFd);
         std::cout << "Accepted the socket ";
-        std::cout << clients.size() << std::endl;
+        thread->start();
+
+        std::string choosenFile = serverStorage->getChoosenFile();
+        QByteArray byteBuff(choosenFile.c_str(),choosenFile.length());
+        emit sendMessage(byteBuff,socketFd);
     }
     else{
         QTcpSocket *rejectedSocket = new QTcpSocket();
         rejectedSocket->setSocketDescriptor(socketFd);
         rejectedSocket->write("MAX_LIMIT_ABORT");
         rejectedSocket->close();
+        //TODO
+        //deletelater blocks close
+        //rejectedSocket->deleteLater();
     }
 }
 
