@@ -6,15 +6,21 @@
 #include <QThread>
 #include <QTcpSocket>
 
-class Thread : public QObject{
+class Thread : public QThread{
 Q_OBJECT
 
 public:
     explicit Thread(qintptr newSocketFd, QObject *parent = 0);
 
 public slots:
+    //Socket slots
     void readyRead();
-    void sendMessage(QByteArray message);
+    void onSendMessage(QByteArray message,qintptr targetSocketPtr);
+    void disconnected();
+    //Thread slots
+
+protected:
+    void run() override;
 
 private:
     QTcpSocket* threadSocket;

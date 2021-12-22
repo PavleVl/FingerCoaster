@@ -80,9 +80,20 @@ void Storage::pickRandomFile(){
     choosenFile = fName;
 }
 
+//If we are client we want to set randomTextFlag to false
+// and do setChosenPath first and then call this function.
+//--------------------------------------------------------
+//If we are server we are calling this function as with true
+//flag so that we choose random file
 void Storage::loadText(bool randomTextFlag){
 
-    pickRandomFile();
+    if(randomTextFlag)
+        pickRandomFile();
+
+    if(choosenFile.size() == 0){
+        //TODO SIGNAL FOR ERROR
+    }
+
     std::string fullPath = PATH + choosenFile;
 
     std::ifstream inFile;

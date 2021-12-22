@@ -8,7 +8,6 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
-
 class Server : public QTcpServer{
     Q_OBJECT
     Q_DISABLE_COPY(Server)
@@ -17,18 +16,17 @@ public:
     explicit Server(QObject* parent = nullptr);
 
     void startServer();
-    void sendMessage(Thread* thread,QByteArray message);
     int numOfClients() const;
 
-public slots:
-    void broadcast(QByteArray message);
+signals:
+    void sendMessage(QByteArray message,qintptr targetSocketFd);
 
 protected:
     void incomingConnection(qintptr socketFd) override;
 
 private:
-    QVector<Thread*> clients;
-    Storage serverStorage;
+    QVector<qintptr> clientSockets;
+    Storage* serverStorage;
 };
 
 #endif
