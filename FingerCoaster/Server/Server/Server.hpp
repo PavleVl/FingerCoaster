@@ -7,6 +7,7 @@
 #include <iostream>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QtConcurrent>
 
 class Server : public QTcpServer{
     Q_OBJECT
@@ -21,11 +22,16 @@ public:
 signals:
     void sendMessage(QByteArray message,qintptr targetSocketFd);
 
+public slots:
+    void setClientsUsername(qintptr clientSocketFd,QString username);
+    void deleteThread(qintptr clientSocketFd);
+
 protected:
     void incomingConnection(qintptr socketFd) override;
 
 private:
-    QVector<qintptr> clientSockets;
+    QMap<quintptr,Thread*> threads;
+    QMap<qintptr,QString> usernames;
     Storage* serverStorage;
 };
 

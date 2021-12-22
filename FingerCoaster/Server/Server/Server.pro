@@ -1,5 +1,7 @@
 QT -= gui
+QT += core
 QT += network
+QT += concurrent
 
 INSTALLS += target
 CONFIG += c++11 console

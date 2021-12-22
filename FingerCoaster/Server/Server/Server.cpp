@@ -19,17 +19,20 @@ void Server::startServer(){
 }
 
 int Server::numOfClients() const{
-    return clientSockets.size();
+    return threads.size();
 }
 
 void Server::incomingConnection(qintptr socketFd){
-    if(unsigned(clientSockets.size()) < serverStorage->getNumberOfPlayers()){
+    if(unsigned(threads.size()) < serverStorage->getNumberOfPlayers()){
         Thread* thread = new Thread(socketFd,this);
-        clientSockets.append(socketFd);
+        threads.insert(socketFd,thread);
+
+        connect(thread,SIGNAL(setClientsUsername(qintptr,QString)),this,SLOT(setClientsUsername(qintptr,QString)),Qt::DirectConnection);
+        connect(thread,SIGNAL(deleteThread(qintptr)),this,SLOT(deleteThread(qintptr)),Qt::DirectConnection);
         std::cout << "Accepted the socket ";
         thread->start();
 
-        std::string choosenFile = serverStorage->getChoosenFile();
+        std::string choosenFile = "text:" + serverStorage->getChoosenFile();
         QByteArray byteBuff(choosenFile.c_str(),choosenFile.length());
         emit sendMessage(byteBuff,socketFd);
     }
@@ -42,5 +45,18 @@ void Server::incomingConnection(qintptr socketFd){
         //deletelater blocks close
         //rejectedSocket->deleteLater();
     }
+}
+
+//Slots:
+//TOTEST
+//I'm not sure if this part will break because of threads
+void Server::setClientsUsername(qintptr clientSocketFd,QString username){
+    std::cout << "Usao sam u setClient!";
+    username.insert(clientSocketFd,username);
+}
+
+void Server::deleteThread(qintptr socketFd){
+    std::cout << "Thread deleted" << std::endl;
+    threads.remove(socketFd);
 }
 

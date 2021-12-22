@@ -12,6 +12,11 @@ Q_OBJECT
 public:
     explicit Thread(qintptr newSocketFd, QObject *parent = 0);
 
+
+signals:
+    void setClientsUsername(qintptr clientSocketFd,QString username);
+    void deleteThread(qintptr clientSocketFd);
+
 public slots:
     //Socket slots
     void readyRead();
