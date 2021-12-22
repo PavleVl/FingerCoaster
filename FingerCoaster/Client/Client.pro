@@ -1,5 +1,5 @@
 QT -= gui
-QT += core network
+QT += core network widgets
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
@@ -9,12 +9,13 @@ CONFIG -= app_bundle
 
 SOURCES += \
         Client.cpp \
-        main.cpp
+        main.cpp    \
+        ../Storage/Storage.cpp
+HEADERS += \
+        Client.hpp  \
+        ../Storage/Storage.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-HEADERS += \
-    Client.h

@@ -6,24 +6,25 @@
 #include <QTcpSocket>
 #include <QAbstractSocket>
 #include <QDebug>
+//#include "../Storage/Storage.hpp"
 
 class Client : public QObject
 {
     Q_OBJECT
 public:
     explicit Client(QString name,QObject *parent = nullptr);
-    void connectToHost(const QHostAddress& addr,quint16 port);
-    void disconnectFromHost();
+
 signals:
 
 private slots:
-    void connected();
-    void disconnected();
+    void connectedCl();
+    void disconnectedCl();
+    void printError(QAbstractSocket::SocketError socketError);
 private:
     QHostAddress address;
     quint16 port;
     QString name;
-    QTcpSocket* socket;
+    QTcpSocket* tcpSocket;
 };
 
 #endif // CLIENT_H
