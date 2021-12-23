@@ -7,6 +7,8 @@
 #include "Headers/scoreboard.h"
 //#include "ui_joinpopup.h"
 #include "Headers/enterusername.h"
+#include <QDebug>
+
 
 GameEngine::GameEngine(){
     windowWidth = WINDOW_WIDTH;
@@ -72,6 +74,7 @@ void GameEngine::joinRoom(){
 
 void GameEngine::createRoom(){
     createroom cr;
+    connect(&cr,SIGNAL(startServer(unsigned,unsigned)),this,SLOT(startServer(unsigned,unsigned)),Qt::DirectConnection);
     cr.setModal(true);
     cr.exec();
 }
@@ -88,6 +91,17 @@ void GameEngine::resizeEvent(QResizeEvent *event){
     fitInView(rect);
 }
 
+//This will be run if we catch signal for starting the server
+void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
+    ourServer = new Server();
+
+    ourServer->setStorageDifficulty(difficulty);
+    ourServer->setStorageMaxPlayers(maxPlayers);
+
+    ourServer->startServer();
+    //TODO SERVER IMPL
+    //TODO SERVER SHUT DOWN SIGNAL TO DELETE POINTER TO IT
+}
 
 //If its the first time application is opening and
 //Scoreboard.txt is missing this will be run

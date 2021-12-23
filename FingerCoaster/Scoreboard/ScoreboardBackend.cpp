@@ -2,7 +2,7 @@
 #define FPATH "../FingerCoaster/SavedFiles/scoreboard.txt"
 
 
-std::vector<std::string> split (const std::string &s, char delim) {
+std::vector<std::string> splitStorage (const std::string &s, char delim) {
     std::vector<std::string> result;
     std::stringstream ss (s);
     std::string item;
@@ -42,7 +42,7 @@ void ScoreboardBackend::loadResults(){
 
     //Adding each result into priority_que
     while(std::getline(inFile,line)){
-        std::vector<std::string> components = split(line,'-');
+        std::vector<std::string> components = splitStorage(line,'-');
     
         Result curRes(components);
         _results.push_back(curRes);

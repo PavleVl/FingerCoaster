@@ -15,12 +15,15 @@ public:
     explicit createroom(QWidget *parent = nullptr);
     ~createroom();
 
+signals:
+    void startServer(unsigned maxPlayers,unsigned difficulty);
+
 private slots:
-    void on_create_key_button_clicked();
-
-    void on_create_lobby_button_pressed();
-
     void on_create_lobby_button_clicked();
+
+private:
+    bool noRBChecked();
+    unsigned choosenDifficulty();
 
 private:
     Ui::createroom *ui;

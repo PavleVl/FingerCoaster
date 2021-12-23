@@ -2,7 +2,7 @@
 
 //TOFIX 
 //This path refers from build directory
-#define PATH "../../SavedFiles/Texts/"
+#define PATH "../FingerCoaster/SavedFiles/Texts/"
 
 std::vector<std::string> split (const std::string &s, char delim) {
     std::vector<std::string> result;

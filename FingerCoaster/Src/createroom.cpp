@@ -11,17 +11,38 @@ createroom::createroom(QWidget *parent) :
     this->setWindowTitle("Create room");
 }
 
+bool createroom::noRBChecked(){
+
+    if(!ui->rb_easy->isChecked() && !ui->rb_medium->isChecked() && !ui->rb_hard->isChecked())
+        return true;
+
+    return false;
+}
+
+unsigned createroom::choosenDifficulty(){
+
+    if(ui->rb_easy->isChecked())
+        return 0;
+    if(ui->rb_medium->isChecked())
+        return 1;
+
+    return 2;
+}
+
 createroom::~createroom()
 {
     delete ui;
 }
 
-
 void createroom::on_create_lobby_button_clicked(){
 
-}
+    if(noRBChecked()){
+        //TODO
+        //Label showing up indicating that user has not seleceted any difficulty RB
 
-void createroom::on_create_lobby_button_pressed(){
+        return;
+    }
 
+    emit startServer(unsigned(ui->num_players_cb->currentIndex()) + 1,choosenDifficulty());
 }
 

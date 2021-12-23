@@ -1,4 +1,6 @@
-QT       += core gui
+QT  += core gui
+QT  += network
+QT  += concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +21,11 @@ SOURCES += \
     Src/menuBtn.cpp \
     Src/scoreboard.cpp \
     Src/enterusername.cpp \
+    #These are backend libs
     Scoreboard/ScoreboardBackend.cpp \
+    Storage/Storage.cpp \
+    Server/Server.cpp \
+    Server/Thread.cpp
 
 HEADERS += \
     Headers/createroom.h \
@@ -31,8 +37,11 @@ HEADERS += \
     Headers/menuBtn.h \
     Headers/scoreboard.h \
     Headers/enterusername.h \
+    #These are backend libs
     Scoreboard/ScoreboardBackend.hpp \
-
+    Storage/Storage.hpp \
+    Server/Server.hpp \
+    Server/Thread.h
 
 
 FORMS += \
