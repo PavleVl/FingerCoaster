@@ -37,8 +37,7 @@ createroom::~createroom()
 void createroom::on_create_lobby_button_clicked(){
 
     if(noRBChecked()){
-        //TODO
-        //Label showing up indicating that user has not seleceted any difficulty RB
+        ui->err_label->setText("You need to select difficulty");
 
         return;
     }
