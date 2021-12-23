@@ -5,6 +5,7 @@
 *.out
 .DS_Store
 FingerCoaster.*
+!FingerCoaster.pro
 build
 build*
 **/*.user*
