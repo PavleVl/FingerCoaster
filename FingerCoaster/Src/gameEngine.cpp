@@ -5,7 +5,6 @@
 #include "Headers/createroom.h"
 #include "Headers/joinpopup.h"
 #include "Headers/scoreboard.h"
-//#include "ui_joinpopup.h"
 #include "Headers/enterusername.h"
 #include <QDebug>
 
@@ -64,6 +63,8 @@ void GameEngine::createRoom(){
     cr.setModal(true);
     cr.exec();
 }
+
+
 
 void GameEngine::exit()
 {

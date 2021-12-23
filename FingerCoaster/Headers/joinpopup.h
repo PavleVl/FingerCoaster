@@ -2,7 +2,6 @@
 #define JOINPOPUP_H
 
 #include <QDialog>
-
 namespace Ui {
 class JoinPopUp;
 }
@@ -15,6 +14,8 @@ public:
     explicit JoinPopUp(QWidget *parent = nullptr);
     ~JoinPopUp();
     void insertKey();
+    bool isValidIp4Address(const std::string& ipAddress);
+    bool isValidPort(int port);
 private slots:
     void on_joinButton_clicked();
 

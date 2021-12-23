@@ -41,7 +41,7 @@ private:
     QImage background;
     int windowWidth;
     int windowHeight;
-//    mainMenu* menuScene;
+    //mainMenu* menuScene;
     bool spacePressed;
     QGraphicsScene* levelScene;
     MainWindow* mainWindow;
