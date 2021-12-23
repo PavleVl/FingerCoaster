@@ -14,7 +14,7 @@ class JoinPopUp : public QDialog
 public:
     explicit JoinPopUp(QWidget *parent = nullptr);
     ~JoinPopUp();
-
+    void insertKey();
 private slots:
     void on_joinButton_clicked();
 

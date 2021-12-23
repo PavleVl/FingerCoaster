@@ -42,16 +42,7 @@ Scoreboard::Scoreboard(QWidget *parent) :
     ui->tableView->setModel(Scoreboard);
 
     ui->tableView->horizontalHeader()->setVisible(true);
-    //    ui->tableView->show();
-
-
 }
-    /*
-    Ui::MainWindow* MainWindow::getU(){
-    return ui;
-    }*/
-
-
 
 Scoreboard::~Scoreboard()
 {
@@ -79,7 +70,6 @@ return;
 int Model::rowCount(const QModelIndex &parent) const
 {
 Q_UNUSED(parent);
-//return 10;
   return _place.length();
 }
 

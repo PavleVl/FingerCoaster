@@ -4,10 +4,6 @@
 #include <QAbstractTableModel>
 #include <QApplication>
 
-
-
-
-
 namespace Ui {
     class MainWindow;
 }

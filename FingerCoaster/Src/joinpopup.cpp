@@ -18,6 +18,11 @@ JoinPopUp::~JoinPopUp()
     delete ui;
 }
 
+void JoinPopUp::insertKey(){
+//    this->ui->vr_key->
+}
+
+
 void JoinPopUp::on_joinButton_clicked()
 {
 

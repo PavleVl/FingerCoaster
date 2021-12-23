@@ -5,7 +5,6 @@ mainMenu::mainMenu():QGraphicsScene(){
     int yStartBtn = 800;
     this->setSceneRect(0,0,MAP_WIDTH,MAP_HEIGHT);
     QImage background = QImage(":/images/prefix1/main-menu.jpg");
-//    background = background.scaledToHeight(WINDOW_HEIGHT);
     background = background.scaled(WINDOW_WIDTH,WINDOW_HEIGHT);
 
     this->setBackgroundBrush(background);

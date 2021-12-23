@@ -7,8 +7,11 @@
 FingerCoaster.*
 build
 build*
-FingerCoaster.pro.user
-*.pro.user*
+**/*.user*
+**/*.orig
+_BACKUP_*
+_BASE_*
+**/build*/*
 <<<<<<< HEAD
 
 =======

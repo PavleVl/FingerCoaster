@@ -10,13 +10,11 @@ class mainMenu:public QGraphicsScene{
 public:
     mainMenu();
     ~mainMenu();
-    QList<menuBtn*> getButtonList()const;
     menuBtn* getQuitButton()const;
     menuBtn* getScoreboardButton()const;
     menuBtn* getJoinButton() const;
     menuBtn* getCreateRoomButton() const;
 private:
-    QList<menuBtn*> buttonList;
     menuBtn* QuitButton;
     menuBtn* scoreboardButton;
     menuBtn* joinButton;

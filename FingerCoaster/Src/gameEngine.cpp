@@ -11,13 +11,7 @@
 
 
 GameEngine::GameEngine(){
-    windowWidth = WINDOW_WIDTH;
-    windowHeight = WINDOW_HEIGHT;
     setWindowTitle(TITLE);
-
-    levelScene = new QGraphicsScene();
-
-    map = new Map();
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -36,13 +30,11 @@ GameEngine::GameEngine(){
 
 //    musicPlayer = new QMediaPlayer();
     openMenu();
-//    showFullScreen();
 }
 
 GameEngine::~GameEngine(){
+      menuScene->clear();
       delete menuScene;
-      levelScene->clear();
-      delete levelScene;
       //    delete musicPlayer;
       delete mainWindow;
 }
@@ -51,18 +43,12 @@ void GameEngine::openMenu()
 {
       QApplication::setOverrideCursor(Qt::ArrowCursor);
       setScene(menuScene);
-//    playMusic(":/resources/sounds/Pesma.mp3");
-
 }
 
 void GameEngine::showScore(){
     Scoreboard sc;
     sc.setModal(true);
     sc.exec();
-
-    /*MainWindow* newScene = new MainWindow();
-    newScene->show();
-*/
 }
 
 void GameEngine::joinRoom(){
@@ -74,7 +60,7 @@ void GameEngine::joinRoom(){
 
 void GameEngine::createRoom(){
     createroom cr;
-    connect(&cr,SIGNAL(startServer(unsigned,unsigned)),this,SLOT(startServer(unsigned,unsigned)),Qt::DirectConnection);
+    connect(&cr,SIGNAL(startServer(uint,uint)),this,SLOT(startServer(uint,uint)),Qt::DirectConnection);
     cr.setModal(true);
     cr.exec();
 }
@@ -85,9 +71,7 @@ void GameEngine::exit()
 }
 
 void GameEngine::resizeEvent(QResizeEvent *event){
-    if(levelScene)
-            levelScene->setSceneRect(0,0,map->getWidth(),map->getHeight());
-    QRect rect = QRect(0,0,WINDOW_WIDTH,map->getHeight());
+    QRect rect = QRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
     fitInView(rect);
 }
 
