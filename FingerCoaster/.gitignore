@@ -1,0 +1,15 @@
+# This file is used to ignore files which are generated
+# ----------------------------------------------------------------------------
+
+*.o
+*.out
+.DS_Store
+FingerCoaster.*
+build
+build*
+FingerCoaster.pro.user
+*.pro.user*
+<<<<<<< HEAD
+
+=======
+>>>>>>> Scoreboard-0.0
