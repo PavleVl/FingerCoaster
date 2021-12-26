@@ -2,6 +2,7 @@
 #define JOINPOPUP_H
 
 #include <QDialog>
+#include "lobby.h"
 namespace Ui {
 class JoinPopUp;
 }
@@ -21,6 +22,7 @@ private slots:
 
 private:
     Ui::JoinPopUp *ui;
+    Lobby *lobby;
 };
 
 #endif // JOINPOPUP_H

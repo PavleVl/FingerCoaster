@@ -42,6 +42,9 @@ void createroom::on_create_lobby_button_clicked(){
         return;
     }
 
+    lobby = new Lobby(this);
+    lobby->show();
     emit startServer(unsigned(ui->num_players_cb->currentIndex()) + 1,choosenDifficulty());
+
 }
 

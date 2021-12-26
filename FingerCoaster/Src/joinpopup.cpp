@@ -44,7 +44,13 @@ void JoinPopUp::on_joinButton_clicked()
             ui->lMessage->setText("Nije validna IPv4 adresa");
     else if(!isVPort)
             ui->lMessage->setText("Nije validan port");
-    else
-            ui->lMessage->setText("Klijent se konektovao.");
+    else {
+        ui->lMessage->setText("Klijent se konektovao.");
+        lobby = new Lobby(this);
+        lobby->show();
+    }
+
+
+
 }
 

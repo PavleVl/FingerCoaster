@@ -2,6 +2,7 @@
 #define CREATEROOM_H
 
 #include <QDialog>
+#include "lobby.h"
 
 namespace Ui {
 class createroom;
@@ -27,6 +28,7 @@ private:
 
 private:
     Ui::createroom *ui;
+    Lobby *lobby;
 };
 
 #endif // CREATEROOM_H
