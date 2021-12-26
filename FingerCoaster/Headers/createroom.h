@@ -2,6 +2,7 @@
 #define CREATEROOM_H
 
 #include <QDialog>
+#include "lobby.h"
 
 namespace Ui {
 class createroom;
@@ -17,9 +18,11 @@ public:
 
 signals:
     void startServer(unsigned maxPlayers,unsigned difficulty);
+    void openLobby();
 
 private slots:
     void on_create_lobby_button_clicked();
+
 
 private:
     bool noRBChecked();

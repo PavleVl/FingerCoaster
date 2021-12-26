@@ -116,6 +116,22 @@
     <string>Number of players:</string>
    </property>
   </widget>
+  <widget class="QLabel" name="err_label">
+   <property name="geometry">
+    <rect>
+     <x>25</x>
+     <y>135</y>
+     <width>250</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

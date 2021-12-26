@@ -20,13 +20,18 @@ public:
     int numOfClients() const;
     void setStorageDifficulty(unsigned difficulty);
     void setStorageMaxPlayers(unsigned maxPlayers);
+    void broadcastUsernames();
 
 signals:
+    //If we send 0 as targetSocketFd that means that we want every
+    //single socket to send that message
     void sendMessage(QByteArray message,qintptr targetSocketFd);
+    void updateLobbyList(QString username);
 
 public slots:
     void setClientsUsername(qintptr clientSocketFd,QString username);
     void deleteThread(qintptr clientSocketFd);
+    void blockConnections();
 
 protected:
     void incomingConnection(qintptr socketFd) override;

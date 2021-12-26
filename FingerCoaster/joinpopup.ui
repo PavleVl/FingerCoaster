@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>152</height>
+    <width>320</width>
+    <height>130</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>20</y>
      <width>31</width>
-     <height>17</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
@@ -29,9 +29,9 @@
   <widget class="QPushButton" name="joinButton">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>80</y>
-     <width>89</width>
+     <x>220</x>
+     <y>90</y>
+     <width>90</width>
      <height>25</height>
     </rect>
    </property>
@@ -56,9 +56,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>80</y>
-     <width>181</width>
-     <height>20</height>
+     <y>90</y>
+     <width>200</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">

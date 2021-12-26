@@ -31,21 +31,31 @@ bool JoinPopUp::isValidPort(int port){
 
 void JoinPopUp::on_joinButton_clicked()
 {
-    QString key = ui->labelInsertKey->text();
-    QStringList list = key.split(" ");
-    if(list.size() < 2){
-            ui->lMessage->setText("Morate uneti ip adresu i port");
-            return;
-    }
-    bool isIpAddr = isValidIp4Address(list[0].toStdString());
-    int isPort = list[1].toInt();
-    bool isVPort = isValidPort(isPort);
-    if(!isIpAddr)
-            ui->lMessage->setText("Nije validna IPv4 adresa");
-    else if(!isVPort)
-            ui->lMessage->setText("Nije validan port");
-    else
-            ui->lMessage->setText("Klijent se konektovao.");
+    //TOFIX
+    //Way of parsing if it's right adress is wrong,
+    //format should be something like this "0.0.0.0:30"
+    //-------------------------------------------------
+
+    //ipv4:port
+    //QString key = ui->labelInsertKey->text();
+    //QStringList list = key.split(" ");
+    //if(list.size() < 2){
+            //ui->lMessage->setText("Morate uneti ip adresu i port");
+            //return;
+    //}
+    //bool isIpAddr = isValidIp4Address(list[0].toStdString());
+    //int isPort = list[1].toInt();
+    //bool isVPort = isValidPort(isPort);
+    //if(!isIpAddr)
+            //ui->lMessage->setText("Nije validna IPv4 adresa");
+    //else if(!isVPort)
+            //ui->lMessage->setText("Nije validan port");
+    //else {
+        ui->lMessage->setText("Klijent se konektovao.");
+
+        this->close();
+        emit openLobby();
+    //}
 
 }
 

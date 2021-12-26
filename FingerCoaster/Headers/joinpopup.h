@@ -2,6 +2,7 @@
 #define JOINPOPUP_H
 
 #include <QDialog>
+#include "lobby.h"
 namespace Ui {
 class JoinPopUp;
 }
@@ -16,6 +17,10 @@ public:
     void insertKey();
     bool isValidIp4Address(const std::string& ipAddress);
     bool isValidPort(int port);
+
+signals:
+    void openLobby();
+
 private slots:
     void on_joinButton_clicked();
 

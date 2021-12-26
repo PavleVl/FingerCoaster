@@ -36,6 +36,7 @@ public slots:
     void joinRoom();
     void createRoom();
     void startServer(unsigned maxPlayers,unsigned difficulty);
+    void startLobby();
 
 private:
     QImage background;
@@ -50,6 +51,8 @@ private:
     //    QMediaPlayer* musicPlayer;
 //    Server
     Server* ourServer;
+    Lobby* ourLobby;
+
 };
 
 #endif // GAMEENGINE_ma

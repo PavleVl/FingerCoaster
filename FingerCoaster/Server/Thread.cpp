@@ -2,7 +2,6 @@
 
 Thread::Thread(qintptr newSocketFd, QObject *parent) : QThread(parent), threadSocket(new QTcpSocket(this)){
     socketFd = newSocketFd;
-    std::cout << "I'm here!";
     if(!threadSocket->setSocketDescriptor(socketFd)){
         std::cout << threadSocket->error();
     }
@@ -15,7 +14,7 @@ Thread::Thread(qintptr newSocketFd, QObject *parent) : QThread(parent), threadSo
 }
 
 void Thread::onSendMessage(QByteArray message,qintptr targetSocketFd){
-    if(targetSocketFd == socketFd){
+    if(targetSocketFd == socketFd || targetSocketFd == 0){
         threadSocket->write(message);
         threadSocket->flush();
     }

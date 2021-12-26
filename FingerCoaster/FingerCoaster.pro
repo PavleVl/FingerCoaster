@@ -27,6 +27,7 @@ SOURCES += \
     Server/Server.cpp \
     Server/Thread.cpp   \
     Client/Client.cpp   \
+    Src/lobby.cpp
 
 
 HEADERS += \
@@ -44,12 +45,14 @@ HEADERS += \
     Storage/Storage.hpp \
     Server/Server.hpp \
     Server/Thread.h     \
-    Client/Client.hpp
+    Client/Client.hpp \
+    Headers/lobby.h
 
 FORMS += \
     createroom.ui \
     enterusername.ui \
     joinpopup.ui \
+    lobby.ui \
     mainwindow.ui \
     scoreboard.ui
 
