@@ -17,12 +17,15 @@ public:
     void insertKey();
     bool isValidIp4Address(const std::string& ipAddress);
     bool isValidPort(int port);
+
+signals:
+    void openLobby();
+
 private slots:
     void on_joinButton_clicked();
 
 private:
     Ui::JoinPopUp *ui;
-    Lobby *lobby;
 };
 
 #endif // JOINPOPUP_H

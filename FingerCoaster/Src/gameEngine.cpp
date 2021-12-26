@@ -52,6 +52,8 @@ void GameEngine::showScore(){
 
 void GameEngine::joinRoom(){
     JoinPopUp joinPopup;
+    connect(&joinPopup,SIGNAL(openLobby()),this,SLOT(startLobby()),Qt::DirectConnection);
+
     joinPopup.setModal(true);
     joinPopup.exec();
 }
@@ -60,6 +62,8 @@ void GameEngine::joinRoom(){
 void GameEngine::createRoom(){
     createroom cr;
     connect(&cr,SIGNAL(startServer(uint,uint)),this,SLOT(startServer(uint,uint)),Qt::DirectConnection);
+    connect(&cr,SIGNAL(openLobby()),this,SLOT(startLobby()),Qt::DirectConnection);
+
     cr.setModal(true);
     cr.exec();
 }
@@ -88,12 +92,21 @@ void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
     //TODO SERVER SHUT DOWN SIGNAL TO DELETE POINTER TO IT
 }
 
+//This will be run if we catch signal for start lobby
+void GameEngine::startLobby(){
+    Lobby ourLobby;
+
+    ourLobby.setModal(true);
+    ourLobby.exec();
+}
+
+
 //If its the first time application is opening and
 //Scoreboard.txt is missing this will be run
 void GameEngine::showUsernameInput(){
     enterUsername eu;
     eu.setModal(true);
-    eu.exec();;
+    eu.exec();
 };
 
 //void playMusic(QString path){

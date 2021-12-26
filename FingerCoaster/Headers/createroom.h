@@ -18,9 +18,11 @@ public:
 
 signals:
     void startServer(unsigned maxPlayers,unsigned difficulty);
+    void openLobby();
 
 private slots:
     void on_create_lobby_button_clicked();
+
 
 private:
     bool noRBChecked();
@@ -28,7 +30,6 @@ private:
 
 private:
     Ui::createroom *ui;
-    Lobby *lobby;
 };
 
 #endif // CREATEROOM_H
