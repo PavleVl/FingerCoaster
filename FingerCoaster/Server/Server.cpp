@@ -60,12 +60,41 @@ void Server::incomingConnection(qintptr socketFd){
 //I'm not sure if this part will break because of threads
 void Server::setClientsUsername(qintptr clientSocketFd,QString username){
     std::cout << "Usao sam u setClient!";
-    emit updateLobbyList(username);
-    username.insert(clientSocketFd,username);
+    //emit updateLobbyList(username);
+    usernames.insert(clientSocketFd,username);
+
+    std::cout << "List of usernames: " << std::endl;
+    auto it = usernames.begin();
+    while(it != usernames.end()){
+        std::cout << it.value().toStdString() << " ";
+        it++;
+    }
+
+
+    broadcastUsernames();
 }
 
 void Server::deleteThread(qintptr socketFd){
     std::cout << "Thread deleted" << std::endl;
     threads.remove(socketFd);
 }
+
+void Server::blockConnections(){
+    std::cout << "Server is blocking connections!" << std::endl;
+    this->pauseAccepting();
+}
+
+void Server::broadcastUsernames(){
+    std::string outputMsg = "usernamesList:";
+    auto it = usernames.begin();
+    while(it != usernames.end()){
+        outputMsg += it.value().toStdString() + ":";
+        it++;
+    }
+
+    QByteArray byteBuff(outputMsg.c_str(),outputMsg.length());
+    emit sendMessage(byteBuff,0);
+}
+
+
 
