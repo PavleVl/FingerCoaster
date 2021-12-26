@@ -28,6 +28,10 @@ GameEngine::GameEngine(){
     connect(menuScene->getCreateRoomButton(), SIGNAL(clicked()), this, SLOT(createRoom()));
 
 //    musicPlayer = new QMediaPlayer();
+
+    //Initialisation
+    ourServer = nullptr;
+    ourLobby = nullptr;
     openMenu();
 }
 
@@ -96,6 +100,10 @@ void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
 void GameEngine::startLobby(){
     Lobby ourLobby;
 
+    if(ourServer != nullptr){
+        connect(ourServer,SIGNAL(updateLobbyList(QString)),&ourLobby,SLOT(addPlayer(QString)),Qt::DirectConnection);
+
+    }
     ourLobby.setModal(true);
     ourLobby.exec();
 }

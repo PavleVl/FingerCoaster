@@ -23,6 +23,7 @@ public:
 
 signals:
     void sendMessage(QByteArray message,qintptr targetSocketFd);
+    void updateLobbyList(QString username);
 
 public slots:
     void setClientsUsername(qintptr clientSocketFd,QString username);

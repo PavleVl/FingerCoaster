@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QListView" name="listView">
+  <widget class="QListView" name="playerList">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="startGame">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -33,7 +33,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Zapocni Igru</string>
+    <string>Start</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">

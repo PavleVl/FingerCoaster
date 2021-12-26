@@ -51,6 +51,7 @@ private:
     //    QMediaPlayer* musicPlayer;
 //    Server
     Server* ourServer;
+    Lobby* ourLobby;
 
 };
 

@@ -60,6 +60,7 @@ void Server::incomingConnection(qintptr socketFd){
 //I'm not sure if this part will break because of threads
 void Server::setClientsUsername(qintptr clientSocketFd,QString username){
     std::cout << "Usao sam u setClient!";
+    emit updateLobbyList(username);
     username.insert(clientSocketFd,username);
 }
 
