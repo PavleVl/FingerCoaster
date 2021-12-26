@@ -9,7 +9,7 @@ JoinPopUp::JoinPopUp(QWidget *parent) :
     ui->setupUi(this);
 
     this->setWindowTitle("Join room");
-   connect(ui->joinButton,SIGNAL(clicked()),this,SLOT(on_joinButton_clicked()));
+    connect(ui->joinButton,SIGNAL(clicked()),this,SLOT(on_joinButton_clicked()));
 }
 
 JoinPopUp::~JoinPopUp()
@@ -46,5 +46,6 @@ void JoinPopUp::on_joinButton_clicked()
             ui->lMessage->setText("Nije validan port");
     else
             ui->lMessage->setText("Klijent se konektovao.");
+
 }
 
