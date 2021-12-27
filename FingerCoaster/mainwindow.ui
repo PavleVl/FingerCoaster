@@ -13,42 +13,6 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>340</y>
-     <width>81</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_ime">
-   <property name="geometry">
-    <rect>
-     <x>435</x>
-     <y>340</y>
-     <width>120</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>340</x>
-     <y>20</y>
-     <width>205</width>
-     <height>353</height>
-    </rect>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
