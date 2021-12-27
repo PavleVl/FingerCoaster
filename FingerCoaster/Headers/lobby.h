@@ -25,6 +25,8 @@ private slots:
 private:
     Ui::Lobby *ui;
     bool isServer;
+    int i;
+    QStringList players;
     //TODO
     //Implement way to check if you are server or client
 
