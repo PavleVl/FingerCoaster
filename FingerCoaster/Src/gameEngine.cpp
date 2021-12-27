@@ -98,13 +98,9 @@ void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
 }
 
 void GameEngine::startClient(){
-    //Sta ovde zapravo da se uradi?
-    //Jer kada se otvori joinpopup i posle toga udje u lobby tada se kreira klijent,ali njegov username se nigde
-    //ne navodi
-    //U gameEngine.hpp
     ScoreboardBackend sc;
     std::string username = sc.giveUsername();
-    ourClient = new Client(username);
+    ourClient = new Client(QString::fromStdString(username));
 }
 
 
