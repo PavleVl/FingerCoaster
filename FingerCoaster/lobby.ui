@@ -13,17 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QListView" name="playerList">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>40</y>
-     <width>201</width>
-     <height>121</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="startGame">
+  <widget class="QPushButton" name="btStartGame">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -47,6 +37,16 @@
    </property>
    <property name="text">
     <string>Wait for game to start</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="playerList">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>20</y>
+     <width>241</width>
+     <height>141</height>
+    </rect>
    </property>
   </widget>
  </widget>

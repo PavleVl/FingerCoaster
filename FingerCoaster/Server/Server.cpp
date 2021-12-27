@@ -37,12 +37,14 @@ void Server::incomingConnection(qintptr socketFd){
 
         connect(thread,SIGNAL(setClientsUsername(qintptr,QString)),this,SLOT(setClientsUsername(qintptr,QString)),Qt::DirectConnection);
         connect(thread,SIGNAL(deleteThread(qintptr)),this,SLOT(deleteThread(qintptr)),Qt::DirectConnection);
+
         std::cout << "Accepted the socket ";
         thread->start();
 
         std::string choosenFile = "text:" + serverStorage->getChoosenFile();
         QByteArray byteBuff(choosenFile.c_str(),choosenFile.length());
         emit sendMessage(byteBuff,socketFd);
+
     }
     else{
         QTcpSocket *rejectedSocket = new QTcpSocket();
@@ -60,7 +62,8 @@ void Server::incomingConnection(qintptr socketFd){
 //I'm not sure if this part will break because of threads
 void Server::setClientsUsername(qintptr clientSocketFd,QString username){
     std::cout << "Usao sam u setClient!";
-    //emit updateLobbyList(username);
+
+    emit updateLobbyList(username);
     usernames.insert(clientSocketFd,username);
 
     std::cout << "List of usernames: " << std::endl;
@@ -96,5 +99,13 @@ void Server::broadcastUsernames(){
     emit sendMessage(byteBuff,0);
 }
 
+void Server::forceCloseTheServer(){
+    emit endConnection();
 
+    auto it = threads.begin();
+    while(it != threads.end())
+        it.value()->deleteLater();
+
+    this->close();
+}
 

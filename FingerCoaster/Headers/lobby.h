@@ -16,19 +16,20 @@ public:
     ~Lobby();
 
 signals:
-    //TODO
-    //Send signal when the game is started if its server lobby
+    void closeServerConnections();
+    void popUpForcedClose();
 
 private slots:
     void addPlayer(QString username);
+    void on_btStartGame_clicked();
+    void on_Lobby_destroyed();
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::Lobby *ui;
-    bool isServer;
-    //TODO
-    //Implement way to check if you are server or client
-
-
+    int i;
+    QStringList players;
+    bool client = false;
 };
 
 #endif // LOBBY_H

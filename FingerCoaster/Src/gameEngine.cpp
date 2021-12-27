@@ -114,6 +114,9 @@ void GameEngine::startLobby(){
 
     if(ourServer != nullptr){
         connect(ourServer,SIGNAL(updateLobbyList(QString)),&ourLobby,SLOT(addPlayer(QString)),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(closeServerConnections()),ourServer,SLOT(blockConnections()),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(popUpForcedClose()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
+        //
         //TODO connect to kill other connections
     }
     ourLobby.setModal(true);

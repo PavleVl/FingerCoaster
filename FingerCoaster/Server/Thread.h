@@ -22,6 +22,7 @@ public slots:
     void readyRead();
     void onSendMessage(QByteArray message,qintptr targetSocketPtr);
     void disconnected();
+    void forceCloseConnection();
     //Thread slots
 
 protected:
