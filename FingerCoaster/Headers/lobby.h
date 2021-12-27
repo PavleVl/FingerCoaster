@@ -27,9 +27,7 @@ private:
     bool isServer;
     int i;
     QStringList players;
-    //TODO
-    //Implement way to check if you are server or client
-
+    bool client = false;
 
 };
 

@@ -11,6 +11,9 @@ Lobby::Lobby(QWidget *parent) :
     i = 0;
     ui->setupUi(this);
     this->setWindowTitle("Lobby");
+    if(client) {
+        ui->btStartGame->hide();
+    }
 }
 
 Lobby::~Lobby()
@@ -25,7 +28,4 @@ void Lobby::addPlayer(QString username){
     ui->playerList->addItem(s);
 }
 
-//TODO
-//Implement way to show a start button if you are server
-//and hide if you are client
 
