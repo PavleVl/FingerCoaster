@@ -57,7 +57,7 @@ void GameEngine::showScore(){
 
 void GameEngine::joinRoom(){
     JoinPopUp joinPopup;
-    connect(&joinPopup,SIGNAL(startClient),this,SLOT(startClient()),Qt::DirectConnection);
+    connect(&joinPopup,SIGNAL(startClient()),this,SLOT(startClient()),Qt::DirectConnection);
     connect(&joinPopup,SIGNAL(openLobby()),this,SLOT(startLobby()),Qt::DirectConnection);
     joinPopup.setModal(true);
     joinPopup.exec();
@@ -101,7 +101,10 @@ void GameEngine::startClient(){
     //Sta ovde zapravo da se uradi?
     //Jer kada se otvori joinpopup i posle toga udje u lobby tada se kreira klijent,ali njegov username se nigde
     //ne navodi
-    ourClient = new Client("Vlado");
+    //U gameEngine.hpp
+    ScoreboardBackend sc;
+    std::string username = sc.giveUsername();
+    ourClient = new Client(username);
 }
 
 
