@@ -80,6 +80,16 @@ void Server::setClientsUsername(qintptr clientSocketFd,QString username){
 void Server::deleteThread(qintptr socketFd){
     std::cout << "Thread deleted" << std::endl;
     threads.remove(socketFd);
+    usernames.remove(socketFd);
+
+    QVector<QString> usernamesBuff;
+    auto it = usernames.begin();
+    while(it != usernames.end()){
+        usernamesBuff.push_back(it.value());
+        it++;
+    }
+
+    emit rewriteLobbyList(&usernamesBuff);
 }
 
 void Server::blockConnections(){

@@ -31,6 +31,7 @@ protected:
 private:
     QTcpSocket* threadSocket;
     qintptr socketFd;
+    QString username;
 };
 
 #endif // THREAD_H

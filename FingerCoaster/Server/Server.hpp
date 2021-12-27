@@ -27,6 +27,7 @@ signals:
     //single socket to send that message
     void sendMessage(QByteArray message,qintptr targetSocketFd);
     void updateLobbyList(QString username);
+    void rewriteLobbyList(QVector<QString>* usernames);
     void endConnection();
 
 public slots:

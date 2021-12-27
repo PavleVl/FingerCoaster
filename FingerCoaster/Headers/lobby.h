@@ -22,7 +22,7 @@ signals:
 private slots:
     void addPlayer(QString username);
     void on_btStartGame_clicked();
-    void on_Lobby_destroyed();
+    void rewriteUsernames(QVector<QString>* usernames);
     void closeEvent(QCloseEvent *event);
 
 private:
