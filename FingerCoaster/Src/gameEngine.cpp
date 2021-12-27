@@ -112,9 +112,10 @@ void GameEngine::startLobby(){
         connect(ourServer,SIGNAL(updateLobbyList(QString)),&ourLobby,SLOT(addPlayer(QString)),Qt::DirectConnection);
         connect(&ourLobby,SIGNAL(closeServerConnections()),ourServer,SLOT(blockConnections()),Qt::DirectConnection);
         connect(&ourLobby,SIGNAL(popUpForcedClose()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
-        //
-        //TODO connect to kill other connections
+        connect(ourServer,SIGNAL(rewriteLobbyList(QVector<QString>*)),&ourLobby,
+                SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
     }
+
     ourLobby.setModal(true);
     ourLobby.exec();
 }

@@ -40,9 +40,11 @@ void Lobby::on_btStartGame_clicked()
     }
 }
 
-void Lobby::on_Lobby_destroyed()
-{
-    //emit popUpForcedClose();
+void Lobby::rewriteUsernames(QVector<QString>* usernames){
+    ui->playerList->clear();
+
+    for(int j = 0;j<usernames->size();j++)
+        ui->playerList->addItem(usernames->at(j));
 }
 
 void Lobby::closeEvent(QCloseEvent *event){
