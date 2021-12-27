@@ -16,7 +16,7 @@
 #include "map.h"
 #include "../Scoreboard/ScoreboardBackend.hpp"
 #include "../Server/Server.hpp"
-
+#include "../Client/Client.hpp"
 class GameEngine:public QGraphicsView{
     Q_OBJECT
 public:
@@ -36,6 +36,7 @@ public slots:
     void joinRoom();
     void createRoom();
     void startServer(unsigned maxPlayers,unsigned difficulty);
+    void startClient();
     void startLobby();
 
 private:
@@ -50,9 +51,10 @@ private:
     Ui::MainWindow* gui;
     //    QMediaPlayer* musicPlayer;
 //    Server
+    //TREBA PAZITI ourServer i ourClient vrate na null;
     Server* ourServer;
     Lobby* ourLobby;
-
+    Client* ourClient;
 };
 
 #endif // GAMEENGINE_ma

@@ -29,6 +29,7 @@ public:
     QLabel *diff_label;
     QComboBox *num_players_cb;
     QLabel *num_players_label;
+    QLabel *err_label;
 
     void setupUi(QDialog *createroom)
     {
@@ -59,6 +60,10 @@ public:
         num_players_label = new QLabel(createroom);
         num_players_label->setObjectName(QString::fromUtf8("num_players_label"));
         num_players_label->setGeometry(QRect(150, 10, 140, 17));
+        err_label = new QLabel(createroom);
+        err_label->setObjectName(QString::fromUtf8("err_label"));
+        err_label->setGeometry(QRect(25, 135, 250, 17));
+        err_label->setAlignment(Qt::AlignCenter);
 
         retranslateUi(createroom);
 
@@ -78,6 +83,7 @@ public:
         num_players_cb->setItemText(2, QCoreApplication::translate("createroom", "3 players", nullptr));
 
         num_players_label->setText(QCoreApplication::translate("createroom", "Number of players:", nullptr));
+        err_label->setText(QString());
     } // retranslateUi
 
 };

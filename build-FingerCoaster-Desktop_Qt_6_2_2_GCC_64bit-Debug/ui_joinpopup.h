@@ -30,19 +30,19 @@ public:
     {
         if (JoinPopUp->objectName().isEmpty())
             JoinPopUp->setObjectName(QString::fromUtf8("JoinPopUp"));
-        JoinPopUp->resize(300, 152);
+        JoinPopUp->resize(320, 130);
         key = new QLabel(JoinPopUp);
         key->setObjectName(QString::fromUtf8("key"));
-        key->setGeometry(QRect(10, 20, 31, 17));
+        key->setGeometry(QRect(10, 20, 31, 25));
         joinButton = new QPushButton(JoinPopUp);
         joinButton->setObjectName(QString::fromUtf8("joinButton"));
-        joinButton->setGeometry(QRect(200, 80, 89, 25));
+        joinButton->setGeometry(QRect(220, 90, 90, 25));
         labelInsertKey = new QLineEdit(JoinPopUp);
         labelInsertKey->setObjectName(QString::fromUtf8("labelInsertKey"));
         labelInsertKey->setGeometry(QRect(60, 20, 171, 25));
         lMessage = new QLabel(JoinPopUp);
         lMessage->setObjectName(QString::fromUtf8("lMessage"));
-        lMessage->setGeometry(QRect(10, 80, 181, 20));
+        lMessage->setGeometry(QRect(10, 90, 200, 25));
 
         retranslateUi(JoinPopUp);
 

@@ -16,6 +16,9 @@ Thread::Thread(qintptr newSocketFd, QObject *parent) : QThread(parent), threadSo
 void Thread::onSendMessage(QByteArray message,qintptr targetSocketFd){
     if(targetSocketFd == socketFd || targetSocketFd == 0){
         threadSocket->write(message);
+        //Ja bih trebalo da ukljucim Thread.hpp i da procitam odavde i samo parsiram tako da klijent ima info o
+        //drugim username-ovima?Ovo bi meni zapravo bio signal da ja(Client) mogu da citam tj parsiram i dobijem usernamove?
+        //Ovako si zamislio?
         threadSocket->flush();
     }
 }

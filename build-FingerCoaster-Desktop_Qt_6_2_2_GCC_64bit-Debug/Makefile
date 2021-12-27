@@ -66,7 +66,8 @@ SOURCES       = ../FingerCoaster/Src/createroom.cpp \
 		../FingerCoaster/Storage/Storage.cpp \
 		../FingerCoaster/Server/Server.cpp \
 		../FingerCoaster/Server/Thread.cpp \
-		../FingerCoaster/Client/Client.cpp qrc_res.cpp \
+		../FingerCoaster/Client/Client.cpp \
+		../FingerCoaster/Src/lobby.cpp qrc_res.cpp \
 		moc_createroom.cpp \
 		moc_gameEngine.cpp \
 		moc_joinpopup.cpp \
@@ -75,7 +76,8 @@ SOURCES       = ../FingerCoaster/Src/createroom.cpp \
 		moc_enterusername.cpp \
 		moc_Server.cpp \
 		moc_Thread.cpp \
-		moc_Client.cpp
+		moc_Client.cpp \
+		moc_lobby.cpp
 OBJECTS       = createroom.o \
 		gameEngine.o \
 		joinpopup.o \
@@ -91,6 +93,7 @@ OBJECTS       = createroom.o \
 		Server.o \
 		Thread.o \
 		Client.o \
+		lobby.o \
 		qrc_res.o \
 		moc_createroom.o \
 		moc_gameEngine.o \
@@ -100,7 +103,8 @@ OBJECTS       = createroom.o \
 		moc_enterusername.o \
 		moc_Server.o \
 		moc_Thread.o \
-		moc_Client.o
+		moc_Client.o \
+		moc_lobby.o
 DIST          = ../../../Qt/6.2.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/6.2.2/gcc_64/mkspecs/common/unix.conf \
 		../../../Qt/6.2.2/gcc_64/mkspecs/common/linux.conf \
@@ -257,7 +261,8 @@ DIST          = ../../../Qt/6.2.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../FingerCoaster/Storage/Storage.hpp \
 		../FingerCoaster/Server/Server.hpp \
 		../FingerCoaster/Server/Thread.h \
-		../FingerCoaster/Client/Client.hpp ../FingerCoaster/Src/createroom.cpp \
+		../FingerCoaster/Client/Client.hpp \
+		../FingerCoaster/Headers/lobby.h ../FingerCoaster/Src/createroom.cpp \
 		../FingerCoaster/Src/gameEngine.cpp \
 		../FingerCoaster/Src/joinpopup.cpp \
 		../FingerCoaster/Src/main.cpp \
@@ -271,7 +276,8 @@ DIST          = ../../../Qt/6.2.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../FingerCoaster/Storage/Storage.cpp \
 		../FingerCoaster/Server/Server.cpp \
 		../FingerCoaster/Server/Thread.cpp \
-		../FingerCoaster/Client/Client.cpp
+		../FingerCoaster/Client/Client.cpp \
+		../FingerCoaster/Src/lobby.cpp
 QMAKE_TARGET  = FingerCoaster
 DESTDIR       = 
 TARGET        = FingerCoaster
@@ -280,7 +286,7 @@ TARGET        = FingerCoaster
 first: all
 ####### Build rules
 
-FingerCoaster: ui_createroom.h ui_enterusername.h ui_joinpopup.h ui_mainwindow.h ui_scoreboard.h $(OBJECTS)  
+FingerCoaster: ui_createroom.h ui_enterusername.h ui_joinpopup.h ui_lobby.h ui_mainwindow.h ui_scoreboard.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../FingerCoaster/FingerCoaster.pro ../../../Qt/6.2.2/gcc_64/mkspecs/linux-g++/qmake.conf ../../../Qt/6.2.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -600,9 +606,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../FingerCoaster/res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/6.2.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../FingerCoaster/Headers/createroom.h ../FingerCoaster/Headers/gameEngine.h ../FingerCoaster/Headers/joinpopup.h ../FingerCoaster/Headers/mainMenu.h ../FingerCoaster/Headers/mainwindow.h ../FingerCoaster/Headers/map.h ../FingerCoaster/Headers/menuBtn.h ../FingerCoaster/Headers/scoreboard.h ../FingerCoaster/Headers/enterusername.h ../FingerCoaster/Scoreboard/ScoreboardBackend.hpp ../FingerCoaster/Storage/Storage.hpp ../FingerCoaster/Server/Server.hpp ../FingerCoaster/Server/Thread.h ../FingerCoaster/Client/Client.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../FingerCoaster/Src/createroom.cpp ../FingerCoaster/Src/gameEngine.cpp ../FingerCoaster/Src/joinpopup.cpp ../FingerCoaster/Src/main.cpp ../FingerCoaster/Src/mainMenu.cpp ../FingerCoaster/Src/mainwindow.cpp ../FingerCoaster/Src/map.cpp ../FingerCoaster/Src/menuBtn.cpp ../FingerCoaster/Src/scoreboard.cpp ../FingerCoaster/Src/enterusername.cpp ../FingerCoaster/Scoreboard/ScoreboardBackend.cpp ../FingerCoaster/Storage/Storage.cpp ../FingerCoaster/Server/Server.cpp ../FingerCoaster/Server/Thread.cpp ../FingerCoaster/Client/Client.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../FingerCoaster/createroom.ui ../FingerCoaster/enterusername.ui ../FingerCoaster/joinpopup.ui ../FingerCoaster/mainwindow.ui ../FingerCoaster/scoreboard.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../FingerCoaster/Headers/createroom.h ../FingerCoaster/Headers/gameEngine.h ../FingerCoaster/Headers/joinpopup.h ../FingerCoaster/Headers/mainMenu.h ../FingerCoaster/Headers/mainwindow.h ../FingerCoaster/Headers/map.h ../FingerCoaster/Headers/menuBtn.h ../FingerCoaster/Headers/scoreboard.h ../FingerCoaster/Headers/enterusername.h ../FingerCoaster/Scoreboard/ScoreboardBackend.hpp ../FingerCoaster/Storage/Storage.hpp ../FingerCoaster/Server/Server.hpp ../FingerCoaster/Server/Thread.h ../FingerCoaster/Client/Client.hpp ../FingerCoaster/Headers/lobby.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../FingerCoaster/Src/createroom.cpp ../FingerCoaster/Src/gameEngine.cpp ../FingerCoaster/Src/joinpopup.cpp ../FingerCoaster/Src/main.cpp ../FingerCoaster/Src/mainMenu.cpp ../FingerCoaster/Src/mainwindow.cpp ../FingerCoaster/Src/map.cpp ../FingerCoaster/Src/menuBtn.cpp ../FingerCoaster/Src/scoreboard.cpp ../FingerCoaster/Src/enterusername.cpp ../FingerCoaster/Scoreboard/ScoreboardBackend.cpp ../FingerCoaster/Storage/Storage.cpp ../FingerCoaster/Server/Server.cpp ../FingerCoaster/Server/Thread.cpp ../FingerCoaster/Client/Client.cpp ../FingerCoaster/Src/lobby.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../FingerCoaster/createroom.ui ../FingerCoaster/enterusername.ui ../FingerCoaster/joinpopup.ui ../FingerCoaster/lobby.ui ../FingerCoaster/mainwindow.ui ../FingerCoaster/scoreboard.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -640,9 +646,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt/6.2.2/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1z -Wall -Wextra -dM -E -o moc_predefs.h ../../../Qt/6.2.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_createroom.cpp moc_gameEngine.cpp moc_joinpopup.cpp moc_mainwindow.cpp moc_scoreboard.cpp moc_enterusername.cpp moc_Server.cpp moc_Thread.cpp moc_Client.cpp
+compiler_moc_header_make_all: moc_createroom.cpp moc_gameEngine.cpp moc_joinpopup.cpp moc_mainwindow.cpp moc_scoreboard.cpp moc_enterusername.cpp moc_Server.cpp moc_Thread.cpp moc_Client.cpp moc_lobby.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_createroom.cpp moc_gameEngine.cpp moc_joinpopup.cpp moc_mainwindow.cpp moc_scoreboard.cpp moc_enterusername.cpp moc_Server.cpp moc_Thread.cpp moc_Client.cpp
+	-$(DEL_FILE) moc_createroom.cpp moc_gameEngine.cpp moc_joinpopup.cpp moc_mainwindow.cpp moc_scoreboard.cpp moc_enterusername.cpp moc_Server.cpp moc_Thread.cpp moc_Client.cpp moc_lobby.cpp
 moc_createroom.cpp: ../FingerCoaster/Headers/createroom.h \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qdialog.h \
@@ -774,6 +780,7 @@ moc_createroom.cpp: ../FingerCoaster/Headers/createroom.h \
 		../../../Qt/6.2.2/gcc_64/include/QtGui/QTransform \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qloggingcategory.h \
+		../FingerCoaster/Headers/lobby.h \
 		moc_predefs.h \
 		../../../Qt/6.2.2/gcc_64/libexec/moc
 	/home/vladimir/Qt/6.2.2/gcc_64/libexec/moc $(DEFINES) --include /home/vladimir/Desktop/18-FingerCoaster/build-FingerCoaster-Desktop_Qt_6_2_2_GCC_64bit-Debug/moc_predefs.h -I/home/vladimir/Qt/6.2.2/gcc_64/mkspecs/linux-g++ -I/home/vladimir/Desktop/18-FingerCoaster/FingerCoaster -I/home/vladimir/Qt/6.2.2/gcc_64/include -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtWidgets -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtGui -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtNetwork -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtConcurrent -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtCore -I. -I/usr/include/c++/10 -I/usr/include/x86_64-linux-gnu/c++/10 -I/usr/include/c++/10/backward -I/usr/lib/gcc/x86_64-linux-gnu/10/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../FingerCoaster/Headers/createroom.h -o moc_createroom.cpp
@@ -960,6 +967,7 @@ moc_gameEngine.cpp: ../FingerCoaster/Headers/gameEngine.h \
 		../FingerCoaster/Headers/joinpopup.h \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qdialog.h \
+		../FingerCoaster/Headers/lobby.h \
 		../FingerCoaster/Headers/createroom.h \
 		../FingerCoaster/Headers/map.h \
 		../FingerCoaster/Scoreboard/ScoreboardBackend.hpp \
@@ -1237,6 +1245,7 @@ moc_joinpopup.cpp: ../FingerCoaster/Headers/joinpopup.h \
 		../../../Qt/6.2.2/gcc_64/include/QtGui/QTransform \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qloggingcategory.h \
+		../FingerCoaster/Headers/lobby.h \
 		moc_predefs.h \
 		../../../Qt/6.2.2/gcc_64/libexec/moc
 	/home/vladimir/Qt/6.2.2/gcc_64/libexec/moc $(DEFINES) --include /home/vladimir/Desktop/18-FingerCoaster/build-FingerCoaster-Desktop_Qt_6_2_2_GCC_64bit-Debug/moc_predefs.h -I/home/vladimir/Qt/6.2.2/gcc_64/mkspecs/linux-g++ -I/home/vladimir/Desktop/18-FingerCoaster/FingerCoaster -I/home/vladimir/Qt/6.2.2/gcc_64/include -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtWidgets -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtGui -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtNetwork -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtConcurrent -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtCore -I. -I/usr/include/c++/10 -I/usr/include/x86_64-linux-gnu/c++/10 -I/usr/include/c++/10/backward -I/usr/lib/gcc/x86_64-linux-gnu/10/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../FingerCoaster/Headers/joinpopup.h -o moc_joinpopup.cpp
@@ -2139,13 +2148,148 @@ moc_Client.cpp: ../FingerCoaster/Client/Client.hpp \
 		../../../Qt/6.2.2/gcc_64/libexec/moc
 	/home/vladimir/Qt/6.2.2/gcc_64/libexec/moc $(DEFINES) --include /home/vladimir/Desktop/18-FingerCoaster/build-FingerCoaster-Desktop_Qt_6_2_2_GCC_64bit-Debug/moc_predefs.h -I/home/vladimir/Qt/6.2.2/gcc_64/mkspecs/linux-g++ -I/home/vladimir/Desktop/18-FingerCoaster/FingerCoaster -I/home/vladimir/Qt/6.2.2/gcc_64/include -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtWidgets -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtGui -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtNetwork -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtConcurrent -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtCore -I. -I/usr/include/c++/10 -I/usr/include/x86_64-linux-gnu/c++/10 -I/usr/include/c++/10/backward -I/usr/lib/gcc/x86_64-linux-gnu/10/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../FingerCoaster/Client/Client.hpp -o moc_Client.cpp
 
+moc_lobby.cpp: ../FingerCoaster/Headers/lobby.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qflags.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstring.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qchar.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpair.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qarraydataops.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qanystringview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qlist.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcompare.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiterable.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmath.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qproperty.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpropertyprivate.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qrect.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsize.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpalette.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qimage.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qregion.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qline.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qfont.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qcursor.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qbitmap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qevent.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qurl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qhash.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringconverter.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qset.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qeventpoint.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qvectornd.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpointingdevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qinputdevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qscreen.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QList \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QObject \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QRect \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QSize \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QSizeF \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/QTransform \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qnativeinterface.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qloggingcategory.h \
+		moc_predefs.h \
+		../../../Qt/6.2.2/gcc_64/libexec/moc
+	/home/vladimir/Qt/6.2.2/gcc_64/libexec/moc $(DEFINES) --include /home/vladimir/Desktop/18-FingerCoaster/build-FingerCoaster-Desktop_Qt_6_2_2_GCC_64bit-Debug/moc_predefs.h -I/home/vladimir/Qt/6.2.2/gcc_64/mkspecs/linux-g++ -I/home/vladimir/Desktop/18-FingerCoaster/FingerCoaster -I/home/vladimir/Qt/6.2.2/gcc_64/include -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtWidgets -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtGui -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtNetwork -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtConcurrent -I/home/vladimir/Qt/6.2.2/gcc_64/include/QtCore -I. -I/usr/include/c++/10 -I/usr/include/x86_64-linux-gnu/c++/10 -I/usr/include/c++/10/backward -I/usr/lib/gcc/x86_64-linux-gnu/10/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../FingerCoaster/Headers/lobby.h -o moc_lobby.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_createroom.h ui_enterusername.h ui_joinpopup.h ui_mainwindow.h ui_scoreboard.h
+compiler_uic_make_all: ui_createroom.h ui_enterusername.h ui_joinpopup.h ui_lobby.h ui_mainwindow.h ui_scoreboard.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_createroom.h ui_enterusername.h ui_joinpopup.h ui_mainwindow.h ui_scoreboard.h
+	-$(DEL_FILE) ui_createroom.h ui_enterusername.h ui_joinpopup.h ui_lobby.h ui_mainwindow.h ui_scoreboard.h
 ui_createroom.h: ../FingerCoaster/createroom.ui \
 		../../../Qt/6.2.2/gcc_64/libexec/uic
 	/home/vladimir/Qt/6.2.2/gcc_64/libexec/uic ../FingerCoaster/createroom.ui -o ui_createroom.h
@@ -2157,6 +2301,10 @@ ui_enterusername.h: ../FingerCoaster/enterusername.ui \
 ui_joinpopup.h: ../FingerCoaster/joinpopup.ui \
 		../../../Qt/6.2.2/gcc_64/libexec/uic
 	/home/vladimir/Qt/6.2.2/gcc_64/libexec/uic ../FingerCoaster/joinpopup.ui -o ui_joinpopup.h
+
+ui_lobby.h: ../FingerCoaster/lobby.ui \
+		../../../Qt/6.2.2/gcc_64/libexec/uic
+	/home/vladimir/Qt/6.2.2/gcc_64/libexec/uic ../FingerCoaster/lobby.ui -o ui_lobby.h
 
 ui_mainwindow.h: ../FingerCoaster/mainwindow.ui \
 		../../../Qt/6.2.2/gcc_64/libexec/uic
@@ -2307,6 +2455,7 @@ createroom.o: ../FingerCoaster/Src/createroom.cpp ../FingerCoaster/Headers/creat
 		../../../Qt/6.2.2/gcc_64/include/QtGui/QTransform \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qloggingcategory.h \
+		../FingerCoaster/Headers/lobby.h \
 		ui_createroom.h \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/QVariant \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QApplication \
@@ -2538,6 +2687,7 @@ gameEngine.o: ../FingerCoaster/Src/gameEngine.cpp ../FingerCoaster/Headers/gameE
 		../FingerCoaster/Headers/joinpopup.h \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qdialog.h \
+		../FingerCoaster/Headers/lobby.h \
 		../FingerCoaster/Headers/createroom.h \
 		../FingerCoaster/Headers/map.h \
 		../FingerCoaster/Scoreboard/ScoreboardBackend.hpp \
@@ -2835,6 +2985,7 @@ joinpopup.o: ../FingerCoaster/Src/joinpopup.cpp ../FingerCoaster/Headers/joinpop
 		../../../Qt/6.2.2/gcc_64/include/QtGui/QTransform \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/qloggingcategory.h \
+		../FingerCoaster/Headers/lobby.h \
 		ui_joinpopup.h \
 		../../../Qt/6.2.2/gcc_64/include/QtCore/QVariant \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QApplication \
@@ -2872,8 +3023,7 @@ joinpopup.o: ../FingerCoaster/Src/joinpopup.cpp ../FingerCoaster/Headers/joinpop
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../../Qt/6.2.2/gcc_64/include/QtGui/qicon.h \
-		../FingerCoaster/Headers/configuration.h \
-		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QSizePolicy
+		../FingerCoaster/Headers/configuration.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o joinpopup.o ../FingerCoaster/Src/joinpopup.cpp
 
 main.o: ../FingerCoaster/Src/main.cpp ../../../Qt/6.2.2/gcc_64/include/QtWidgets/QApplication \
@@ -3058,6 +3208,7 @@ main.o: ../FingerCoaster/Src/main.cpp ../../../Qt/6.2.2/gcc_64/include/QtWidgets
 		../FingerCoaster/Headers/joinpopup.h \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qdialog.h \
+		../FingerCoaster/Headers/lobby.h \
 		../FingerCoaster/Headers/createroom.h \
 		../FingerCoaster/Headers/map.h \
 		../FingerCoaster/Scoreboard/ScoreboardBackend.hpp \
@@ -4465,6 +4616,140 @@ Client.o: ../FingerCoaster/Client/Client.cpp ../FingerCoaster/Client/Client.hpp 
 		../../../Qt/6.2.2/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Client.o ../FingerCoaster/Client/Client.cpp
 
+lobby.o: ../FingerCoaster/Src/lobby.cpp ../FingerCoaster/Headers/lobby.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qdialog.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtcore-config.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qflags.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qwidget.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstring.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qchar.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpair.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qarraydataops.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qanystringview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qlist.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcompare.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qscopeguard.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiterable.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmath.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qproperty.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpropertyprivate.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qrect.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsize.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpalette.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qcolor.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qrgb.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qrgba64.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qbrush.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qimage.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpixelformat.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qtransform.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpolygon.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qregion.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qline.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpixmap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qfont.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qfontinfo.h \
+		../../../Qt/6.2.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qcursor.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qbitmap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qevent.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qpointer.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qurl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qmap.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qhash.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qstringconverter.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qset.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qeventpoint.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qvectornd.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qpointingdevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qinputdevice.h \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/qscreen.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QList \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QObject \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QRect \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QSize \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/QSizeF \
+		../../../Qt/6.2.2/gcc_64/include/QtGui/QTransform \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qnativeinterface.h \
+		../../../Qt/6.2.2/gcc_64/include/QtCore/qloggingcategory.h \
+		ui_lobby.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lobby.o ../FingerCoaster/Src/lobby.cpp
+
 qrc_res.o: qrc_res.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res.o qrc_res.cpp
 
@@ -4494,6 +4779,9 @@ moc_Thread.o: moc_Thread.cpp
 
 moc_Client.o: moc_Client.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Client.o moc_Client.cpp
+
+moc_lobby.o: moc_lobby.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_lobby.o moc_lobby.cpp
 
 ####### Install
 

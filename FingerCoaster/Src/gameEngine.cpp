@@ -32,6 +32,7 @@ GameEngine::GameEngine(){
     //Initialisation
     ourServer = nullptr;
     ourLobby = nullptr;
+    ourClient = nullptr;
     openMenu();
 }
 
@@ -56,8 +57,8 @@ void GameEngine::showScore(){
 
 void GameEngine::joinRoom(){
     JoinPopUp joinPopup;
+    connect(&joinPopup,SIGNAL(startClient),this,SLOT(startClient()),Qt::DirectConnection);
     connect(&joinPopup,SIGNAL(openLobby()),this,SLOT(startLobby()),Qt::DirectConnection);
-
     joinPopup.setModal(true);
     joinPopup.exec();
 }
@@ -95,6 +96,14 @@ void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
     //TODO SERVER IMPL
     //TODO SERVER SHUT DOWN SIGNAL TO DELETE POINTER TO IT
 }
+
+void GameEngine::startClient(){
+    //Sta ovde zapravo da se uradi?
+    //Jer kada se otvori joinpopup i posle toga udje u lobby tada se kreira klijent,ali njegov username se nigde
+    //ne navodi
+    ourClient = new Client("Vlado");
+}
+
 
 //This will be run if we catch signal for start lobby
 void GameEngine::startLobby(){
