@@ -6,6 +6,7 @@
 #include "Headers/joinpopup.h"
 #include "Headers/scoreboard.h"
 #include "Headers/enterusername.h"
+#include "../Game/game.h"
 #include <QDebug>
 
 
@@ -35,6 +36,13 @@ GameEngine::GameEngine(){
     ourClient = nullptr;
 
     openMenu();
+
+    //TOFIX
+    //This will be place where game class will started for testing
+    //------------------------------------------------------------
+        std::string choosenFile = "easy1.txt";
+        Game ourGame(choosenFile,this);
+    //------------------------------------------------------------
 }
 
 GameEngine::~GameEngine(){

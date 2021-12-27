@@ -48,7 +48,7 @@ void Storage::setNumberOfPlayers(unsigned newNumberOfPlayers){
     numberOfPlayers = newNumberOfPlayers;
 }
 
-void Storage::setChoosenFIle(std::string newChoosenFile){
+void Storage::setChoosenFile(std::string newChoosenFile){
 
     if(newChoosenFile == "")
         throw std::invalid_argument("File name is missing");

@@ -18,7 +18,7 @@ public:
 
     void setNumberOfPlayers(unsigned newNumberOfPlayer);
     
-    void setChoosenFIle(std::string newChoosenFile);
+    void setChoosenFile(std::string newChoosenFile);
 
     unsigned getDifficulty() const;
 
