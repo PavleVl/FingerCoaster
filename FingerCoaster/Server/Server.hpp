@@ -29,6 +29,7 @@ signals:
     void updateLobbyList(QString username);
     void rewriteLobbyList(QVector<QString>* usernames);
     void endConnection();
+    void serverShutdown();
 
 public slots:
     void setClientsUsername(qintptr clientSocketFd,QString username);

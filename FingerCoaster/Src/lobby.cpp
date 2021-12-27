@@ -7,13 +7,11 @@ Lobby::Lobby(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Lobby)
 {
-
+    isClient = false;
     i = 0;
     ui->setupUi(this);
     this->setWindowTitle("Lobby");
-    if(client) {
-        ui->btStartGame->hide();
-    }
+
 }
 
 Lobby::~Lobby()
@@ -30,25 +28,35 @@ void Lobby::addPlayer(QString username){
 
 void Lobby::on_btStartGame_clicked()
 {
-    if(!client){
-        emit closeServerConnections();
+    emit closeServerConnections();
 
         //TOIML
         //starting the game
 
-        this->close();
-    }
+    this->close();
 }
 
 void Lobby::rewriteUsernames(QVector<QString>* usernames){
     ui->playerList->clear();
 
-    for(int j = 0;j<usernames->size();j++)
-        ui->playerList->addItem(usernames->at(j));
+    QString buff = "";
+    for(int j = 0;j<usernames->size();j++){
+
+        buff += QString::number(j) + ". " + usernames->at(j);
+        ui->playerList->addItem(buff);
+        buff = "";
+    }
 }
 
 void Lobby::closeEvent(QCloseEvent *event){
-    emit popUpForcedClose();
+
+    if(!isClient)
+        emit popUpForcedClose();
+    else {}
+        //EMITUJEMO ZATVARANJE KLIJENTU
 }
 
-
+void Lobby::setIsClient(){
+    isClient = true;
+    ui->btStartGame->hide();
+}

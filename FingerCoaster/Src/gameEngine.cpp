@@ -89,6 +89,7 @@ void GameEngine::resizeEvent(QResizeEvent *event){
 void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
     ourServer = new Server();
 
+    connect(ourServer,SIGNAL(serverShutdown()),this,SLOT(reInitServer()),Qt::DirectConnection);
     ourServer->setStorageDifficulty(difficulty);
     ourServer->setStorageMaxPlayers(maxPlayers);
 
@@ -115,6 +116,10 @@ void GameEngine::startLobby(){
         connect(ourServer,SIGNAL(rewriteLobbyList(QVector<QString>*)),&ourLobby,
                 SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
     }
+    else{
+        //Podeseno klijentsko okruzenje
+        ourLobby.setIsClient();
+    }
 
     ourLobby.setModal(true);
     ourLobby.exec();
@@ -134,3 +139,7 @@ void GameEngine::showUsernameInput(){
 //    musicPlayer->setVolume(100);
 //    musicPlayer->play();
 //}
+
+void GameEngine::reInitServer(){
+    ourServer = nullptr;
+}

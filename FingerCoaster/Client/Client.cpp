@@ -35,6 +35,10 @@ void Client::bytesWritten(){
 }
 
 void Client::readyRead(){
+    //Kada uhvatis usernamesList:username1:username2:username3:
+    //Tada splitujes
+    //Saljes signal da upalis slot rewriteUSernames();
+
     qDebug()<<"Reading...";
     qDebug()<<tcpSocket->readAll();
 }

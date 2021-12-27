@@ -38,6 +38,7 @@ public slots:
     void startServer(unsigned maxPlayers,unsigned difficulty);
     void startClient();
     void startLobby();
+    void reInitServer();
 
 private:
     QImage background;

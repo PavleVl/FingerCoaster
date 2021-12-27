@@ -116,6 +116,7 @@ void Server::forceCloseTheServer(){
     while(it != threads.end())
         it.value()->deleteLater();
 
+    emit serverShutdown();
     this->close();
 }
 
