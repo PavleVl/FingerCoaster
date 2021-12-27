@@ -28,4 +28,25 @@ void Lobby::addPlayer(QString username){
     ui->playerList->addItem(s);
 }
 
+void Lobby::on_btStartGame_clicked()
+{
+    if(!client){
+        emit closeServerConnections();
+
+        //TOIML
+        //starting the game
+
+        this->close();
+    }
+}
+
+void Lobby::on_Lobby_destroyed()
+{
+    //emit popUpForcedClose();
+}
+
+void Lobby::closeEvent(QCloseEvent *event){
+    emit popUpForcedClose();
+}
+
 

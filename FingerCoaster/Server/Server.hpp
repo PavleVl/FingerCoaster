@@ -27,11 +27,13 @@ signals:
     //single socket to send that message
     void sendMessage(QByteArray message,qintptr targetSocketFd);
     void updateLobbyList(QString username);
+    void endConnection();
 
 public slots:
     void setClientsUsername(qintptr clientSocketFd,QString username);
     void deleteThread(qintptr clientSocketFd);
     void blockConnections();
+    void forceCloseTheServer();
 
 protected:
     void incomingConnection(qintptr socketFd) override;
