@@ -20,6 +20,7 @@ public:
 
 signals:
     void openLobby();
+    void startClient();
 
 private slots:
     void on_joinButton_clicked();

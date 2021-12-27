@@ -24,7 +24,6 @@ private slots:
 
 private:
     Ui::Lobby *ui;
-    bool isServer;
     int i;
     QStringList players;
     bool client = false;
