@@ -12,7 +12,7 @@ class Storage{
 
 public:
     inline Storage():
-    difficulty{0},numberOfPlayers(1),text(""),choosenFile(""){};
+    difficulty{0},numberOfPlayers(1),choosenFile(""),text(""){};
 
     void setDifficulty(unsigned newDifficulty);
 

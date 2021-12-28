@@ -6,7 +6,8 @@
 #include <QTcpSocket>
 #include <QAbstractSocket>
 #include <QDebug>
-//#include "../Storage/Storage.hpp"
+#include <iostream>
+#include "../Storage/Storage.hpp"
 
 class Client : public QObject
 {
@@ -29,6 +30,7 @@ private:
     quint16 port;
     QString username;
     QTcpSocket* tcpSocket;
+    Storage* clientStorage;
 };
 
 #endif // CLIENT_H

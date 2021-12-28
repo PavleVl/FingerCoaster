@@ -5,13 +5,18 @@ Client::Client(QString name,QObject *parent)
       username(name),
       tcpSocket(new QTcpSocket(this))
 {
+    clientStorage = new Storage();
+    //treba postaviti putanju do fajla i randomTextFlag na false i pozvati f-ju loadText()
+
+
+
     connect(tcpSocket,SIGNAL(connected()),this,SLOT(connectedCl()));
     connect(tcpSocket,SIGNAL(disconnected()),this,SLOT(disconnectedCl()));
     connect(tcpSocket,&QAbstractSocket::errorOccurred,this,&Client::printError);
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readyRead()));
     connect(tcpSocket,SIGNAL(bytesWritten(qint64)),this,SLOT(bytesWritten()));
 
-    qDebug()<<"Connecting...";
+    std::cout<<"Connecting..."<<std::endl;
 //    tcpSocket->connectToHost(QHostAddress::LocalHost,12345);
 
     tcpSocket->connectToHost("0.0.0.0",8080);
@@ -19,7 +24,7 @@ Client::Client(QString name,QObject *parent)
 
 
 void Client::connectedCl(){
-    qDebug()<<"Connected!";
+    std::cout<<"Connected!"<<std::endl;
     QByteArray br = "username:" + this->username.toUtf8() + "\n";
     tcpSocket->write(br);
 }
@@ -27,56 +32,56 @@ void Client::connectedCl(){
 void Client::disconnectedCl(){
     tcpSocket->close();
     tcpSocket->deleteLater();
-    qDebug()<<"Disconnected from host";
+    std::cout<<"Disconnected from host"<<std::endl;
 }
 
 void Client::bytesWritten(){
-    qDebug()<<"we wrote username to host";
+    std::cout<<"we wrote username to host"<<std::endl;
 }
-//NIJE DOBRO PARSIRANO,ALI PRE TOGA NI PORUKA KOJA STIGNE NIJE U DOBROM
-//OBLIKU
 void Client::readyRead(){
     //Kada uhvatis usernamesList:username1:username2:username3:
     //Tada splitujes
     //Saljes signal da upalis slot rewriteUSernames();
 
-//    qDebug()<<"Reading...";
-//    QByteArray buf = tcpSocket->readAll();
-//    qDebug()<<buf;
-//    QList<QByteArray> list = buf.split(':');
-//    buf.clear();
-//    qDebug()<<list;
-//    list.remove(0,2);
-//    list.removeLast();
-//    qDebug()<<list;
-//    if(!list.empty()){
-//        qDebug()<<list;
-//         return;
-//    }
-//    QVector<QString> usernames;
-//    QString tmp;
-//    unsigned size = (unsigned)list.size();
-//    for(unsigned i = 0;i < size;i++){
-//        tmp = QString(list[i]);
-//        usernames.push_back(tmp.first(tmp.size()-1));
-//    }
-
-
-//    emit rewriteUsernames(&usernames);
-//    qDebug()<<usernames;
+    QByteArray byteBuff = tcpSocket->readAll();
+    QString buff(byteBuff);
+    QVector<QString> vUsernames;
+    if(buff.contains("text")){
+        std::cout << "I've caught text initialisation " << buff.toStdString() << std::endl;
+        std::cout<<"Buffer: "<<buff.toStdString()<< std::endl;
+        std::string filename = buff.split(":").last().toStdString();
+        std::cout<<"Filename: "<<filename<<std::endl;
+        clientStorage->setChoosenFIle(filename);
+        clientStorage->loadText(false);
+    }
+    if(buff.contains("usernamesList:")){
+       std::cout <<buff.toStdString()<<std::endl;
+       QStringList usernames = buff.split(":");
+       auto size = 0;
+       std::cout<<"Username-ovi: "<<std::endl;
+       for(auto it = usernames.begin()+1;it != usernames.end()-1;it++){
+           size = (*it).size();
+           if(strcmp((*it).toStdString().c_str(),"usernamesList")==0){
+                continue;
+           }
+           vUsernames.push_back((*it).first(size-1));
+           std::cout<<(*it).toStdString()<<" ";
+       }
+    }
+        qDebug()<<vUsernames;
+//        emit rewriteUsernames(&vUsernames);
 }
-
 
 void Client::printError(QAbstractSocket::SocketError socketError){
     switch(socketError){
-        case QAbstractSocket::RemoteHostClosedError:qDebug()<<"Remote host closed";break;
+        case QAbstractSocket::RemoteHostClosedError:std::cerr<<"Remote host closed"<<std::endl;break;
         case QAbstractSocket::HostNotFoundError:
-              qDebug()<<"The host was not found,please check the hostname and port";break;
+              std::cerr<<"The host was not found,please check the hostname and port"<<std::endl;break;
         case QAbstractSocket::ConnectionRefusedError:
-            qDebug()<<"The connection was refused. "
+            std::cerr<<"The connection was refused. "
                       "Make sure the server is running "
-                      "and check that the hostname and port settings are correct";break;
-        default:qDebug()<<"The following error occured: " + tcpSocket->errorString();
+                      "and check that the hostname and port settings are correct"<<std::endl;break;
+        default:std::cerr<<"The following error occured: "<<tcpSocket->errorString().toStdString()<<std::endl;
     }
     emit dontShowLobby();
 }
