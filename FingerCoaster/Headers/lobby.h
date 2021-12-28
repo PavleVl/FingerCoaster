@@ -18,16 +18,16 @@ public:
 
 signals:
     void closeServerConnections();
-    //void closeClientConnect();
+    void joinPopupForcedClose();
     void popUpForcedClose();
 
-    //Klijent ne otvara lobby prozor ako nije sklopio konekciju sa serverom
+    //Klijent ne otvara lobby prozor ako nije sklopio konekciju sa serverom         RESENO
 
-    //U readyRead treba da prepoznas kada ti je server napisao
+    //U readyRead treba da prepoznas kada ti je server napisao                      RESENO(DEO)
     //start i ako je napisao start ti treba da pokrenes igru
     //i da zatvoris popup lobby(za to treba da se napravi slot)
 
-    //Ako se klijent ugasi preko x tj ako udjemo u slot
+    //Ako se klijent ugasi preko x tj ako udjemo u slot             RESENO
     //closeEvent() tada treba i poslati signal u
     //gameEngine iz klijenta da treba da se klijent
     //namesti na nullptr;
@@ -42,7 +42,7 @@ private slots:
     //Koristi se kada neki klijent izadje
     void rewriteUsernames(QVector<QString>* usernames);
     void closeEvent(QCloseEvent *event);
-
+    void dontShowLobby();
 private:
     bool isClient;
     Ui::Lobby *ui;

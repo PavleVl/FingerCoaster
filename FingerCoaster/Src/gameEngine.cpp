@@ -33,6 +33,7 @@ GameEngine::GameEngine(){
     ourServer = nullptr;
     ourLobby = nullptr;
     ourClient = nullptr;
+
     openMenu();
 }
 
@@ -85,6 +86,13 @@ void GameEngine::resizeEvent(QResizeEvent *event){
     fitInView(rect);
 }
 
+void GameEngine::startClient(){
+    ScoreboardBackend sc;
+    std::string username = sc.giveUsername();
+    ourClient = new Client(QString::fromStdString(username));
+}
+
+
 //This will be run if we catch signal for starting the server
 void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
     ourServer = new Server();
@@ -98,29 +106,25 @@ void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
     //TODO SERVER SHUT DOWN SIGNAL TO DELETE POINTER TO IT
 }
 
-void GameEngine::startClient(){
-    ScoreboardBackend sc;
-    std::string username = sc.giveUsername();
-    ourClient = new Client(QString::fromStdString(username));
-}
 
 
 //This will be run if we catch signal for start lobby
 void GameEngine::startLobby(){
     Lobby ourLobby;
-
     if(ourServer != nullptr){
         connect(ourServer,SIGNAL(updateLobbyList(QString)),&ourLobby,SLOT(addPlayer(QString)),Qt::DirectConnection);
         connect(&ourLobby,SIGNAL(closeServerConnections()),ourServer,SLOT(blockConnections()),Qt::DirectConnection);
         connect(&ourLobby,SIGNAL(popUpForcedClose()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
         connect(ourServer,SIGNAL(rewriteLobbyList(QVector<QString>*)),&ourLobby,
                 SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
-    }
+     }
     else{
         //Podeseno klijentsko okruzenje
         ourLobby.setIsClient();
-    }
-
+        connect(&ourLobby,SIGNAL(joinPopupForcedClose()),this,SLOT(forceCloseTheClient()),Qt::DirectConnection);
+        connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
+        //connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
+        }
     ourLobby.setModal(true);
     ourLobby.exec();
 }
@@ -142,4 +146,8 @@ void GameEngine::showUsernameInput(){
 
 void GameEngine::reInitServer(){
     ourServer = nullptr;
+}
+
+void GameEngine::forceCloseTheClient(){
+    ourClient = nullptr;
 }

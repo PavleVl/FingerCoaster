@@ -38,25 +38,29 @@ void Lobby::on_btStartGame_clicked()
 
 void Lobby::rewriteUsernames(QVector<QString>* usernames){
     ui->playerList->clear();
+//    usernames->size();
+//    QString buff = "";
+//    for(int j = 0;j<usernames->size();j++){
 
-    QString buff = "";
-    for(int j = 0;j<usernames->size();j++){
-
-        buff += QString::number(j) + ". " + usernames->at(j);
-        ui->playerList->addItem(buff);
-        buff = "";
-    }
+//        buff += QString::number(j) + ". " + usernames->at(j);
+//        ui->playerList->addItem(buff);
+//        buff = "";
+//    }
 }
 
 void Lobby::closeEvent(QCloseEvent *event){
 
     if(!isClient)
         emit popUpForcedClose();
-    else {}
-        //EMITUJEMO ZATVARANJE KLIJENTU
+    else
+        emit joinPopupForcedClose();
 }
 
 void Lobby::setIsClient(){
     isClient = true;
     ui->btStartGame->hide();
+}
+
+void Lobby::dontShowLobby(){
+    this->close();
 }

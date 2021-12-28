@@ -39,6 +39,7 @@ public slots:
     void startClient();
     void startLobby();
     void reInitServer();
+    void forceCloseTheClient();
 
 private:
     QImage background;
@@ -56,6 +57,8 @@ private:
     Server* ourServer;
     Lobby* ourLobby;
     Client* ourClient;
+
+
 };
 
 #endif // GAMEENGINE_ma
