@@ -67,9 +67,11 @@ void Client::readyRead(){
            vUsernames.push_back((*it).first(size-1));
            std::cout<<(*it).toStdString()<<" ";
        }
+
+        emit rewriteUsernames(&vUsernames);
     }
         qDebug()<<vUsernames;
-//        emit rewriteUsernames(&vUsernames);
+
 }
 
 void Client::printError(QAbstractSocket::SocketError socketError){

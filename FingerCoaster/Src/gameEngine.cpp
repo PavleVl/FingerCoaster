@@ -123,8 +123,8 @@ void GameEngine::startLobby(){
         ourLobby.setIsClient();
         connect(&ourLobby,SIGNAL(joinPopupForcedClose()),this,SLOT(forceCloseTheClient()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
-        //connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
-        }
+        connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
+    }
     ourLobby.setModal(true);
     ourLobby.exec();
 }

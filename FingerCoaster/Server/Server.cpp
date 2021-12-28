@@ -88,6 +88,7 @@ void Server::deleteThread(qintptr socketFd){
         usernamesBuff.push_back(it.value());
         it++;
     }
+    broadcastUsernames();
 
     emit rewriteLobbyList(&usernamesBuff);
 }
@@ -119,4 +120,3 @@ void Server::forceCloseTheServer(){
     emit serverShutdown();
     this->close();
 }
-
