@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images/prefix1">
         <file>main-menu.jpg</file>
+        <file>popup.jpg</file>
     </qresource>
 </RCC>

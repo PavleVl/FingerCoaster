@@ -11,6 +11,8 @@ Lobby::Lobby(QWidget *parent) :
     i = 0;
     ui->setupUi(this);
     this->setWindowTitle("Lobby");
+    this->setObjectName("PopUp");
+    this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
 
 
 }

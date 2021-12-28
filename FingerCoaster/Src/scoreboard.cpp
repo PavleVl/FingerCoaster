@@ -10,6 +10,7 @@ Scoreboard::Scoreboard(QWidget *parent) :
     this->setWindowTitle("Scoreboard");
 
 
+
     Model *Scoreboard = new Model(this);
     Scoreboard->savedScoreboard = new ScoreboardBackend();
 

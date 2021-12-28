@@ -10,6 +10,9 @@ JoinPopUp::JoinPopUp(QWidget *parent) :
     ui->setupUi(this);
 
     this->setWindowTitle("Join room");
+    this->setObjectName("PopUp");
+    this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
+
 
     //    connect(ui->joinButton,SIGNAL(clicked()),this,SLOT(on_joinButton_clicked()));
     if(ui->joinButton->isChecked())

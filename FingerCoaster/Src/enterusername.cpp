@@ -8,6 +8,9 @@ enterUsername::enterUsername(QWidget *parent) :
     ui->setupUi(this);
 
     this->setWindowTitle("Welcome");
+    this->setObjectName("PopUp");
+    this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
+
 }
 
 enterUsername::~enterUsername()
