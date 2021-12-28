@@ -1,6 +1,7 @@
 #include "Headers/createroom.h"
 #include "ui_createroom.h"
 #include <stdlib.h>
+#include <QGraphicsScene>
 
 createroom::createroom(QWidget *parent) :
     QDialog(parent),
@@ -9,6 +10,9 @@ createroom::createroom(QWidget *parent) :
     ui->setupUi(this);
 
     this->setWindowTitle("Create room");
+
+
+
 }
 
 bool createroom::noRBChecked(){

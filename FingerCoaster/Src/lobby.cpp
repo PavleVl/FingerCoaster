@@ -12,6 +12,7 @@ Lobby::Lobby(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Lobby");
 
+
 }
 
 Lobby::~Lobby()
