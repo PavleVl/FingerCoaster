@@ -14,6 +14,7 @@ createroom::createroom(QWidget *parent) :
     this->setWindowTitle("Create room");
     this->setObjectName("PopUp");
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
+<<<<<<< HEAD
     ui->diff_label->setStyleSheet("font-weight: bold");
     ui->num_players_label->setStyleSheet("font-weight: bold");
     ui->rb_easy->setStyleSheet("font-weight: bold");
@@ -21,6 +22,8 @@ createroom::createroom(QWidget *parent) :
     ui->rb_medium->setStyleSheet("font-weight: bold");
 
 
+=======
+>>>>>>> "Nasilno" zatvaranje klijenta
 
 }
 
