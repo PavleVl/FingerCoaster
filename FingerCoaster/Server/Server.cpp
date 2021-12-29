@@ -1,5 +1,10 @@
 #include "Server.hpp"
 
+//Kada se klijent diskonektuje
+//Tada se u lobby kao nus produkt upisuje i ime servera
+//Ispraviti to u broadKast tako sto se parsir
+//niz koji ide u lobby i izbacuje ime servera
+
 #define SERVER_PORT 8080
 
 Server::Server(QObject* parent) : QTcpServer(parent){
@@ -7,6 +12,8 @@ Server::Server(QObject* parent) : QTcpServer(parent){
     serverStorage->loadText(true);
     serverStorage->setNumberOfPlayers(3);
 
+    ScoreboardBackend sc;
+    usernames.insert(-1,QString::fromStdString(sc.giveUsername()));
 }
 
 void Server::startServer(){
@@ -85,7 +92,7 @@ void Server::deleteThread(qintptr socketFd){
     QVector<QString> usernamesBuff;
     auto it = usernames.begin();
     while(it != usernames.end()){
-        usernamesBuff.push_back(it.value());
+        usernamesBuff.push_back(it.value().first(it.value().size()-1));
         it++;
     }
     broadcastUsernames();
@@ -106,7 +113,7 @@ void Server::broadcastUsernames(){
         it++;
     }
 
-    QByteArray byteBuff(outputMsg.c_str(),outputMsg.length());
+    QByteArray byteBuff(outputMsg.c_str(),outputMsg.length()-1);
     emit sendMessage(byteBuff,0);
 }
 

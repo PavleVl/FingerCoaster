@@ -25,8 +25,6 @@ Client::Client(QString name,QObject *parent)
 
 void Client::connectedCl(){
     std::cout<<"Connected!"<<std::endl;
-    QByteArray br = "username:" + this->username.toUtf8() + "\n";
-    tcpSocket->write(br);
 }
 
 void Client::disconnectedCl(){
@@ -53,6 +51,9 @@ void Client::readyRead(){
         std::cout<<"Filename: "<<filename<<std::endl;
         clientStorage->setChoosenFIle(filename);
         clientStorage->loadText(false);
+
+        QByteArray br = "username:" + this->username.toUtf8() + "\n";
+        tcpSocket->write(br);
     }
     if(buff.contains("usernamesList:")){
        std::cout <<buff.toStdString()<<std::endl;
@@ -64,7 +65,7 @@ void Client::readyRead(){
            if(strcmp((*it).toStdString().c_str(),"usernamesList")==0){
                 continue;
            }
-           vUsernames.push_back((*it).first(size-1));
+           vUsernames.push_back((*it).first(size));
            std::cout<<(*it).toStdString()<<" ";
        }
 

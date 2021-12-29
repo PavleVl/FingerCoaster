@@ -3,6 +3,7 @@
 
 #include "Thread.h"
 #include "../Storage/Storage.hpp"
+#include "../Scoreboard/ScoreboardBackend.hpp"
 #include <QDebug>
 #include <iostream>
 #include <QTcpServer>
