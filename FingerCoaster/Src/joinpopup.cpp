@@ -12,7 +12,7 @@ JoinPopUp::JoinPopUp(QWidget *parent) :
     this->setWindowTitle("Join room");
     this->setObjectName("PopUp");
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
-
+    ui->key->setStyleSheet("font-weight: bold");
 
     //    connect(ui->joinButton,SIGNAL(clicked()),this,SLOT(on_joinButton_clicked()));
     if(ui->joinButton->isChecked())
@@ -42,6 +42,7 @@ void JoinPopUp::on_joinButton_clicked()
     QStringList list = key.split(":");
     if(list.size() < 2){
             ui->lMessage->setText("Morate uneti ip adresu i port");
+            ui->lMessage->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
             return;
     }
     bool isIpAddr = isValidIp4Address(list[0].toStdString());
