@@ -13,6 +13,7 @@ Lobby::Lobby(QWidget *parent) :
     this->setWindowTitle("Lobby");
     this->setObjectName("PopUp");
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
+    ui->label->setStyleSheet("font-weight: bold");
 
 
 }
@@ -63,6 +64,7 @@ void Lobby::closeEvent(QCloseEvent *event){
 void Lobby::setIsClient(){
     isClient = true;
     ui->btStartGame->hide();
+
 }
 
 void Lobby::dontShowLobby(){
