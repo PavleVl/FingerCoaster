@@ -14,6 +14,7 @@ public:
     menuBtn* getScoreboardButton()const;
     menuBtn* getJoinButton() const;
     menuBtn* getCreateRoomButton() const;
+    void setScene();
 private:
     menuBtn* QuitButton;
     menuBtn* scoreboardButton;

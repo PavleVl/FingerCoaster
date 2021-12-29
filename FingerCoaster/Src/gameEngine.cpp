@@ -56,6 +56,7 @@ void GameEngine::openMenu()
 {
       QApplication::setOverrideCursor(Qt::ArrowCursor);
       setScene(menuScene);
+
 }
 
 void GameEngine::showScore(){
