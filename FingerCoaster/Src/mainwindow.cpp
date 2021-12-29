@@ -7,7 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+<<<<<<< HEAD
     ui->setupUi(this);
+=======
+    //ui->setupUi(this);
+
+>>>>>>> Popravljeni problemi -
 }
 =======
 //MainWindow::MainWindow(QWidget *parent) :

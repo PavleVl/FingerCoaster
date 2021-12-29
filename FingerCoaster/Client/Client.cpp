@@ -3,7 +3,8 @@
 Client::Client(QString name,QObject *parent)
     : QObject{parent},
       username(name),
-      tcpSocket(new QTcpSocket(this))
+      tcpSocket(new QTcpSocket(this)),
+      alreadyClosed(false)
 {
     clientStorage = new Storage();
     //treba postaviti putanju do fajla i randomTextFlag na false i pozvati f-ju loadText()
@@ -17,7 +18,6 @@ Client::Client(QString name,QObject *parent)
     connect(tcpSocket,SIGNAL(bytesWritten(qint64)),this,SLOT(bytesWritten()));
 
     std::cout<<"Connecting..."<<std::endl;
-//    tcpSocket->connectToHost(QHostAddress::LocalHost,12345);
 
     tcpSocket->connectToHost("0.0.0.0",8080);
 }
@@ -30,6 +30,7 @@ void Client::connectedCl(){
 void Client::disconnectedCl(){
     tcpSocket->close();
     tcpSocket->deleteLater();
+    alreadyClosed = true;
     std::cout<<"Disconnected from host"<<std::endl;
 }
 
@@ -90,6 +91,8 @@ void Client::printError(QAbstractSocket::SocketError socketError){
 }
 
 void Client::forceCloseClient(){
-    this->tcpSocket->close();
-    this->tcpSocket->deleteLater();
+    if(!alreadyClosed){
+        this->tcpSocket->close();
+        this->tcpSocket->deleteLater();
+    }
 }
