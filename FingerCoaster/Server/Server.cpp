@@ -13,7 +13,7 @@ Server::Server(QObject* parent) : QTcpServer(parent){
     serverStorage->setNumberOfPlayers(3);
 
     ScoreboardBackend sc;
-    usernames.insert(-1,QString::fromStdString(sc.giveUsername()));
+    usernames.insert(-1,QString::fromStdString(sc.giveUsername()) + "(host)");
 }
 
 void Server::startServer(){
@@ -44,6 +44,7 @@ void Server::incomingConnection(qintptr socketFd){
 
         connect(thread,SIGNAL(setClientsUsername(qintptr,QString)),this,SLOT(setClientsUsername(qintptr,QString)),Qt::DirectConnection);
         connect(thread,SIGNAL(deleteThread(qintptr)),this,SLOT(deleteThread(qintptr)),Qt::DirectConnection);
+        connect(thread,SIGNAL(finished()), thread,SLOT(deleteLater()),Qt::DirectConnection);
 
         std::cout << "Accepted the socket ";
         thread->start();
@@ -86,20 +87,30 @@ void Server::setClientsUsername(qintptr clientSocketFd,QString username){
 
 void Server::deleteThread(qintptr socketFd){
     std::cout << "Thread deleted" << std::endl;
+
     threads.remove(socketFd);
     usernames.remove(socketFd);
 
     QVector<QString> usernamesBuff;
     auto it = usernames.begin();
     while(it != usernames.end()){
-        usernamesBuff.push_back(it.value().first(it.value().size()-1));
+        usernamesBuff.push_back(it.value().first(it.value().size()));
         it++;
     }
     if(usernamesBuff.size() > 1)
         broadcastUsernames();
 
+    QVector<QString> usernamesBuffWithoutHost;
+    while(it != usernames.end()){
+        if(it.value().contains("(host)"))
+            continue;
+
+        usernamesBuffWithoutHost.push_back(it.value().first(it.value().size()));
+        it++;
+    }
+
     if(usernamesBuff.size() > 0)
-        emit rewriteLobbyList(&usernamesBuff);
+        emit rewriteLobbyList(&usernamesBuffWithoutHost);
 }
 
 void Server::blockConnections(){
@@ -120,12 +131,16 @@ void Server::broadcastUsernames(){
 }
 
 void Server::forceCloseTheServer(){
-    emit endConnection();
+    if(threads.size() > 0){
 
-    auto it = threads.begin();
-    while(it != threads.end())
-        it.value()->deleteLater();
+        emit endConnection();
 
+        auto it = threads.begin();
+        while(it != threads.end())
+            it.value()->deleteLater();
+
+        this->close();
+        emit serverShutdown();
+    }
     emit serverShutdown();
-    this->close();
 }

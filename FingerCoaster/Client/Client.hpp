@@ -31,6 +31,7 @@ private:
     QString username;
     QTcpSocket* tcpSocket;
     Storage* clientStorage;
+    bool alreadyClosed;
 };
 
 #endif // CLIENT_H

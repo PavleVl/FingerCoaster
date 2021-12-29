@@ -149,10 +149,12 @@ void GameEngine::showUsernameInput(){
 //}
 
 void GameEngine::reInitServer(){
+    ourServer->deleteLater();
     ourServer = nullptr;
 }
 
 void GameEngine::forceCloseTheClientConnection(){
     emit forceCloseClient();
+    ourClient->deleteLater();
     ourClient = nullptr;
 }

@@ -42,6 +42,7 @@ void Lobby::on_btStartGame_clicked()
 
 void Lobby::rewriteUsernames(QVector<QString>* usernames){
     ui->playerList->clear();
+    i = usernames->size();
     usernames->size();
     QString buff = "";
     for(int j = 0;j<usernames->size();j++){

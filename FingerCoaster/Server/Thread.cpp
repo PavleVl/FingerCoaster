@@ -15,7 +15,7 @@ Thread::Thread(qintptr newSocketFd, QObject *parent) : QThread(parent), threadSo
 }
 
 void Thread::onSendMessage(QByteArray message,qintptr targetSocketFd){
-    if(targetSocketFd == socketFd || targetSocketFd == 0){
+    if(threadSocket->isWritable() && (targetSocketFd == socketFd || targetSocketFd == 0)){
         threadSocket->write(message);
         threadSocket->flush();
     }
@@ -33,8 +33,8 @@ void Thread::readyRead(){
 
 void Thread::disconnected(){
     std::cout << "The client has disconnected" << std::endl;
-    threadSocket->deleteLater();
 
+    threadSocket->deleteLater();
     emit deleteThread(socketFd);
     this->exit();
 }
@@ -44,6 +44,6 @@ void Thread::run(){
 }
 
 void Thread::forceCloseConnection(){
-    threadSocket->close();
-    threadSocket->deleteLater();
+        threadSocket->deleteLater();
+        threadSocket->close();
 }
