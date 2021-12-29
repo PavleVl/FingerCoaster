@@ -34,13 +34,12 @@ mainMenu::mainMenu():QGraphicsScene(){
     title->setFont(font);
     title->setPos(650,20);
     this->addItem(title);
-
 }
 mainMenu::~mainMenu(){
-delete QuitButton;
-delete scoreboardButton;
-delete joinButton;
-delete createRoomButton;
+    delete QuitButton;
+    delete scoreboardButton;
+    delete joinButton;
+    delete createRoomButton;
 }
 
 menuBtn* mainMenu::getQuitButton() const{
