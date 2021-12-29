@@ -14,6 +14,14 @@ createroom::createroom(QWidget *parent) :
     this->setWindowTitle("Create room");
     this->setObjectName("PopUp");
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
+    ui->diff_label->setStyleSheet("font-weight: bold");
+    ui->num_players_label->setStyleSheet("font-weight: bold");
+    ui->rb_easy->setStyleSheet("font-weight: bold");
+    ui->rb_hard->setStyleSheet("font-weight: bold");
+    ui->rb_medium->setStyleSheet("font-weight: bold");
+
+
+
 }
 
 bool createroom::noRBChecked(){
@@ -43,6 +51,7 @@ void createroom::on_create_lobby_button_clicked(){
 
     if(noRBChecked()){
         ui->err_label->setText("You need to select difficulty");
+        ui->err_label->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
 
         return;
     }
