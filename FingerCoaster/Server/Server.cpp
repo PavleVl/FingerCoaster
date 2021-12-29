@@ -1,6 +1,5 @@
 #include "Server.hpp"
 
-
 #define SERVER_PORT 8080
 
 Server::Server(QObject* parent) : QTcpServer(parent){

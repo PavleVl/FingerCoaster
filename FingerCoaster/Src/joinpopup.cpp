@@ -56,6 +56,6 @@ void JoinPopUp::on_joinButton_clicked()
         this->close();
         emit startClient();
         emit openLobby();
-    //}
+    }
 }
 
