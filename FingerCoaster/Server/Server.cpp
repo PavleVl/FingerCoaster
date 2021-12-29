@@ -1,9 +1,5 @@
 #include "Server.hpp"
 
-//Kada se klijent diskonektuje
-//Tada se u lobby kao nus produkt upisuje i ime servera
-//Ispraviti to u broadKast tako sto se parsir
-//niz koji ide u lobby i izbacuje ime servera
 
 #define SERVER_PORT 8080
 
