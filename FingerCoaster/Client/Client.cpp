@@ -52,7 +52,7 @@ void Client::readyRead(){
         clientStorage->setChoosenFile(filename);
         clientStorage->loadText(false);
 
-        QByteArray br = "username:" + this->username.toUtf8() + "\n";
+        QByteArray br = "username:" + this->username.toUtf8();
         tcpSocket->write(br);
     }
     if(buff.contains("usernamesList:")){
