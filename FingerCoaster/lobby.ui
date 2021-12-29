@@ -627,6 +627,9 @@
    <property name="text">
     <string>Wait for game to start</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QListWidget" name="playerList">
    <property name="geometry">
