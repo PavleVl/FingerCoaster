@@ -38,6 +38,7 @@ bool JoinPopUp::isValidPort(int port){
 
 void JoinPopUp::on_joinButton_clicked()
 {
+    /*
     QString key = ui->labelInsertKey->text();
     QStringList list = key.split(":");
     if(list.size() < 2){
@@ -51,11 +52,11 @@ void JoinPopUp::on_joinButton_clicked()
             ui->lMessage->setText("Nije validna IPv4 adresa");
     else if(!isVPort)
             ui->lMessage->setText("Nije validan port");
-    else {
+    else {*/
         ui->lMessage->setText("Klijent se konektovao.");
         this->close();
         emit startClient();
         emit openLobby();
-    }
+    //}
 }
 
