@@ -29,6 +29,10 @@ SOURCES += \
     Server/Thread.cpp   \
     Client/Client.cpp   \
     Src/lobby.cpp \
+#<<<<<<< HEAD
+#=======
+    Game/gamewindow.cpp
+#>>>>>>> added game session
 
 
 HEADERS += \
@@ -49,10 +53,13 @@ HEADERS += \
     Server/Thread.h     \
     Client/Client.hpp \
     Headers/lobby.h \
+    Game/gamewindow.h
+#>>>>>>> added game session
 
 FORMS += \
     createroom.ui \
     enterusername.ui \
+    gamewindow.ui \
     joinpopup.ui \
     lobby.ui \
     mainwindow.ui \
