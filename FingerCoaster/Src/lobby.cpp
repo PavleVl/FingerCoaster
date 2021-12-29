@@ -2,6 +2,7 @@
 #include "ui_lobby.h"
 #include <qlistview.h>
 #include <sstream>
+#include <QMovie>
 
 Lobby::Lobby(QWidget *parent) :
     QDialog(parent),
@@ -64,6 +65,18 @@ void Lobby::closeEvent(QCloseEvent *event){
 void Lobby::setIsClient(){
     isClient = true;
     ui->btStartGame->hide();
+
+    ui->label=new QLabel(this);
+    QMovie *movie=new QMovie(":/images/prefix1/loading.gif");
+
+
+    QLabel *gif_label = new QLabel(this);
+    gif_label->setGeometry(155,140,40,40);
+    gif_label->setMovie(movie);
+    movie->start();
+
+
+
 
 }
 
