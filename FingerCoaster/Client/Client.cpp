@@ -49,7 +49,7 @@ void Client::readyRead(){
         std::cout<<"Buffer: "<<buff.toStdString()<< std::endl;
         std::string filename = buff.split(":").last().toStdString();
         std::cout<<"Filename: "<<filename<<std::endl;
-        clientStorage->setChoosenFIle(filename);
+        clientStorage->setChoosenFile(filename);
         clientStorage->loadText(false);
 
         QByteArray br = "username:" + this->username.toUtf8() + "\n";
