@@ -19,6 +19,8 @@ Client::Client(QString name,QObject *parent)
 
     std::cout<<"Connecting..."<<std::endl;
 
+    //TOFIX
+    //This is hardcoded
     tcpSocket->connectToHost("0.0.0.0",8080);
 }
 
