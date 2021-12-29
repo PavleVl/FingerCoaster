@@ -9,7 +9,6 @@
 #include <QApplication>
 #include <QDebug>
 #include "configuration.h"
-#include "mainwindow.h"
 #include "mainMenu.h"
 #include "joinpopup.h"
 #include "createroom.h"
@@ -27,7 +26,8 @@ public:
     void playMusic();
     bool isFirstTime(ScoreboardBackend* sc);
     void showUsernameInput();
-    mainMenu* menuScene;
+    void clearScene();
+
 signals:
     void forceCloseClient();
 
@@ -46,12 +46,10 @@ private:
     QImage background;
     int windowWidth;
     int windowHeight;
-    //mainMenu* menuScene;
+    mainMenu* menuScene;
     bool spacePressed;
     QGraphicsScene* levelScene;
-    MainWindow* mainWindow;
     Map* map;
-    Ui::MainWindow* gui;
     //    QMediaPlayer* musicPlayer;
 //    Server
     //TREBA PAZITI ourServer i ourClient vrate na null;

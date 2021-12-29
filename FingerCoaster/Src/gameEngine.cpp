@@ -41,13 +41,16 @@ GameEngine::~GameEngine(){
       menuScene->clear();
       delete menuScene;
       //    delete musicPlayer;
-      delete mainWindow;
 }
 
 void GameEngine::openMenu()
 {
       QApplication::setOverrideCursor(Qt::ArrowCursor);
       setScene(menuScene);
+}
+
+void GameEngine::clearScene(){
+    menuScene->clear();
 }
 
 void GameEngine::showScore(){
