@@ -17,7 +17,6 @@ SOURCES += \
     Src/joinpopup.cpp \
     Src/main.cpp \
     Src/mainMenu.cpp \
-    Src/mainwindow.cpp \
     Src/map.cpp \
     Src/menuBtn.cpp \
     Src/scoreboard.cpp \
@@ -41,7 +40,6 @@ HEADERS += \
     Headers/gameEngine.h \
     Headers/joinpopup.h \
     Headers/mainMenu.h \
-    Headers/mainwindow.h \
     Headers/map.h \
     Headers/menuBtn.h \
     Headers/scoreboard.h \

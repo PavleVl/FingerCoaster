@@ -14,7 +14,11 @@ public:
     menuBtn* getScoreboardButton()const;
     menuBtn* getJoinButton() const;
     menuBtn* getCreateRoomButton() const;
+<<<<<<< HEAD
     void setScene();
+=======
+
+>>>>>>> Obrisao mainwindow
 private:
     menuBtn* QuitButton;
     menuBtn* scoreboardButton;
