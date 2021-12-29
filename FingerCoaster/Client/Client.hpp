@@ -24,7 +24,7 @@ private slots:
     void printError(QAbstractSocket::SocketError socketError);
     void bytesWritten();
     void readyRead();
-
+    void forceCloseClient();
 private:
     QHostAddress address;
     quint16 port;

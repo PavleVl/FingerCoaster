@@ -121,7 +121,8 @@ void GameEngine::startLobby(){
     else{
         //Podeseno klijentsko okruzenje
         ourLobby.setIsClient();
-        connect(&ourLobby,SIGNAL(joinPopupForcedClose()),this,SLOT(forceCloseTheClient()),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(joinPopupForcedClose()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
+        connect(this,SIGNAL(forceCloseClient()),ourClient,SLOT(forceCloseClient()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
     }
@@ -148,6 +149,7 @@ void GameEngine::reInitServer(){
     ourServer = nullptr;
 }
 
-void GameEngine::forceCloseTheClient(){
+void GameEngine::forceCloseTheClientConnection(){
+    emit forceCloseClient();
     ourClient = nullptr;
 }

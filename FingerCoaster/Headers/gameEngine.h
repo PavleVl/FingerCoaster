@@ -28,6 +28,8 @@ public:
     bool isFirstTime(ScoreboardBackend* sc);
     void showUsernameInput();
     mainMenu* menuScene;
+signals:
+    void forceCloseClient();
 
 public slots:
     void exit();
@@ -39,8 +41,7 @@ public slots:
     void startClient();
     void startLobby();
     void reInitServer();
-    void forceCloseTheClient();
-
+    void forceCloseTheClientConnection();
 private:
     QImage background;
     int windowWidth;

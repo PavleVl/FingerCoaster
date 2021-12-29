@@ -52,7 +52,7 @@ void Client::readyRead(){
         clientStorage->setChoosenFIle(filename);
         clientStorage->loadText(false);
 
-        QByteArray br = "username:" + this->username.toUtf8() + "\n";
+        QByteArray br = "username:" + this->username.toUtf8();
         tcpSocket->write(br);
     }
     if(buff.contains("usernamesList:")){
@@ -66,7 +66,7 @@ void Client::readyRead(){
                 continue;
            }
            vUsernames.push_back((*it).first(size));
-           std::cout<<(*it).toStdString()<<" ";
+           std::cout<<(*it).toStdString()<<" "<<"\n";
        }
 
         emit rewriteUsernames(&vUsernames);
@@ -89,3 +89,7 @@ void Client::printError(QAbstractSocket::SocketError socketError){
     emit dontShowLobby();
 }
 
+void Client::forceCloseClient(){
+    this->tcpSocket->close();
+    this->tcpSocket->deleteLater();
+}
