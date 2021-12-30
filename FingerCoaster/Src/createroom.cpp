@@ -19,6 +19,12 @@ createroom::createroom(QWidget *parent) :
     ui->rb_easy->setStyleSheet("font-weight: bold");
     ui->rb_hard->setStyleSheet("font-weight: bold");
     ui->rb_medium->setStyleSheet("font-weight: bold");
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 }
 
 bool createroom::noRBChecked(){

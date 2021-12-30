@@ -56,6 +56,12 @@ void GameEngine::openMenu()
       setScene(menuScene);
 }
 
+<<<<<<< HEAD
+=======
+void GameEngine::clearScene(){
+    menuScene->clear();
+}
+>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 
 void GameEngine::showScore(){
     Scoreboard sc;
