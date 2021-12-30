@@ -26,10 +26,10 @@ public:
     void playMusic();
     bool isFirstTime(ScoreboardBackend* sc);
     void showUsernameInput();
-<<<<<<< HEAD
-=======
-    void clearScene();
->>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
+//<<<<<<< HEAD
+//=======
+//    void clearScene();
+//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 
 signals:
     void forceCloseClient();

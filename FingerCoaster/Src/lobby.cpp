@@ -15,11 +15,11 @@ Lobby::Lobby(QWidget *parent) :
     this->setObjectName("PopUp");
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
     ui->label->setStyleSheet("font-weight: bold");
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
 
->>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
+//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 }
 
 Lobby::~Lobby()
@@ -78,13 +78,13 @@ void Lobby::setIsClient(){
     gif_label->setGeometry(155,140,40,40);
     gif_label->setMovie(movie);
     movie->start();
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
 
 
 
->>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
+//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 }
 
 void Lobby::dontShowLobby(){

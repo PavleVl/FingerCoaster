@@ -24,11 +24,11 @@ public:
     menuBtn* getScoreboardButton()const;
     menuBtn* getJoinButton() const;
     menuBtn* getCreateRoomButton() const;
-<<<<<<< HEAD
-    void setScene();
-    void freeMemory();
-=======
->>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
+//<<<<<<< HEAD
+//    void setScene();
+//    void freeMemory();
+//=======
+//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 
 private:
     menuBtn* QuitButton;

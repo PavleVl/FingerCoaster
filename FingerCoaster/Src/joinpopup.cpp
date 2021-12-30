@@ -14,10 +14,10 @@ JoinPopUp::JoinPopUp(QWidget *parent) :
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
     ui->key->setStyleSheet("font-weight: bold");
 
-<<<<<<< HEAD
-=======
-    //    connect(ui->joinButton,SIGNAL(clicked()),this,SLOT(on_joinButton_clicked()));
->>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
+//<<<<<<< HEAD
+//=======
+//    //    connect(ui->joinButton,SIGNAL(clicked()),this,SLOT(on_joinButton_clicked()));
+//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
     if(ui->joinButton->isChecked())
             on_joinButton_clicked();
 }
