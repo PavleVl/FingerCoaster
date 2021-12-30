@@ -139,6 +139,7 @@ void GameEngine::startLobby(){
         connect(this,SIGNAL(forceCloseClient()),ourClient,SLOT(forceCloseClient()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(setGameScene()),this,SLOT(setGameScene()),Qt::DirectConnection);
     }
     ourLobby.setModal(true);
     ourLobby.exec();
@@ -146,9 +147,15 @@ void GameEngine::startLobby(){
 
 
 void GameEngine::setGameScene(){
-    GameDialog gameDialog;
-    gameDialog.setModal(true);
-    gameDialog.exec();
+    this->hide();
+    //ovo treba osloboditi(inace curi memorija)
+    gameDialog = new GameDialog();
+    Storage* st = ourServer->getServerStorage();
+    std::vector<std::string> text = st->formatTextForGame();
+    gameDialog->setWordsOnScreen(text);
+
+    gameDialog->setModal(true);
+    gameDialog->exec();
 }
 
 

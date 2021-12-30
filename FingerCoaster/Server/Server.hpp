@@ -22,6 +22,7 @@ public:
     void setStorageDifficulty(unsigned difficulty);
     void setStorageMaxPlayers(unsigned maxPlayers);
     void broadcastUsernames();
+    Storage* getServerStorage()const;
 signals:
     //If we send 0 as targetSocketFd that means that we want every
     //single socket to send that message

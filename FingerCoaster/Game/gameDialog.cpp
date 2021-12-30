@@ -1,6 +1,8 @@
 #include "Game/gameDialog.h"
 #include "ui_gamedialog.h"
 
+#define MAX_CHARS (100)
+
 GameDialog::GameDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GameDialog)
@@ -20,8 +22,18 @@ GameDialog::GameDialog(QWidget *parent) :
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
 }
 
+void GameDialog::setWordsOnScreen(std::vector<std::string> text){
+    for(auto& word:text){
+//        words.push_back(word);
+//        std::cout<<word<<" ";
+        ui->lwText->insertItem(0,QString::fromStdString(word));
+
+    }
+}
+
 GameDialog::~GameDialog()
 {
+//    delete server;
     delete ui;
 }
 

@@ -6,9 +6,12 @@ Server::Server(QObject* parent) : QTcpServer(parent){
     serverStorage = new Storage();
     serverStorage->loadText(true);
     serverStorage->setNumberOfPlayers(3);
-
     ScoreboardBackend sc;
     usernames.insert(-1,QString::fromStdString(sc.giveUsername()) + "(host)");
+}
+
+Storage* Server::getServerStorage()const{
+    return serverStorage;
 }
 
 void Server::startServer(){

@@ -62,6 +62,7 @@ private:
     Server* ourServer;
     Lobby* ourLobby;
     Client* ourClient;
+    GameDialog* gameDialog;
 };
 
 #endif // GAMEENGINE_ma
