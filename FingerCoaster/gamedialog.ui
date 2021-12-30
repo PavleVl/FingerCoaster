@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>819</width>
-    <height>544</height>
+    <width>820</width>
+    <height>630</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>820</width>
+    <height>630</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>820</width>
+    <height>630</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -53,7 +65,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QGroupBox" name="gb1">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -74,7 +86,7 @@
    <property name="title">
     <string>Player 1</string>
    </property>
-   <widget class="QProgressBar" name="progressBar">
+   <widget class="QProgressBar" name="pb1">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -91,7 +103,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_2">
+  <widget class="QGroupBox" name="gb2">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -112,7 +124,7 @@
    <property name="title">
     <string>Player 2</string>
    </property>
-   <widget class="QProgressBar" name="progressBar_3">
+   <widget class="QProgressBar" name="pb2">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -129,7 +141,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QGroupBox" name="groupBox_4">
+  <widget class="QGroupBox" name="gb3">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -150,7 +162,7 @@
    <property name="title">
     <string>Player 3</string>
    </property>
-   <widget class="QProgressBar" name="progressBar_5">
+   <widget class="QProgressBar" name="pb3">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -171,19 +183,58 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>450</y>
+     <y>550</y>
      <width>791</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <pointsize>18</pointsize>
      <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color:blue</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="gb4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>450</y>
+     <width>791</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:black</string>
+   </property>
+   <property name="title">
+    <string>Player 4</string>
+   </property>
+   <widget class="QProgressBar" name="pb4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>771</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

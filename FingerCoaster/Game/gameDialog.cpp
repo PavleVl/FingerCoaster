@@ -12,12 +12,16 @@ GameDialog::GameDialog(QWidget *parent) :
     this->setObjectName("GameWindow");
     this->setStyleSheet(QString::fromUtf8("#GameWindow {border-image: url(:/images/prefix1/board.jpeg) 0 0 0 0 stretch stretch;}"));
 
-    ui->progressBar->setObjectName("QProgressBar");
-    ui->progressBar_3->setObjectName("QProgressBar1");
-    ui->progressBar_5->setObjectName("QProgressBar2");
-    ui->progressBar->setStyleSheet(QString::fromUtf8("#QProgressBar {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
-    ui->progressBar_3->setStyleSheet(QString::fromUtf8("#QProgressBar1 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
-    ui->progressBar_5->setStyleSheet(QString::fromUtf8("#QProgressBar2 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
+    ui->pb1->setObjectName("QProgressBar1");
+    ui->pb2->setObjectName("QProgressBar2");
+    ui->pb3->setObjectName("QProgressBar3");
+    ui->pb4->setObjectName("QProgressBar4");
+
+    ui->pb1->setStyleSheet(QString::fromUtf8("#QProgressBar1 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
+    ui->pb2->setStyleSheet(QString::fromUtf8("#QProgressBar2 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
+    ui->pb3->setStyleSheet(QString::fromUtf8("#QProgressBar3 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
+    ui->pb4->setStyleSheet(QString::fromUtf8("#QProgressBar4 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
+
     ui->lineEdit->setObjectName("lEdit");
     ui->lineEdit->setStyleSheet(QString::fromUtf8("#lEdit {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
