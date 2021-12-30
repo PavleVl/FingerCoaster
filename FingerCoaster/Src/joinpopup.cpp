@@ -44,19 +44,23 @@ void JoinPopUp::on_joinButton_clicked()
     QString key = ui->labelInsertKey->text();
     QStringList list = key.split(":");
     if(list.size() < 2){
-            ui->lMessage->setText("Morate uneti ip adresu i port");
+            ui->lMessage->setText("IP address and port is needed");
             ui->lMessage->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
             return;
     }
     bool isIpAddr = isValidIp4Address(list[0].toStdString());
     int isPort = list[1].toInt();
     bool isVPort = isValidPort(isPort);
-    if(!isIpAddr)
-            ui->lMessage->setText("Nije validna IPv4 adresa");
-    else if(!isVPort)
-            ui->lMessage->setText("Nije validan port");
+    if(!isIpAddr){
+            ui->lMessage->setText("IPv4 address is not valid");
+            ui->lMessage->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
+    }
+    else if(!isVPort){
+            ui->lMessage->setText("Port not valid");
+            ui->lMessage->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
+    }
     else {
-        ui->lMessage->setText("Klijent se konektovao.");
+        ui->lMessage->setText("Client is connected.");
         this->close();
         emit startClient();
         emit openLobby();
