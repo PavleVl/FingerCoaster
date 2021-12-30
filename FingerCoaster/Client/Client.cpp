@@ -74,6 +74,10 @@ void Client::readyRead(){
 
         emit rewriteUsernames(&vUsernames);
     }
+    if(buff.contains("startGame")){
+        emit closeClientLobby();
+        emit startGame();
+    }
         qDebug()<<vUsernames;
 
 }

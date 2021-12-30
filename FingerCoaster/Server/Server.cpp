@@ -142,3 +142,7 @@ void Server::forceCloseTheServer(){
     }
     emit serverShutdown();
 }
+
+void Server::startGameForClients(){
+    emit sendMessage("startGame",0);
+}

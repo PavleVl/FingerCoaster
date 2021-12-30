@@ -21,17 +21,8 @@ signals:
     void joinPopupForcedClose();
     void popUpForcedClose();
     void setGameScene();
-
-    //Klijent ne otvara lobby prozor ako nije sklopio konekciju sa serverom         RESENO
-
-    //U readyRead treba da prepoznas kada ti je server napisao                      RESENO(DEO)
-    //start i ako je napisao start ti treba da pokrenes igru
-    //i da zatvoris popup lobby(za to treba da se napravi slot)
-
-    //Ako se klijent ugasi preko x tj ako udjemo u slot             RESENO
-    //closeEvent() tada treba i poslati signal u
-    //gameEngine iz klijenta da treba da se klijent
-    //namesti na nullptr;
+    //Game signals
+    void startGameForClients();
 
 private slots:
     //Addplayer se koristi za prvo dodavanje u lobby
@@ -49,6 +40,7 @@ private:
     Ui::Lobby *ui;
     int i;
     QStringList players;
+    bool checkCloseFlag;
 };
 
 #endif // LOBBY_H

@@ -37,6 +37,7 @@ public slots:
     void deleteThread(qintptr clientSocketFd);
     void blockConnections();
     void forceCloseTheServer();
+    void startGameForClients();
 
 protected:
     void incomingConnection(qintptr socketFd) override;
