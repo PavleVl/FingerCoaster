@@ -1,4 +1,4 @@
-#include "gamedialog.h"
+#include "Game/gameDialog.h"
 #include "ui_gamedialog.h"
 
 GameDialog::GameDialog(QWidget *parent) :
@@ -8,7 +8,7 @@ GameDialog::GameDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setObjectName("GameWindow");
     this->setStyleSheet(QString::fromUtf8("#GameWindow {border-image: url(:/images/prefix1/board.jpeg) 0 0 0 0 stretch stretch;}"));
-    this->
+
     ui->progressBar->setObjectName("QProgressBar");
     ui->progressBar_3->setObjectName("QProgressBar1");
     ui->progressBar_5->setObjectName("QProgressBar2");

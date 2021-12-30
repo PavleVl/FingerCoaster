@@ -28,9 +28,9 @@ SOURCES += \
     Server/Thread.cpp   \
     Client/Client.cpp   \
     Src/lobby.cpp \
+    Game/gameDialog.cpp
 #<<<<<<< HEAD
 #=======
-    Game/gamewindow.cpp
 #>>>>>>> added game session
 
 
@@ -51,17 +51,17 @@ HEADERS += \
     Server/Thread.h     \
     Client/Client.hpp \
     Headers/lobby.h \
-    Game/gamewindow.h
+    Game/gameDialog.h
 #>>>>>>> added game session
 
 FORMS += \
     createroom.ui \
     enterusername.ui \
-    gamewindow.ui \
     joinpopup.ui \
     lobby.ui \
     mainwindow.ui \
-    scoreboard.ui
+    scoreboard.ui   \
+    gamedialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -130,6 +130,7 @@ void GameEngine::startLobby(){
         connect(&ourLobby,SIGNAL(popUpForcedClose()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
         connect(ourServer,SIGNAL(rewriteLobbyList(QVector<QString>*)),&ourLobby,
                 SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(setGameScene()),this,SLOT(setGameScene()),Qt::DirectConnection);
      }
     else{
         //Podeseno klijentsko okruzenje
@@ -141,6 +142,13 @@ void GameEngine::startLobby(){
     }
     ourLobby.setModal(true);
     ourLobby.exec();
+}
+
+
+void GameEngine::setGameScene(){
+    GameDialog gameDialog;
+    gameDialog.setModal(true);
+    gameDialog.exec();
 }
 
 

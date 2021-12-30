@@ -41,7 +41,7 @@ void Lobby::on_btStartGame_clicked()
         //TOIML
         //starting the game
 
-//    emit openGameScene();
+    emit setGameScene();
     this->close();
 }
 

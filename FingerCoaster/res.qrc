@@ -3,5 +3,6 @@
         <file>main-menu.jpg</file>
         <file>popup.jpg</file>
         <file>loading.gif</file>
+        <file>board.jpeg</file>
     </qresource>
 </RCC>

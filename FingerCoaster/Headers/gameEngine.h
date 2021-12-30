@@ -12,10 +12,12 @@
 #include "mainMenu.h"
 #include "joinpopup.h"
 #include "createroom.h"
+#include "Game/gameDialog.h"
 #include "map.h"
 #include "../Scoreboard/ScoreboardBackend.hpp"
 #include "../Server/Server.hpp"
 #include "../Client/Client.hpp"
+
 class GameEngine:public QGraphicsView{
     Q_OBJECT
 public:
@@ -45,6 +47,7 @@ public slots:
     void startLobby();
     void reInitServer();
     void forceCloseTheClientConnection();
+    void setGameScene();
 private:
     QImage background;
     int windowWidth;

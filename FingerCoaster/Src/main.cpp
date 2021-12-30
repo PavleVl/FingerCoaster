@@ -1,12 +1,13 @@
 #include <QApplication>
 #include "Headers/gameEngine.h"
-#include "Game/gamewindow.h"
+#include "Game/gameDialog.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     GameEngine* game = new GameEngine();
     game->show();
-//    GameWindow* k = new GameWindow();
-//    k->show();
+//    GameDialog* gd = new GameDialog();
+//    gd->setModal(true);
+//    gd->show();
     return a.exec();
 }
