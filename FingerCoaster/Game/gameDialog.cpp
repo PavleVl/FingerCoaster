@@ -28,9 +28,7 @@ void GameDialog::setWordsOnScreen(std::vector<std::string> text){
     for(auto& word:text){
         ui->lwText->addItem(QString::fromStdString(word));
     }
-    for(auto& word:text){
-
-    }
+    std::cout<<ui->lineEdit->text().toStdString();
 }
 
 GameDialog::~GameDialog()
