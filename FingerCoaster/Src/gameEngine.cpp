@@ -17,7 +17,6 @@ GameEngine::GameEngine(){
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     menuScene = new mainMenu();
-
     //Ako smo prvi put usli i nije nam postavljen username
     ScoreboardBackend* checkUsername = new ScoreboardBackend();
     if(checkUsername->isFirstTimeCheck())
@@ -27,7 +26,6 @@ GameEngine::GameEngine(){
     connect(menuScene->getScoreboardButton(),SIGNAL(clicked()),this,SLOT(showScore()));
     connect(menuScene->getJoinButton(),SIGNAL(clicked()), this, SLOT(joinRoom()));
     connect(menuScene->getCreateRoomButton(), SIGNAL(clicked()), this, SLOT(createRoom()));
-
 //    musicPlayer = new QMediaPlayer();
 
     //Initialisation
@@ -43,6 +41,7 @@ GameEngine::GameEngine(){
         std::string choosenFile = "easy1.txt";
         Game ourGame(choosenFile,this);
     //------------------------------------------------------------
+
 }
 
 GameEngine::~GameEngine(){
@@ -55,12 +54,8 @@ void GameEngine::openMenu()
 {
       QApplication::setOverrideCursor(Qt::ArrowCursor);
       setScene(menuScene);
-
 }
 
-void GameEngine::clearScene(){
-    menuScene->clear();
-}
 
 void GameEngine::showScore(){
     Scoreboard sc;

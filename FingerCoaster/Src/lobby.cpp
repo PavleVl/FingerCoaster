@@ -15,8 +15,6 @@ Lobby::Lobby(QWidget *parent) :
     this->setObjectName("PopUp");
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
     ui->label->setStyleSheet("font-weight: bold");
-
-
 }
 
 Lobby::~Lobby()
@@ -38,6 +36,7 @@ void Lobby::on_btStartGame_clicked()
         //TOIML
         //starting the game
 
+//    emit openGameScene();
     this->close();
 }
 
@@ -74,10 +73,6 @@ void Lobby::setIsClient(){
     gif_label->setGeometry(155,140,40,40);
     gif_label->setMovie(movie);
     movie->start();
-
-
-
-
 }
 
 void Lobby::dontShowLobby(){

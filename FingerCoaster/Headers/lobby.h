@@ -20,6 +20,7 @@ signals:
     void closeServerConnections();
     void joinPopupForcedClose();
     void popUpForcedClose();
+//    void openGameScene();
 
     //Klijent ne otvara lobby prozor ako nije sklopio konekciju sa serverom         RESENO
 

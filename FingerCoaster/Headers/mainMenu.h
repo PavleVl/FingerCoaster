@@ -6,6 +6,16 @@
 #include "menuBtn.h"
 #include "configuration.h"
 
+
+#include <QProgressBar>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QMenuBar>
+#include <QStatusBar>
+
+
 class mainMenu:public QGraphicsScene{
 public:
     mainMenu();
@@ -14,16 +24,17 @@ public:
     menuBtn* getScoreboardButton()const;
     menuBtn* getJoinButton() const;
     menuBtn* getCreateRoomButton() const;
-<<<<<<< HEAD
     void setScene();
-=======
+    void freeMemory();
 
->>>>>>> Obrisao mainwindow
 private:
     menuBtn* QuitButton;
     menuBtn* scoreboardButton;
     menuBtn* joinButton;
     menuBtn* createRoomButton;
+    QImage background;
+    QFont font;
+    QGraphicsTextItem* title;
 };
 
 

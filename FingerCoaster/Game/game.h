@@ -26,8 +26,6 @@ signals:
 
 private:
     std::vector<std::string> gameText;
-
-
 };
 
 #endif // GAME_H

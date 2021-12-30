@@ -14,9 +14,8 @@ class GameWindow : public QMainWindow
 public:
     explicit GameWindow(QWidget *parent = nullptr);
     ~GameWindow();
-
 private:
-    Ui::GameWindow *ui;
+    Ui::GameWindow* ui;
 };
 
 #endif // GAMEWINDOW_H

@@ -26,7 +26,6 @@ public:
     void playMusic();
     bool isFirstTime(ScoreboardBackend* sc);
     void showUsernameInput();
-    void clearScene();
 
 signals:
     void forceCloseClient();
@@ -56,8 +55,6 @@ private:
     Server* ourServer;
     Lobby* ourLobby;
     Client* ourClient;
-
-
 };
 
 #endif // GAMEENGINE_ma
