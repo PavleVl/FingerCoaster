@@ -3,10 +3,12 @@
 #include <qlistview.h>
 #include <sstream>
 #include <QMovie>
+#include <iostream>
 
 Lobby::Lobby(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Lobby)
+    ui(new Ui::Lobby),
+    checkCloseFlag(false)
 {
     isClient = false;
     i = 0;
@@ -15,11 +17,6 @@ Lobby::Lobby(QWidget *parent) :
     this->setObjectName("PopUp");
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
     ui->label->setStyleSheet("font-weight: bold");
-//<<<<<<< HEAD
-//=======
-
-
-//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 }
 
 Lobby::~Lobby()
@@ -36,13 +33,12 @@ void Lobby::addPlayer(QString username){
 
 void Lobby::on_btStartGame_clicked()
 {
-    emit closeServerConnections();
-
-        //TOIML
-        //starting the game
-
-    emit setGameScene();
+    checkCloseFlag = true;
     this->close();
+
+    emit closeServerConnections();
+    emit startGameForClients();
+    emit setGameScene();
 }
 
 void Lobby::rewriteUsernames(QVector<QString>* usernames){
@@ -59,6 +55,9 @@ void Lobby::rewriteUsernames(QVector<QString>* usernames){
 }
 
 void Lobby::closeEvent(QCloseEvent *event){
+
+    if(checkCloseFlag)
+        return;
 
     if(!isClient)
         emit popUpForcedClose();
@@ -78,15 +77,9 @@ void Lobby::setIsClient(){
     gif_label->setGeometry(155,140,40,40);
     gif_label->setMovie(movie);
     movie->start();
-//<<<<<<< HEAD
-//=======
-
-
-
-
-//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 }
 
 void Lobby::dontShowLobby(){
+    checkCloseFlag = true;
     this->close();
 }

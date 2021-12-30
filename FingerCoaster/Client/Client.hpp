@@ -18,6 +18,9 @@ public:
 signals:
     void dontShowLobby();
     void rewriteUsernames(QVector<QString>* usernames);
+    void startGame();
+    void closeClientLobby();
+
 private slots:
     void connectedCl();
     void disconnectedCl();
@@ -25,6 +28,7 @@ private slots:
     void bytesWritten();
     void readyRead();
     void forceCloseClient();
+
 private:
     QHostAddress address;
     quint16 port;

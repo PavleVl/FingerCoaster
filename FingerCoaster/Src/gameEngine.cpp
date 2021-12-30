@@ -56,13 +56,6 @@ void GameEngine::openMenu()
       setScene(menuScene);
 }
 
-//<<<<<<< HEAD
-//=======
-//void GameEngine::clearScene(){
-//    menuScene->clear();
-//}
-//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
-
 void GameEngine::showScore(){
     Scoreboard sc;
     sc.setModal(true);
@@ -103,6 +96,8 @@ void GameEngine::startClient(){
     ScoreboardBackend sc;
     std::string username = sc.giveUsername();
     ourClient = new Client(QString::fromStdString(username));
+
+    connect(ourClient,SIGNAL(startGame()),this,SLOT(setGameScene()),Qt::DirectConnection);
 }
 
 
@@ -131,6 +126,7 @@ void GameEngine::startLobby(){
         connect(ourServer,SIGNAL(rewriteLobbyList(QVector<QString>*)),&ourLobby,
                 SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
         connect(&ourLobby,SIGNAL(setGameScene()),this,SLOT(setGameScene()),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(startGameForClients()),ourServer,SLOT(startGameForClients()),Qt::DirectConnection);
      }
     else{
         //Podeseno klijentsko okruzenje
@@ -140,6 +136,7 @@ void GameEngine::startLobby(){
         connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
         connect(&ourLobby,SIGNAL(setGameScene()),this,SLOT(setGameScene()),Qt::DirectConnection);
+        connect(ourClient,SIGNAL(closeClientLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
     }
     ourLobby.setModal(true);
     ourLobby.exec();
@@ -148,11 +145,10 @@ void GameEngine::startLobby(){
 
 void GameEngine::setGameScene(){
     this->hide();
-    //ovo treba osloboditi(inace curi memorija)
     gameDialog = new GameDialog();
-    Storage* st = ourServer->getServerStorage();
-    std::vector<std::string> text = st->formatTextForGame();
-    gameDialog->setWordsOnScreen(text);
+    //Storage* st = ourServer->getServerStorage();
+    //std::vector<std::string> text = st->formatTextForGame();
+    //gameDialog->setWordsOnScreen(text);
 
     gameDialog->setModal(true);
     gameDialog->exec();
