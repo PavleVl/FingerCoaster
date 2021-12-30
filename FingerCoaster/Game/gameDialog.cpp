@@ -20,20 +20,21 @@ GameDialog::GameDialog(QWidget *parent) :
     ui->lineEdit->setObjectName("lEdit");
     ui->lineEdit->setStyleSheet(QString::fromUtf8("#lEdit {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
+    ui->lwText->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->lwText->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 void GameDialog::setWordsOnScreen(std::vector<std::string> text){
     for(auto& word:text){
-//        words.push_back(word);
-//        std::cout<<word<<" ";
-        ui->lwText->insertItem(0,QString::fromStdString(word));
+        ui->lwText->addItem(QString::fromStdString(word));
+    }
+    for(auto& word:text){
 
     }
 }
 
 GameDialog::~GameDialog()
 {
-//    delete server;
     delete ui;
 }
 
