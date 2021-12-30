@@ -45,7 +45,7 @@ void Lobby::rewriteUsernames(QVector<QString>* usernames){
     QString buff = "";
     for(int j = 0;j<usernames->size();j++){
 
-        buff += QString::number(j) + ". " + usernames->at(j);
+        buff += QString::number(j+1) + ". " + usernames->at(j);
         ui->playerList->addItem(buff);
         buff = "";
     }

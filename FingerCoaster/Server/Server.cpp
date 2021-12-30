@@ -95,9 +95,11 @@ void Server::deleteThread(qintptr socketFd){
         usernamesBuff.push_back(it.value().first(it.value().size()-1));
         it++;
     }
-    broadcastUsernames();
+    if(usernamesBuff.size() > 1)
+        broadcastUsernames();
 
-    emit rewriteLobbyList(&usernamesBuff);
+    if(usernamesBuff.size() > 0)
+        emit rewriteLobbyList(&usernamesBuff);
 }
 
 void Server::blockConnections(){
