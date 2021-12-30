@@ -146,6 +146,19 @@ void GameEngine::startLobby(){
 void GameEngine::setGameScene(){
     this->hide();
     gameDialog = new GameDialog();
+    connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(reOpenMainMenu()),Qt::DirectConnection);
+
+    if(ourServer != nullptr){
+        ourServer->setGameStarted(true);
+        //If i don't want to close the clients i can call
+        //softCloseTheServer in the slot
+        connect(gameDialog,SIGNAL(shutdownServer()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
+
+    }
+    if(ourClient != nullptr){
+        connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
+    }
+
     //Storage* st = ourServer->getServerStorage();
     //std::vector<std::string> text = st->formatTextForGame();
     //gameDialog->setWordsOnScreen(text);
@@ -178,4 +191,8 @@ void GameEngine::forceCloseTheClientConnection(){
     emit forceCloseClient();
     ourClient->deleteLater();
     ourClient = nullptr;
+}
+
+void GameEngine::reOpenMainMenu(){
+    this->show();
 }

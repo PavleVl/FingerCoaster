@@ -2,7 +2,7 @@
 
 #define SERVER_PORT 8080
 
-Server::Server(QObject* parent) : QTcpServer(parent){
+Server::Server(QObject* parent) : QTcpServer(parent),inGame(false){
     serverStorage = new Storage();
     serverStorage->loadText(true);
     serverStorage->setNumberOfPlayers(3);
@@ -36,7 +36,7 @@ void Server::setStorageMaxPlayers(unsigned maxPlayers){
 }
 
 void Server::incomingConnection(qintptr socketFd){
-    if(unsigned(threads.size()) < serverStorage->getNumberOfPlayers()){
+    if((unsigned(threads.size()) < serverStorage->getNumberOfPlayers()) && !inGame){
         Thread* thread = new Thread(socketFd,this);
         threads.insert(socketFd,thread);
 
@@ -52,15 +52,23 @@ void Server::incomingConnection(qintptr socketFd){
         emit sendMessage(byteBuff,socketFd);
 
     }
-    else{
-        QTcpSocket *rejectedSocket = new QTcpSocket();
-        rejectedSocket->setSocketDescriptor(socketFd);
-        rejectedSocket->write("MAX_LIMIT_ABORT");
-        rejectedSocket->close();
-        //TODO
-        //deletelater blocks close
-        //rejectedSocket->deleteLater();
+    else if(inGame){
+        QTcpSocket rejectedSocket;
+        rejectedSocket.setSocketDescriptor(socketFd);
+        rejectedSocket.write("SERVER_IN_GAME");
+        rejectedSocket.close();
     }
+    else{
+        QTcpSocket rejectedSocket;
+        rejectedSocket.setSocketDescriptor(socketFd);
+        rejectedSocket.write("SERVER_IS_FULL");
+        rejectedSocket.close();
+    }
+
+}
+
+void Server::setGameStarted(bool gameStartedFlag){
+    inGame = gameStartedFlag;
 }
 
 //Slots:
@@ -113,7 +121,7 @@ void Server::deleteThread(qintptr socketFd){
 
 void Server::blockConnections(){
     std::cout << "Server is blocking connections!" << std::endl;
-    this->pauseAccepting();
+    //this->pauseAccepting();
 }
 
 void Server::broadcastUsernames(){
@@ -132,6 +140,20 @@ void Server::forceCloseTheServer(){
     if(threads.size() > 0){
 
         emit endConnection();
+
+        auto it = threads.begin();
+        while(it != threads.end())
+            it.value()->deleteLater();
+
+        this->close();
+        emit serverShutdown();
+    }
+    emit serverShutdown();
+}
+
+void Server::softCloseTheServer(){
+    if(threads.size() > 0){
+        emit softEndConnection();
 
         auto it = threads.begin();
         while(it != threads.end())

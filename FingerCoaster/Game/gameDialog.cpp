@@ -5,6 +5,7 @@
 
 GameDialog::GameDialog(QWidget *parent) :
     QDialog(parent),
+    isClient(false),
     ui(new Ui::GameDialog)
 {
     ui->setupUi(this);
@@ -34,5 +35,15 @@ void GameDialog::setWordsOnScreen(std::vector<std::string> text){
 GameDialog::~GameDialog()
 {
     delete ui;
+}
+
+void GameDialog::closeEvent(QCloseEvent *){
+    emit gameDialogClosing();
+
+    if(!isClient){
+       emit shutdownServer();
+    }
+
+
 }
 

@@ -28,10 +28,6 @@ public:
     void playMusic();
     bool isFirstTime(ScoreboardBackend* sc);
     void showUsernameInput();
-//<<<<<<< HEAD
-//=======
-//    void clearScene();
-//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
 
 signals:
     void forceCloseClient();
@@ -48,6 +44,8 @@ public slots:
     void reInitServer();
     void forceCloseTheClientConnection();
     void setGameScene();
+    void reOpenMainMenu();
+
 private:
     QImage background;
     int windowWidth;
@@ -63,6 +61,7 @@ private:
     Lobby* ourLobby;
     Client* ourClient;
     GameDialog* gameDialog;
+
 };
 
 #endif // GAMEENGINE_ma

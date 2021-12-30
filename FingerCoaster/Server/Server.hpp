@@ -21,8 +21,10 @@ public:
     int numOfClients() const;
     void setStorageDifficulty(unsigned difficulty);
     void setStorageMaxPlayers(unsigned maxPlayers);
+    void setGameStarted(bool gameStartedFlag);
     void broadcastUsernames();
     Storage* getServerStorage()const;
+
 signals:
     //If we send 0 as targetSocketFd that means that we want every
     //single socket to send that message
@@ -30,6 +32,7 @@ signals:
     void updateLobbyList(QString username);
     void rewriteLobbyList(QVector<QString>* usernames);
     void endConnection();
+    void softEndConnection();
     void serverShutdown();
 
 public slots:
@@ -37,6 +40,8 @@ public slots:
     void deleteThread(qintptr clientSocketFd);
     void blockConnections();
     void forceCloseTheServer();
+    //Softclose won't close the clients
+    void softCloseTheServer();
     void startGameForClients();
 
 protected:
@@ -46,6 +51,7 @@ private:
     QMap<quintptr,Thread*> threads;
     QMap<qintptr,QString> usernames;
     Storage* serverStorage;
+    bool inGame;
 };
 
 #endif

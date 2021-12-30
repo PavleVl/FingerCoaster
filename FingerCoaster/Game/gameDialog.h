@@ -16,6 +16,12 @@ public:
     ~GameDialog();
 //    void getWordsFromServer();
 
+signals:
+    void gameDialogClosing();
+    void shutdownServer();
+
+public slots:
+    void closeEvent(QCloseEvent *event);
 
 public:
     void setWordsOnScreen(std::vector<std::string> text);
@@ -23,6 +29,7 @@ private:
     Ui::GameDialog *ui;
     Storage*  st;
     std::vector<std::string> words;
+    bool isClient;
 };
 
 #endif // GAMEDIALOG_H

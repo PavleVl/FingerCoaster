@@ -12,6 +12,7 @@ Thread::Thread(qintptr newSocketFd, QObject *parent) : QThread(parent), threadSo
    connect(threadSocket,SIGNAL(disconnected()),this,SLOT(disconnected()),Qt::DirectConnection);
    connect(parent,SIGNAL(sendMessage(QByteArray,qintptr)),this,SLOT(onSendMessage(QByteArray,qintptr)),Qt::DirectConnection);
    connect(parent,SIGNAL(endConnection()),this,SLOT(forceCloseConnection()),Qt::DirectConnection);
+   connect(parent,SIGNAL(),this,SLOT(softCloseConnection()),Qt::DirectConnection);
 }
 
 void Thread::onSendMessage(QByteArray message,qintptr targetSocketFd){
@@ -41,6 +42,10 @@ void Thread::disconnected(){
 
 void Thread::run(){
     exec();
+}
+
+void Thread::softCloseConnection(){
+    threadSocket->deleteLater();
 }
 
 void Thread::forceCloseConnection(){
