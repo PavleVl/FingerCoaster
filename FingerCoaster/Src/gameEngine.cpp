@@ -109,7 +109,6 @@ void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
 }
 
 
-
 //This will be run if we catch signal for start lobby
 void GameEngine::startLobby(){
     Lobby ourLobby;
@@ -134,7 +133,6 @@ void GameEngine::startLobby(){
     ourLobby.setModal(true);
     ourLobby.exec();
 }
-
 
 void GameEngine::setGameScene(){
     this->hide();
