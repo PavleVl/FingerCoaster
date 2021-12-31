@@ -76,19 +76,19 @@ void GameDialog::cmpWords(){
 
     totalTypedChars+=ui->lwText->item(currentPosition)->text().size();
 
-    QBrush brush;
     if(currentTypedWord.compare(currentCmpWord) == 0){
-        brush.setColor(Qt::green);
         ui->lwText->item(currentPosition)->setHidden(true);
         ui->lineEdit->clear();
 
         totalCharacters += words[currentPosition].size();
         currentPosition++;
 
-        if(currentPosition > words.size())
-            saveResult();
-
         currentProgress =(((float)currentPosition) / words.size()) * 100;
+        if(currentProgress == 100)
+            saveResult();
+    }
+    else{
+        ui->lineEdit->clear();
     }
 
 
@@ -145,7 +145,7 @@ void GameDialog::updateCurGameProgress(QVector<unsigned>* progresess){
 }
 
 void GameDialog::calculateWpm(){
-
+    //TOFIX
     time_t endTime;
     time(&endTime);
 
