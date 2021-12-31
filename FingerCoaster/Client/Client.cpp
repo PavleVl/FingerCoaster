@@ -9,8 +9,6 @@ Client::Client(QString name,QObject *parent)
     clientStorage = new Storage();
     //treba postaviti putanju do fajla i randomTextFlag na false i pozvati f-ju loadText()
 
-
-
     connect(tcpSocket,SIGNAL(connected()),this,SLOT(connectedCl()));
     connect(tcpSocket,SIGNAL(disconnected()),this,SLOT(disconnectedCl()));
     connect(tcpSocket,&QAbstractSocket::errorOccurred,this,&Client::printError);
@@ -71,7 +69,8 @@ void Client::readyRead(){
            vUsernames.push_back((*it).first(size));
            std::cout<<(*it).toStdString()<<" "<<"\n";
        }
-
+        connectedUsers = vUsernames;
+        connectedUsers.push_front(this->username + " (Me)");
         emit rewriteUsernames(&vUsernames);
     }
     if(buff.contains("startGame")){
@@ -101,4 +100,8 @@ void Client::forceCloseClient(){
         this->tcpSocket->close();
         this->tcpSocket->deleteLater();
     }
+}
+
+void Client::initGame(){
+    emit populateGame(&connectedUsers);
 }

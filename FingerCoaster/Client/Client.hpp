@@ -14,12 +14,14 @@ class Client : public QObject
     Q_OBJECT
 public:
     explicit Client(QString name,QObject *parent = nullptr);
+    void initGame();
 
 signals:
     void dontShowLobby();
     void rewriteUsernames(QVector<QString>* usernames);
     void startGame();
     void closeClientLobby();
+    void populateGame(QVector<QString>*);
 
 private slots:
     void connectedCl();
@@ -35,6 +37,7 @@ private:
     QString username;
     QTcpSocket* tcpSocket;
     Storage* clientStorage;
+    QVector<QString> connectedUsers;
     bool alreadyClosed;
 };
 

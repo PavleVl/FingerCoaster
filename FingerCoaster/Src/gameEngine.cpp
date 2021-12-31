@@ -158,6 +158,9 @@ void GameEngine::setGameScene(){
     }
     if(ourClient != nullptr){
         connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
+        connect(ourClient,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
+
+        ourClient->initGame();
     }
 
     //Storage* st = ourServer->getServerStorage();
