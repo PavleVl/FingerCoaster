@@ -92,12 +92,9 @@ public:
 
     float calcAccuracy() const{
         
-        int totalWords = _correct + _failed;
-
-        if(totalWords == 0)
-            return 0.0;
-
-        return (_correct * 100) / float(totalWords); 
+        float accuracy = ((float)_correct/_failed) * 100;
+    
+        return accuracy;
     }
 
     int giveWpm() const{

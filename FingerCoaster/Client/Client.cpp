@@ -18,11 +18,17 @@ Client::Client(QString name,QObject *parent)
 
     std::cout<<"Connecting..."<<std::endl;
 
-    //TOFIX
-    //This is hardcoded
-    tcpSocket->connectToHost("0.0.0.0",8080);
+    //tcpSocket->connectToHost("0.0.0.0",8080);
 }
 
+void Client::connectToHost(QString key){
+    QList<QString> list = key.split(":");
+    tcpSocket->connectToHost(list.at(0),list.at(1).toInt());
+}
+
+Storage* Client::giveClientStorage(){
+    return clientStorage;
+}
 
 void Client::connectedCl(){
     std::cout<<"Connected!"<<std::endl;
@@ -120,3 +126,5 @@ void Client::updateProgress(unsigned curProgress){
         tcpSocket->flush();
     }
 }
+
+

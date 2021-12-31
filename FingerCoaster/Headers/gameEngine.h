@@ -40,7 +40,7 @@ public slots:
     void joinRoom();
     void createRoom();
     void startServer(unsigned maxPlayers,unsigned difficulty);
-    void startClient();
+    void startClient(QString key);
     void startLobby();
     void reInitServer();
     void forceCloseTheClientConnection();
