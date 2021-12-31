@@ -23,6 +23,9 @@ Client::Client(QString name,QObject *parent)
     tcpSocket->connectToHost("0.0.0.0",8080);
 }
 
+Storage* Client::giveClientStorage(){
+    return clientStorage;
+}
 
 void Client::connectedCl(){
     std::cout<<"Connected!"<<std::endl;

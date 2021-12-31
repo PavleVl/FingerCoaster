@@ -9,6 +9,9 @@
 #include <QTimer>
 #include <QListWidgetItem>
 #include <ctime>
+#include <time.h>
+#include <QDateTime>
+#include "../Result/Result.hpp"
 
 #include "../Server/Server.hpp"
 #include "../Storage/Storage.hpp"
@@ -28,12 +31,14 @@ public:
     unsigned getCurrentProgress();
     void setWordsOnScreen(std::vector<std::string> text);
 
+
 protected:
     bool eventFilter(QObject* obj,QEvent* event)override;
 
 private:
     void cmpWords();
     void calculateWpm();
+    void saveResult();
 
 signals:
     void gameDialogClosing();
@@ -60,6 +65,7 @@ private:
     int currentWpm;
     int totalCharacters;
     time_t startTime;
+    int totalTypedChars;
 };
 
 #endif // GAMEDIALOG_H

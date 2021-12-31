@@ -1,6 +1,7 @@
 #include "Game/gameDialog.h"
 #include "ui_gamedialog.h"
 
+
 #define MAX_CHARS (100)
 
 GameDialog::GameDialog(QWidget *parent) :
@@ -10,7 +11,8 @@ GameDialog::GameDialog(QWidget *parent) :
     currentProgress(0),
     currentPosition(0),
     currentWpm(0),
-    totalCharacters(0)
+    totalCharacters(0),
+    totalTypedChars(0)
 {
     ui->setupUi(this);
     this->setWindowTitle("Let's play the game");
@@ -72,6 +74,8 @@ void GameDialog::cmpWords(){
     QString currentTypedWord = ui->lineEdit->text();
     QString currentCmpWord = ui->lwText->item(currentPosition)->text();
 
+    totalTypedChars+=ui->lwText->item(currentPosition)->text().size();
+
     QBrush brush;
     if(currentTypedWord.compare(currentCmpWord) == 0){
         brush.setColor(Qt::green);
@@ -80,12 +84,13 @@ void GameDialog::cmpWords(){
 
         totalCharacters += words[currentPosition].size();
         currentPosition++;
+
+        if(currentPosition > words.size())
+            saveResult();
+
         currentProgress =(((float)currentPosition) / words.size()) * 100;
     }
-    else{
-        brush.setColor(Qt::red);
-        ui->lwText->item(currentPosition)->setBackground(brush);
-    }
+
 
     calculateWpm();
 }
@@ -129,7 +134,7 @@ void GameDialog::populateGame(QVector<QString>* usernames){
 
 void GameDialog::timeoutSlot(){
     ui->pb1->setValue(currentProgress);
-    //emit updateProgress(currentProgress);
+    emit updateProgress(currentProgress);
 }
 
 void GameDialog::updateCurGameProgress(QVector<unsigned>* progresess){
@@ -147,4 +152,27 @@ void GameDialog::calculateWpm(){
     unsigned seconds = (endTime - startTime);
 
     currentWpm = (totalCharacters/5.0)/(seconds/60.0);
+    //You update on label here
+    ui->label->setText("Current WPM: " + QString::number(currentWpm));
+}
+
+void GameDialog::saveResult(){
+
+    ScoreboardBackend sc;
+
+    time_t rawTime;
+    struct tm *info;
+    time(&rawTime);
+    info = localtime(&rawTime);
+
+    std::string date = "";
+    date.append(std::to_string(info->tm_mday));
+    date.append(":");
+    date.append(std::to_string(info->tm_mon));
+    date.append(":");
+    date.append(std::to_string(info->tm_year));
+
+    Result rs(date,currentWpm,totalCharacters,totalTypedChars,"");
+
+    sc.updateScoreboard(rs);
 }
