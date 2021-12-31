@@ -63,8 +63,16 @@ void GameDialog::closeEvent(QCloseEvent *){
 
 void GameDialog::populateGame(QVector<QString>* usernames){
 
-    for(int i=0;i<usernames->size();i++)
+    int i = 0;
+    for(;i<usernames->size();i++)
         groupBoxes[i]->setTitle(usernames->at(i));
 
+   if(i < 3){
+       while(i <= 3){
+           groupBoxes[i]->hide();
+           progressBars[i]->hide();
+           i++;
+       }
+   }
 }
 
