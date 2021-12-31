@@ -29,7 +29,7 @@ GameDialog::GameDialog(QWidget *parent) :
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->lwText->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
+    ui->lineEdit->installEventFilter(this);
     //Grouping groupBoxes
     groupBoxes[0] = ui->gb1;
     groupBoxes[1] = ui->gb2;
@@ -59,6 +59,18 @@ GameDialog::~GameDialog()
     delete ui;
 }
 
+void GameDialog::keyPressEvent(QKeyEvent* event){
+    QString str;
+}
+
+bool GameDialog::eventFilter(QObject* obj,QEvent* event){
+    if(obj == ui->lineEdit && event->type() == QEvent::KeyPress){
+        QKeyEvent* key = static_cast<QKeyEvent*>(event);
+        qDebug()<<"pressed"<<key->key();
+    }
+    return QObject::eventFilter(obj,event);
+}
+
 void GameDialog::closeEvent(QCloseEvent *){
     emit gameDialogClosing();
 
@@ -80,16 +92,3 @@ void GameDialog::populateGame(QVector<QString>* usernames){
     }
 }
 
-unsigned GameDialog::getCurrentProgress(){
-   return currentProgress;
-}
-
-void GameDialog::timeoutSlot(){
-    emit updateProgress(rand() % 100);
-}
-
-void GameDialog::updateCurGameProgress(QVector<unsigned>* progresses){
-    std::cout << "USAO SAM U UPDATE" << std::endl;
-    for(int i=0;i<progresses->size();i++)
-        progressBars[i]->setValue(progresses->at(i));
-}
