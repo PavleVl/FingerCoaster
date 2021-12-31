@@ -199,7 +199,22 @@ void Server::updateClientsGameProgress(qintptr socketFd,unsigned curClientProgre
     std::cout << "Usao sam u update game progress" << socketFd << " " << curClientProgress << std::endl;
     QPair<qintptr,QString> clientKey = qMakePair(socketFd,usernames.find(socketFd).value());
     progress.insert(clientKey,curClientProgress);
+    broadcastProgress();
     changeGameProgress();
+}
+
+void Server::broadcastProgress(){
+
+    QString msgBuff = "gameProgress:";
+    auto it = progress.begin();
+    while(it != progress.end()){
+        msgBuff += it.key().second + "-" + QString::number(it.value()) + ":";
+
+        it++;
+    }
+    std::cout << "Posalo listu progressa " << msgBuff.toStdString() << std::endl;
+    QByteArray byteBuff(msgBuff.toStdString().c_str(),msgBuff.length()-1);
+    emit sendMessage(byteBuff,0);
 }
 
 void Server::changeGameProgress(){

@@ -16,7 +16,8 @@ Thread::Thread(qintptr newSocketFd, QObject *parent) : QThread(parent), threadSo
 }
 
 void Thread::onSendMessage(QByteArray message,qintptr targetSocketFd){
-    if(threadSocket->isWritable() && (targetSocketFd == socketFd || targetSocketFd == 0)){
+    if( (targetSocketFd == socketFd || targetSocketFd == 0)){
+        std::cout << "PISEM " << QString(message).toStdString() << std::endl;
         threadSocket->write(message);
         threadSocket->flush();
     }

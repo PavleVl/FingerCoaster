@@ -157,9 +157,9 @@ void GameEngine::setGameScene(){
         ourServer->initializeGame();
         //If i don't want to close the clients i can call
         //softCloseTheServer in the slot
-        //Storage* st = ourServer->getServerStorage();
-        //std::vector<std::string> text = st->formatTextForGame();
-        //gameDialog->setWordsOnScreen(text);
+        Storage* st = ourServer->getServerStorage();
+        std::vector<std::string> text = st->formatTextForGame();
+        gameDialog->setWordsOnScreen(text);
     }
     if(ourClient != nullptr){
         connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);

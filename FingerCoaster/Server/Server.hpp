@@ -27,6 +27,7 @@ public:
     Storage* getServerStorage()const;
     void initializeGame();
     void changeGameProgress();
+    void broadcastProgress();
 
 signals:
     //If we send 0 as targetSocketFd that means that we want every

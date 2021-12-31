@@ -39,12 +39,10 @@ void Client::bytesWritten(){
     //std::cout<<"we wrote username to host"<<std::endl;
 }
 void Client::readyRead(){
-    //Kada uhvatis usernamesList:username1:username2:username3:
-    //Tada splitujes
-    //Saljes signal da upalis slot rewriteUSernames();
 
     QByteArray byteBuff = tcpSocket->readAll();
     QString buff(byteBuff);
+    qDebug() << buff;
     QVector<QString> vUsernames;
     if(buff.contains("text")){
         std::cout << "I've caught text initialisation " << buff.toStdString() << std::endl;
@@ -56,6 +54,11 @@ void Client::readyRead(){
 
         QByteArray br = "username:" + this->username.toUtf8();
         tcpSocket->write(br);
+        return;
+    }
+    if(buff.contains("gameProgress:")){
+        std::cout << buff.toStdString() << std::endl;
+        return;
     }
     if(buff.contains("usernamesList:")){
        std::cout <<buff.toStdString()<<std::endl;
