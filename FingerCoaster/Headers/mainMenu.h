@@ -3,20 +3,41 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include "Headers/menuBtn.h"
-#include "Headers/configuration.h"
+#include "menuBtn.h"
+#include "configuration.h"
+
+
+#include <QProgressBar>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QMenuBar>
+#include <QStatusBar>
+
 
 class mainMenu:public QGraphicsScene{
 public:
     mainMenu();
     ~mainMenu();
-    QList<menuBtn*> getButtonList()const;
     menuBtn* getQuitButton()const;
     menuBtn* getScoreboardButton()const;
+    menuBtn* getJoinButton() const;
+    menuBtn* getCreateRoomButton() const;
+//<<<<<<< HEAD
+//    void setScene();
+//    void freeMemory();
+//=======
+//>>>>>>> 7db8ad15debb9a39da1223d741b893a8be3ee399
+
 private:
-    QList<menuBtn*> buttonList;
     menuBtn* QuitButton;
     menuBtn* scoreboardButton;
+    menuBtn* joinButton;
+    menuBtn* createRoomButton;
+    QImage background;
+    QFont font;
+    QGraphicsTextItem* title;
 };
 
 

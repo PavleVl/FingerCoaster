@@ -1,50 +1,85 @@
 #include "Headers/gameEngine.h"
-#include "Headers/mainwindow.h"
-#include "Headers/configuration.h"
 #include "ui_mainwindow.h"
+#include "Headers/mainwindow.h"
 #include <qwidget.h>
+#include "Headers/createroom.h"
+#include "Headers/joinpopup.h"
+#include "Headers/scoreboard.h"
+#include "Headers/enterusername.h"
+#include "../Game/game.h"
+#include <QDebug>
+
 
 GameEngine::GameEngine(){
-    windowWidth = WINDOW_WIDTH;
-    windowHeight = WINDOW_HEIGHT;
     setWindowTitle(TITLE);
-
-    levelScene = new QGraphicsScene();
-
-    map = new Map();
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     menuScene = new mainMenu();
+    //Ako smo prvi put usli i nije nam postavljen username
+    ScoreboardBackend* checkUsername = new ScoreboardBackend();
+    if(checkUsername->isFirstTimeCheck())
+        this->showUsernameInput();
+
     connect(menuScene->getQuitButton(),SIGNAL(clicked()),this,SLOT(exit()));
     connect(menuScene->getScoreboardButton(),SIGNAL(clicked()),this,SLOT(showScore()));
+    connect(menuScene->getJoinButton(),SIGNAL(clicked()), this, SLOT(joinRoom()));
+    connect(menuScene->getCreateRoomButton(), SIGNAL(clicked()), this, SLOT(createRoom()));
 //    musicPlayer = new QMediaPlayer();
+
+    //Initialisation
+    ourServer = nullptr;
+    ourLobby = nullptr;
+    ourClient = nullptr;
+
     openMenu();
-//    showFullScreen();
+
+    //TOFIX
+    //This will be place where game class will started for testing
+    //------------------------------------------------------------
+        std::string choosenFile = "easy1.txt";
+        Game ourGame(choosenFile,this);
+    //------------------------------------------------------------
+
 }
 
 GameEngine::~GameEngine(){
+      menuScene->clear();
       delete menuScene;
-      levelScene->clear();
-      delete levelScene;
       //    delete musicPlayer;
-      delete mainWindow;
 }
 
 void GameEngine::openMenu()
 {
       QApplication::setOverrideCursor(Qt::ArrowCursor);
       setScene(menuScene);
-//    playMusic(":/resources/sounds/Pesma.mp3");
-
 }
 
 void GameEngine::showScore(){
-    MainWindow* newScene = new MainWindow();
-    newScene->show();
-//    newScene->getU()->tableView->show();
+    Scoreboard sc;
+    sc.setModal(true);
+    sc.exec();
 }
+
+void GameEngine::joinRoom(){
+    JoinPopUp joinPopup;
+    connect(&joinPopup,SIGNAL(startClient()),this,SLOT(startClient()),Qt::DirectConnection);
+    connect(&joinPopup,SIGNAL(openLobby()),this,SLOT(startLobby()),Qt::DirectConnection);
+    joinPopup.setModal(true);
+    joinPopup.exec();
+}
+
+
+void GameEngine::createRoom(){
+    createroom cr;
+    connect(&cr,SIGNAL(startServer(uint,uint)),this,SLOT(startServer(uint,uint)),Qt::DirectConnection);
+    connect(&cr,SIGNAL(openLobby()),this,SLOT(startLobby()),Qt::DirectConnection);
+
+    cr.setModal(true);
+    cr.exec();
+}
+
 
 
 void GameEngine::exit()
@@ -53,14 +88,113 @@ void GameEngine::exit()
 }
 
 void GameEngine::resizeEvent(QResizeEvent *event){
-    if(levelScene)
-            levelScene->setSceneRect(0,0,MAP_WIDTH,MAP_HEIGHT);
-    QRect rect = QRect(0,0,WINDOW_WIDTH,map->getHeight());
+    QRect rect = QRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
     fitInView(rect);
 }
 
-//void playMusic(QString path){
-//    musicPlayer->setMedia(QUrl(path));
-//    musicPlayer->setVolume(100);
-//    musicPlayer->play();
-//}
+void GameEngine::startClient(){
+    ScoreboardBackend sc;
+    std::string username = sc.giveUsername();
+    ourClient = new Client(QString::fromStdString(username));
+
+    connect(ourClient,SIGNAL(startGame()),this,SLOT(setGameScene()),Qt::DirectConnection);
+}
+
+
+//This will be run if we catch signal for starting the server
+void GameEngine::startServer(unsigned maxPlayers,unsigned difficulty){
+    ourServer = new Server();
+
+    connect(ourServer,SIGNAL(serverShutdown()),this,SLOT(reInitServer()),Qt::DirectConnection);
+    ourServer->setStorageDifficulty(difficulty);
+    ourServer->setStorageMaxPlayers(maxPlayers);
+
+    ourServer->startServer();
+    //TODO SERVER IMPL
+    //TODO SERVER SHUT DOWN SIGNAL TO DELETE POINTER TO IT
+}
+
+
+
+//This will be run if we catch signal for start lobby
+void GameEngine::startLobby(){
+    Lobby ourLobby;
+    if(ourServer != nullptr){
+        connect(ourServer,SIGNAL(updateLobbyList(QString)),&ourLobby,SLOT(addPlayer(QString)),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(closeServerConnections()),ourServer,SLOT(blockConnections()),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(popUpForcedClose()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
+        connect(ourServer,SIGNAL(rewriteLobbyList(QVector<QString>*)),&ourLobby,
+                SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(setGameScene()),this,SLOT(setGameScene()),Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(startGameForClients()),ourServer,SLOT(startGameForClients()),Qt::DirectConnection);
+     }
+    else{
+        //Podeseno klijentsko okruzenje
+        ourLobby.setIsClient();
+        connect(&ourLobby,SIGNAL(joinPopupForcedClose()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
+        connect(this,SIGNAL(forceCloseClient()),ourClient,SLOT(forceCloseClient()),Qt::DirectConnection);
+        connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
+        connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
+        connect(ourClient,SIGNAL(closeClientLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
+    }
+    ourLobby.setModal(true);
+    ourLobby.exec();
+}
+
+
+void GameEngine::setGameScene(){
+    this->hide();
+    gameDialog = new GameDialog();
+    connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(reOpenMainMenu()),Qt::DirectConnection);
+
+    if(ourServer != nullptr){
+        connect(gameDialog,SIGNAL(shutdownServer()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
+        connect(ourServer,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
+        connect(gameDialog,SIGNAL(updateProgress(uint)),ourServer,SLOT(setMyProgress(uint)),Qt::DirectConnection);
+        connect(ourServer,SIGNAL(changeCurGameProgress(QVector<uint>*)),gameDialog,SLOT(updateCurGameProgress(QVector<uint>*)),Qt::DirectConnection);
+
+        ourServer->setGameStarted(true);
+        ourServer->initializeGame();
+        //If i don't want to close the clients i can call
+        //softCloseTheServer in the slot
+        Storage* st = ourServer->getServerStorage();
+        std::vector<std::string> text = st->formatTextForGame();
+        gameDialog->setWordsOnScreen(text);
+    }
+    if(ourClient != nullptr){
+        connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
+        connect(ourClient,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
+        connect(gameDialog,SIGNAL(updateProgress(uint)),ourClient,SLOT(updateProgress(uint)),Qt::DirectConnection);
+
+        ourClient->initGame();
+    }
+    gameDialog->setModal(true);
+    gameDialog->exec();
+
+}
+
+
+//If its the first time application is opening and
+//Scoreboard.txt is missing this will be run
+void GameEngine::showUsernameInput(){
+    enterUsername eu;
+    eu.setModal(true);
+    eu.exec();
+};
+
+
+void GameEngine::reInitServer(){
+    ourServer->deleteLater();
+    ourServer = nullptr;
+}
+
+void GameEngine::forceCloseTheClientConnection(){
+    emit forceCloseClient();
+    ourClient->deleteLater();
+    ourClient = nullptr;
+}
+
+void GameEngine::reOpenMainMenu(){
+    this->show();
+}
+
