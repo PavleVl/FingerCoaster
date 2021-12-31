@@ -129,7 +129,7 @@ void GameDialog::populateGame(QVector<QString>* usernames){
 
 void GameDialog::timeoutSlot(){
     ui->pb1->setValue(currentProgress);
-    //emit updateProgress(currentProgress);
+    emit updateProgress(currentProgress);
 }
 
 void GameDialog::updateCurGameProgress(QVector<unsigned>* progresess){
