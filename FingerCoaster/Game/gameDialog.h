@@ -8,6 +8,7 @@
 #include <QShowEvent>
 #include <QTimer>
 #include <QListWidgetItem>
+#include <ctime>
 
 #include "../Server/Server.hpp"
 #include "../Storage/Storage.hpp"
@@ -28,8 +29,12 @@ public:
     void setWordsOnScreen(std::vector<std::string> text);
 
 protected:
-    void keyPressEvent(QKeyEvent* event)override;
     bool eventFilter(QObject* obj,QEvent* event)override;
+
+private:
+    void cmpWords();
+    void calculateWpm();
+
 signals:
     void gameDialogClosing();
     void shutdownServer();
@@ -51,7 +56,10 @@ private:
     unsigned currentProgress;
     QTimer* timer;
     QListWidgetItem* item;
-
+    int currentPosition;
+    int currentWpm;
+    int totalCharacters;
+    time_t startTime;
 };
 
 #endif // GAMEDIALOG_H

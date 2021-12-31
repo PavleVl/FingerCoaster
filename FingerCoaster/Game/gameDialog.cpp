@@ -7,7 +7,10 @@ GameDialog::GameDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::GameDialog),
     isClient(false),
-    currentProgress(0)
+    currentProgress(0),
+    currentPosition(0),
+    currentWpm(0),
+    totalCharacters(0)
 {
     ui->setupUi(this);
     this->setWindowTitle("Let's play the game");
@@ -42,12 +45,19 @@ GameDialog::GameDialog(QWidget *parent) :
     progressBars[2] = ui->pb3;
     progressBars[3] = ui->pb4;
 
+    ui->lwText->setAttribute(Qt::WA_StyledBackground, true);
+    ui->lwText->setStyleSheet("QListView::item:selected { background: palette(Highlight) }");
+
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(timeoutSlot()),Qt::DirectConnection);
-    timer->start(15000);
+    timer->start(1000);
+
+
+    time(&startTime);
 }
 
 void GameDialog::setWordsOnScreen(std::vector<std::string> text){
+    words = text;
     for(auto& word:text){
         ui->lwText->addItem(QString::fromStdString(word));
     }
@@ -58,33 +68,41 @@ GameDialog::~GameDialog()
     delete ui;
 }
 
-//int i = 0;
+void GameDialog::cmpWords(){
+    QString currentTypedWord = ui->lineEdit->text();
+    QString currentCmpWord = ui->lwText->item(currentPosition)->text();
 
-void GameDialog::keyPressEvent(QKeyEvent* event){
+    QBrush brush;
+    if(currentTypedWord.compare(currentCmpWord) == 0){
+        brush.setColor(Qt::green);
+        ui->lwText->item(currentPosition)->setHidden(true);
+        ui->lineEdit->clear();
 
-    QString str;
-    str = ui->lineEdit->text();
-//    QStringList list = str.split(" ");
-    qDebug()<<str;
+        totalCharacters += words[currentPosition].size();
+        currentPosition++;
+        currentProgress =(((float)currentPosition) / words.size()) * 100;
+    }
+    else{
+        brush.setColor(Qt::red);
+        ui->lwText->item(currentPosition)->setBackground(brush);
+    }
 
-    item = ui->lwText->currentItem();
-    QString strItem = item->text();
-    qDebug()<<strItem;
-
-//    if(event->key() == Qt::Key_Space){
-
-//        if(QString::compare(list.last(),strItem) == 0){
-//            ui->lwText->currentItem()->setBackground(Qt::cyan);
-
-//        }
-//    }
+    calculateWpm();
 }
 
+
 bool GameDialog::eventFilter(QObject* obj,QEvent* event){
-    if(obj == ui->lineEdit && event->type() == QEvent::KeyPress){
-        QKeyEvent* key = static_cast<QKeyEvent*>(event);
-        qDebug()<<"pressed"<<key->key();
+    if(event->type() == QEvent::KeyPress){
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        if (keyEvent->key() == Qt::Key_Space){
+            cmpWords();
+            return true;
+        }
+        else{
+            return false;
+            }
     }
+
     return QObject::eventFilter(obj,event);
 }
 
@@ -110,8 +128,8 @@ void GameDialog::populateGame(QVector<QString>* usernames){
 }
 
 void GameDialog::timeoutSlot(){
-    ui->pb1->setValue(rand() % 100);
-    emit updateProgress(rand() % 100);
+    ui->pb1->setValue(currentProgress);
+    //emit updateProgress(currentProgress);
 }
 
 void GameDialog::updateCurGameProgress(QVector<unsigned>* progresess){
@@ -119,4 +137,14 @@ void GameDialog::updateCurGameProgress(QVector<unsigned>* progresess){
     for(int i=0;i<progresess->size();i++){
         progressBars[i]->setValue(progresess->at(i));
     }
+}
+
+void GameDialog::calculateWpm(){
+
+    time_t endTime;
+    time(&endTime);
+
+    unsigned seconds = (endTime - startTime);
+
+    currentWpm = (totalCharacters/5.0)/(seconds/60.0);
 }

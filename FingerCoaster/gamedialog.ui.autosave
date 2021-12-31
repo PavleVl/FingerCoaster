@@ -239,19 +239,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>90</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Current Wpm:</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
