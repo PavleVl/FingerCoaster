@@ -9,6 +9,7 @@ GameDialog::GameDialog(QWidget *parent) :
     ui(new Ui::GameDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Let's play the game");
     this->setObjectName("GameWindow");
     this->setStyleSheet(QString::fromUtf8("#GameWindow {border-image: url(:/images/prefix1/board.jpeg) 0 0 0 0 stretch stretch;}"));
 
@@ -45,7 +46,7 @@ void GameDialog::setWordsOnScreen(std::vector<std::string> text){
     for(auto& word:text){
         ui->lwText->addItem(QString::fromStdString(word));
     }
-    std::cout<<ui->lineEdit->text().toStdString();
+   // std::cout<<ui->lineEdit->text().toStdString();
 }
 
 GameDialog::~GameDialog()
