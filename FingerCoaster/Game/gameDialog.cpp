@@ -1,5 +1,6 @@
 #include "Game/gameDialog.h"
 #include "ui_gamedialog.h"
+#include <QLabel>
 
 #define MAX_CHARS (100)
 
@@ -27,6 +28,12 @@ GameDialog::GameDialog(QWidget *parent) :
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->lwText->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
+
+   //QLabel *labels = new QLabel*[10]{ui->pb1, ui->pb2, ui->pb3, ui->pb4,
+     //                        ui->label_4, ui->label_5, ui->label_6,
+       //                      ui->label_7, ui->label_8, ui->label_9
 }
 
 void GameDialog::setWordsOnScreen(std::vector<std::string> text){
