@@ -149,11 +149,12 @@ void GameEngine::setGameScene(){
     connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(reOpenMainMenu()),Qt::DirectConnection);
 
     if(ourServer != nullptr){
+        connect(gameDialog,SIGNAL(shutdownServer()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
+        connect(ourServer,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
         ourServer->setGameStarted(true);
+        ourServer->initializeGame();
         //If i don't want to close the clients i can call
         //softCloseTheServer in the slot
-        connect(gameDialog,SIGNAL(shutdownServer()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
-
     }
     if(ourClient != nullptr){
         connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);

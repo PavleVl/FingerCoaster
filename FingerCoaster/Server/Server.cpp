@@ -165,6 +165,20 @@ void Server::softCloseTheServer(){
     emit serverShutdown();
 }
 
+void Server::initializeGame(){
+
+    QVector<QString> usernamesBuff;
+
+    auto it = usernames.begin();
+    while(it != usernames.end()){
+        usernamesBuff.push_back(it.value());
+        it++;
+    }
+
+    emit populateGame(&usernamesBuff);
+}
+
+
 void Server::startGameForClients(){
     emit sendMessage("startGame",0);
 }

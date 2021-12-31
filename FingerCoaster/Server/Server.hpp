@@ -24,6 +24,7 @@ public:
     void setGameStarted(bool gameStartedFlag);
     void broadcastUsernames();
     Storage* getServerStorage()const;
+    void initializeGame();
 
 signals:
     //If we send 0 as targetSocketFd that means that we want every
@@ -34,6 +35,7 @@ signals:
     void endConnection();
     void softEndConnection();
     void serverShutdown();
+    void populateGame(QVector<QString>* usernames);
 
 public slots:
     void setClientsUsername(qintptr clientSocketFd,QString username);

@@ -5,8 +5,8 @@
 
 GameDialog::GameDialog(QWidget *parent) :
     QDialog(parent),
-    isClient(false),
-    ui(new Ui::GameDialog)
+    ui(new Ui::GameDialog),
+    isClient(false)
 {
     ui->setupUi(this);
     this->setObjectName("GameWindow");
@@ -27,6 +27,18 @@ GameDialog::GameDialog(QWidget *parent) :
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->lwText->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    //Grouping groupBoxes
+    groupBoxes[0] = ui->gb1;
+    groupBoxes[1] = ui->gb2;
+    groupBoxes[2] = ui->gb3;
+    groupBoxes[3] = ui->gb4;
+
+    //Grouping
+    progressBars[0] = ui->pb1;
+    progressBars[1] = ui->pb2;
+    progressBars[2] = ui->pb3;
+    progressBars[3] = ui->pb4;
 }
 
 void GameDialog::setWordsOnScreen(std::vector<std::string> text){
@@ -47,7 +59,11 @@ void GameDialog::closeEvent(QCloseEvent *){
     if(!isClient){
        emit shutdownServer();
     }
-
-
 }
 
+void GameDialog::populateGame(QVector<QString>* usernames){
+
+    for(int i=0;i<usernames->size();i++)
+        groupBoxes[i]->setTitle(usernames->at(i));
+
+}
