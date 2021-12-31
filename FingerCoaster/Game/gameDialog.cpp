@@ -153,7 +153,7 @@ void GameDialog::calculateWpm(){
 
     currentWpm = (totalCharacters/5.0)/(seconds/60.0);
     //You update on label here
-    ui->label->setText("Current WPM: " + QString::number(currentWpm));
+    ui->wpm_label->setText("Current WPM: " + QString::number(currentWpm));
 }
 
 void GameDialog::saveResult(){
