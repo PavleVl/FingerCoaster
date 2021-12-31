@@ -5,8 +5,8 @@
 
 GameDialog::GameDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::GameDialog),
-    isClient(false)
+    isClient(false),
+    ui(new Ui::GameDialog)
 {
     ui->setupUi(this);
     this->setObjectName("GameWindow");
@@ -67,3 +67,4 @@ void GameDialog::populateGame(QVector<QString>* usernames){
         groupBoxes[i]->setTitle(usernames->at(i));
 
 }
+

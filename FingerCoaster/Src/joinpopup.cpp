@@ -45,7 +45,7 @@ void JoinPopUp::on_joinButton_clicked()
     QStringList list = key.split(":");
     if(list.size() < 2){
             ui->lMessage->setText("IP address and port is needed");
-            ui->lMessage->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
+            ui->lMessage->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
             return;
     }
     bool isIpAddr = isValidIp4Address(list[0].toStdString());
@@ -53,11 +53,11 @@ void JoinPopUp::on_joinButton_clicked()
     bool isVPort = isValidPort(isPort);
     if(!isIpAddr){
             ui->lMessage->setText("IPv4 address is not valid");
-            ui->lMessage->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
+            ui->lMessage->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
     }
     else if(!isVPort){
             ui->lMessage->setText("Port not valid");
-            ui->lMessage->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
+            ui->lMessage->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
     }
     else {
         ui->lMessage->setText("Client is connected.");

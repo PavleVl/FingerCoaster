@@ -49,7 +49,7 @@ void createroom::on_create_lobby_button_clicked(){
 
     if(noRBChecked()){
         ui->err_label->setText("You need to select difficulty");
-        ui->err_label->setStyleSheet("QLabel {background-color: lightgreen; color: red;}");
+        ui->err_label->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
 
         return;
     }
