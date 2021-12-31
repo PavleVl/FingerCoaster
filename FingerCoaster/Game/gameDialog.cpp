@@ -5,8 +5,7 @@
 
 GameDialog::GameDialog(QWidget *parent) :
     QDialog(parent),
-    isClient(false),
-    ui(new Ui::GameDialog)
+    ui(new Ui::GameDialog),isClient(false)
 {
     ui->setupUi(this);
     this->setWindowTitle("Let's play the game");
@@ -28,7 +27,7 @@ GameDialog::GameDialog(QWidget *parent) :
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->lwText->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
+    ui->lineEdit->installEventFilter(this);
     //Grouping groupBoxes
     groupBoxes[0] = ui->gb1;
     groupBoxes[1] = ui->gb2;
@@ -42,6 +41,10 @@ GameDialog::GameDialog(QWidget *parent) :
     progressBars[3] = ui->pb4;
 }
 
+void GameDialog::showEvent(QShowEvent *event){
+//    event->type =
+}
+
 void GameDialog::setWordsOnScreen(std::vector<std::string> text){
     for(auto& word:text){
         ui->lwText->addItem(QString::fromStdString(word));
@@ -52,6 +55,18 @@ void GameDialog::setWordsOnScreen(std::vector<std::string> text){
 GameDialog::~GameDialog()
 {
     delete ui;
+}
+
+void GameDialog::keyPressEvent(QKeyEvent* event){
+    QString str;
+}
+
+bool GameDialog::eventFilter(QObject* obj,QEvent* event){
+    if(obj == ui->lineEdit && event->type() == QEvent::KeyPress){
+        QKeyEvent* key = static_cast<QKeyEvent*>(event);
+        qDebug()<<"pressed"<<key->key();
+    }
+    return QObject::eventFilter(obj,event);
 }
 
 void GameDialog::closeEvent(QCloseEvent *){
@@ -68,12 +83,10 @@ void GameDialog::populateGame(QVector<QString>* usernames){
     for(;i<usernames->size();i++)
         groupBoxes[i]->setTitle(usernames->at(i));
 
-   if(i < 3){
        while(i <= 3){
            groupBoxes[i]->hide();
            progressBars[i]->hide();
            i++;
-       }
    }
 }
 

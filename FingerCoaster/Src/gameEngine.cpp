@@ -163,10 +163,10 @@ void GameEngine::setGameScene(){
         ourClient->initGame();
     }
 
-    //Storage* st = ourServer->getServerStorage();
-    //std::vector<std::string> text = st->formatTextForGame();
-    //gameDialog->setWordsOnScreen(text);
-
+    Storage* st = ourServer->getServerStorage();
+    std::vector<std::string> text = st->formatTextForGame();
+    gameDialog->setWordsOnScreen(text);
+//    gameDialog->setFocus(Qt::PopupFocusReason);
     gameDialog->setModal(true);
     gameDialog->exec();
 }
