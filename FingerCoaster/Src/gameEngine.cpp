@@ -167,6 +167,9 @@ void GameEngine::setGameScene(){
         connect(gameDialog,SIGNAL(updateProgress(uint)),ourClient,SLOT(updateProgress(uint)),Qt::DirectConnection);
 
         ourClient->initGame();
+        Storage* st = ourClient->giveClientStorage();
+        std::vector<std::string> text = st->formatTextForGame();
+        gameDialog->setWordsOnScreen(text);
     }
     gameDialog->setModal(true);
     gameDialog->exec();

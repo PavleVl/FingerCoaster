@@ -15,6 +15,7 @@ class Client : public QObject
 public:
     explicit Client(QString name,QObject *parent = nullptr);
     void initGame();
+    Storage* giveClientStorage();
 
 signals:
     void dontShowLobby();
