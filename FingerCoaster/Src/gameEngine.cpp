@@ -135,7 +135,6 @@ void GameEngine::startLobby(){
         connect(this,SIGNAL(forceCloseClient()),ourClient,SLOT(forceCloseClient()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
-        connect(&ourLobby,SIGNAL(setGameScene()),this,SLOT(setGameScene()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(closeClientLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
     }
     ourLobby.setModal(true);
@@ -158,6 +157,9 @@ void GameEngine::setGameScene(){
         ourServer->initializeGame();
         //If i don't want to close the clients i can call
         //softCloseTheServer in the slot
+        //Storage* st = ourServer->getServerStorage();
+        //std::vector<std::string> text = st->formatTextForGame();
+        //gameDialog->setWordsOnScreen(text);
     }
     if(ourClient != nullptr){
         connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
@@ -167,9 +169,8 @@ void GameEngine::setGameScene(){
         ourClient->initGame();
     }
 
-    Storage* st = ourServer->getServerStorage();
-    std::vector<std::string> text = st->formatTextForGame();
-    gameDialog->setWordsOnScreen(text);
+
+
 //    gameDialog->setFocus(Qt::PopupFocusReason);
     gameDialog->setModal(true);
     gameDialog->exec();
@@ -205,3 +206,4 @@ void GameEngine::forceCloseTheClientConnection(){
 void GameEngine::reOpenMainMenu(){
     this->show();
 }
+

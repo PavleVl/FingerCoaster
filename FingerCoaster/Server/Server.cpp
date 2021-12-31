@@ -208,6 +208,7 @@ void Server::changeGameProgress(){
     auto it = progress.begin();
     while(it != progress.end()){
         gameProgress.push_back(it.value());
+        it++;
     }
 
     std::cout << "Emitovao" << std::endl;

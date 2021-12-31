@@ -44,7 +44,7 @@ GameDialog::GameDialog(QWidget *parent) :
 
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(timeoutSlot()),Qt::DirectConnection);
-    timer->start(5000);
+    timer->start(15000);
 }
 
 void GameDialog::setWordsOnScreen(std::vector<std::string> text){
@@ -92,3 +92,14 @@ void GameDialog::populateGame(QVector<QString>* usernames){
     }
 }
 
+void GameDialog::timeoutSlot(){
+    ui->pb1->setValue(rand() % 100);
+    emit updateProgress(rand() % 100);
+}
+
+void GameDialog::updateCurGameProgress(QVector<unsigned>* progresess){
+
+    for(int i=0;i<progresess->size();i++){
+        progressBars[i]->setValue(progresess->at(i));
+    }
+}

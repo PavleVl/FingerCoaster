@@ -39,8 +39,6 @@ public slots:
     void timeoutSlot();
     void updateCurGameProgress(QVector<unsigned>* progresses);
 
-public:
-    void setWordsOnScreen(std::vector<std::string> text);
 private:
     Ui::GameDialog *ui;
     QGroupBox *groupBoxes[4];
