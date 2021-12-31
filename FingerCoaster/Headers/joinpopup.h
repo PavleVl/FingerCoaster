@@ -20,7 +20,7 @@ public:
 
 signals:
     void openLobby();
-    void startClient();
+    void startClient(QString key);
 
 private slots:
     void on_joinButton_clicked();
