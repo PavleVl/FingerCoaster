@@ -7,7 +7,8 @@ Server::Server(QObject* parent) : QTcpServer(parent),inGame(false){
     serverStorage->loadText(true);
     serverStorage->setNumberOfPlayers(3);
     ScoreboardBackend sc;
-    usernames.insert(-1,QString::fromStdString(sc.giveUsername()) + "(host)");
+    myUsername = QString::fromStdString(sc.giveUsername()) + "(host)";
+    usernames.insert(-1,myUsername);
 }
 
 Storage* Server::getServerStorage()const{
@@ -42,7 +43,8 @@ void Server::incomingConnection(qintptr socketFd){
 
         connect(thread,SIGNAL(setClientsUsername(qintptr,QString)),this,SLOT(setClientsUsername(qintptr,QString)),Qt::DirectConnection);
         connect(thread,SIGNAL(deleteThread(qintptr)),this,SLOT(deleteThread(qintptr)),Qt::DirectConnection);
-        connect(thread,SIGNAL(finished()), thread,SLOT(deleteLater()),Qt::DirectConnection);
+        connect(thread,SIGNAL(updateClientsProgress(qintptr,unsigned)),this,SLOT(updateClientsGameProgress(qintptr,unsigned)),Qt::DirectConnection);
+        connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()),Qt::DirectConnection);
 
         std::cout << "Accepted the socket ";
         thread->start();
@@ -170,15 +172,44 @@ void Server::initializeGame(){
     QVector<QString> usernamesBuff;
 
     auto it = usernames.begin();
+    QPair<qintptr,QString> keyPair;
     while(it != usernames.end()){
         usernamesBuff.push_back(it.value());
+
+        keyPair = qMakePair(it.key(),it.value());
+        progress.insert(keyPair,0);
+
         it++;
     }
 
     emit populateGame(&usernamesBuff);
 }
 
+void Server::setMyProgress(unsigned curProgress){
+    std::cout << "Current server progress " << curProgress << std::endl;
+    QPair<qintptr,QString> serverPair = qMakePair(-1,myUsername);
+    progress.insert(serverPair,curProgress);
+}
 
 void Server::startGameForClients(){
     emit sendMessage("startGame",0);
+}
+
+void Server::updateClientsGameProgress(qintptr socketFd,unsigned curClientProgress){
+    std::cout << "Usao sam u update game progress" << socketFd << " " << curClientProgress << std::endl;
+    QPair<qintptr,QString> clientKey = qMakePair(socketFd,usernames.find(socketFd).value());
+    progress.insert(clientKey,curClientProgress);
+    changeGameProgress();
+}
+
+void Server::changeGameProgress(){
+    std::cout << "Usao sam u change game progress" << std::endl;
+    QVector<unsigned> gameProgress;
+    auto it = progress.begin();
+    while(it != progress.end()){
+        gameProgress.push_back(it.value());
+    }
+
+    std::cout << "Emitovao" << std::endl;
+    emit changeCurGameProgress(&gameProgress);
 }

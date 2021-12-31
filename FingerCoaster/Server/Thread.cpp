@@ -26,10 +26,22 @@ void Thread::readyRead(){
     QByteArray buff = threadSocket->readAll();
 
     QString text = QString(buff);
-    std::cout << text.toStdString() << std::endl;
     //Ispaljujemo signal ako nam je klijent poslao username
-    if(text.contains("username:"))
+    if(text.contains("clientProgress:")){
+        std::cout << "Usao u clientProgress" << std::endl;
+
+        text = text.split(":").at(1);
+        username = text.split("-").at(0);
+        unsigned curGameProgress = text.split("-").at(1).toUInt();
+
+        emit updateClientsProgress(socketFd,curGameProgress);
+        return;
+    }
+    if(text.contains("username:")){
         emit setClientsUsername(socketFd,text.mid(9,text.size() - 9));
+        return;
+    }
+
 }
 
 void Thread::disconnected(){

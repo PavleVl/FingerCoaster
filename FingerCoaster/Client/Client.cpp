@@ -4,7 +4,8 @@ Client::Client(QString name,QObject *parent)
     : QObject{parent},
       username(name),
       tcpSocket(new QTcpSocket(this)),
-      alreadyClosed(false)
+      alreadyClosed(false),
+      curGameProgress(0)
 {
     clientStorage = new Storage();
     //treba postaviti putanju do fajla i randomTextFlag na false i pozvati f-ju loadText()
@@ -35,7 +36,7 @@ void Client::disconnectedCl(){
 }
 
 void Client::bytesWritten(){
-    std::cout<<"we wrote username to host"<<std::endl;
+    //std::cout<<"we wrote username to host"<<std::endl;
 }
 void Client::readyRead(){
     //Kada uhvatis usernamesList:username1:username2:username3:
@@ -104,4 +105,15 @@ void Client::forceCloseClient(){
 
 void Client::initGame(){
     emit populateGame(&connectedUsers);
+}
+
+void Client::updateProgress(unsigned curProgress){
+    std::cout << "My current progress is " << curGameProgress << std::endl;
+    curGameProgress = curProgress;
+
+    if(tcpSocket->isWritable()){
+        QString msg = "clientProgress:" + username + "-" + QString::number(curGameProgress);
+        tcpSocket->write(msg.toUtf8());
+        tcpSocket->flush();
+    }
 }

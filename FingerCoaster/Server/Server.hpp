@@ -9,6 +9,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QtConcurrent>
+#include <QPair>
 
 class Server : public QTcpServer{
     Q_OBJECT
@@ -25,6 +26,7 @@ public:
     void broadcastUsernames();
     Storage* getServerStorage()const;
     void initializeGame();
+    void changeGameProgress();
 
 signals:
     //If we send 0 as targetSocketFd that means that we want every
@@ -36,6 +38,7 @@ signals:
     void softEndConnection();
     void serverShutdown();
     void populateGame(QVector<QString>* usernames);
+    void changeCurGameProgress(QVector<unsigned>* cuProgress);
 
 public slots:
     void setClientsUsername(qintptr clientSocketFd,QString username);
@@ -45,6 +48,8 @@ public slots:
     //Softclose won't close the clients
     void softCloseTheServer();
     void startGameForClients();
+    void setMyProgress(unsigned curProgress);
+    void updateClientsGameProgress(qintptr socketFd,unsigned curClientProgress);
 
 protected:
     void incomingConnection(qintptr socketFd) override;
@@ -52,8 +57,10 @@ protected:
 private:
     QMap<quintptr,Thread*> threads;
     QMap<qintptr,QString> usernames;
+    QMap<QPair<qintptr,QString>,unsigned> progress;
     Storage* serverStorage;
     bool inGame;
+    QString myUsername;
 };
 
 #endif

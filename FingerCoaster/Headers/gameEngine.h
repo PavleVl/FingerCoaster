@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QDebug>
+#include <QBasicTimer>
 #include "configuration.h"
 #include "mainMenu.h"
 #include "joinpopup.h"

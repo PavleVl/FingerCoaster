@@ -5,8 +5,9 @@
 
 GameDialog::GameDialog(QWidget *parent) :
     QDialog(parent),
+    ui(new Ui::GameDialog),
     isClient(false),
-    ui(new Ui::GameDialog)
+    currentProgress(0)
 {
     ui->setupUi(this);
     this->setWindowTitle("Let's play the game");
@@ -40,6 +41,10 @@ GameDialog::GameDialog(QWidget *parent) :
     progressBars[1] = ui->pb2;
     progressBars[2] = ui->pb3;
     progressBars[3] = ui->pb4;
+
+    timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(timeoutSlot()),Qt::DirectConnection);
+    timer->start(5000);
 }
 
 void GameDialog::setWordsOnScreen(std::vector<std::string> text){
@@ -68,12 +73,23 @@ void GameDialog::populateGame(QVector<QString>* usernames){
     for(;i<usernames->size();i++)
         groupBoxes[i]->setTitle(usernames->at(i));
 
-   if(i < 3){
-       while(i <= 3){
-           groupBoxes[i]->hide();
-           progressBars[i]->hide();
-           i++;
-       }
-   }
+    while(i <= 3){
+        groupBoxes[i]->hide();
+        progressBars[i]->hide();
+        i++;
+    }
 }
 
+unsigned GameDialog::getCurrentProgress(){
+   return currentProgress;
+}
+
+void GameDialog::timeoutSlot(){
+    emit updateProgress(rand() % 100);
+}
+
+void GameDialog::updateCurGameProgress(QVector<unsigned>* progresses){
+    std::cout << "USAO SAM U UPDATE" << std::endl;
+    for(int i=0;i<progresses->size();i++)
+        progressBars[i]->setValue(progresses->at(i));
+}

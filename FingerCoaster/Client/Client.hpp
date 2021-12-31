@@ -30,6 +30,7 @@ private slots:
     void bytesWritten();
     void readyRead();
     void forceCloseClient();
+    void updateProgress(unsigned curProgress);
 
 private:
     QHostAddress address;
@@ -39,6 +40,7 @@ private:
     Storage* clientStorage;
     QVector<QString> connectedUsers;
     bool alreadyClosed;
+    unsigned curGameProgress;
 };
 
 #endif // CLIENT_H

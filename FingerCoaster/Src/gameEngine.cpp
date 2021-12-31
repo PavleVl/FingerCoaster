@@ -151,6 +151,9 @@ void GameEngine::setGameScene(){
     if(ourServer != nullptr){
         connect(gameDialog,SIGNAL(shutdownServer()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
         connect(ourServer,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
+        connect(gameDialog,SIGNAL(updateProgress(unsigned)),ourServer,SLOT(setMyProgress(unsigned)),Qt::DirectConnection);
+        connect(ourServer,SIGNAL(changeCurGameProgress(QVector<unsigned>*)),gameDialog,SLOT(updateCurGameProgress(QVector<unsigned>*)),Qt::DirectConnection);
+
         ourServer->setGameStarted(true);
         ourServer->initializeGame();
         //If i don't want to close the clients i can call
@@ -159,6 +162,7 @@ void GameEngine::setGameScene(){
     if(ourClient != nullptr){
         connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
+        connect(gameDialog,SIGNAL(updateProgress(unsigned)),ourClient,SLOT(updateProgress(unsigned)),Qt::DirectConnection);
 
         ourClient->initGame();
     }
@@ -169,6 +173,7 @@ void GameEngine::setGameScene(){
 
     gameDialog->setModal(true);
     gameDialog->exec();
+
 }
 
 

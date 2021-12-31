@@ -16,6 +16,7 @@ public:
 signals:
     void setClientsUsername(qintptr clientSocketFd,QString username);
     void deleteThread(qintptr clientSocketFd);
+    void updateClientsProgress(qintptr socketFd,unsigned curProgress);
 
 public slots:
     //Socket slots

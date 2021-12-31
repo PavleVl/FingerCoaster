@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QGroupBox>
 #include <QProgressBar>
+#include <QTimer>
 #include "../Server/Server.hpp"
 #include "../Storage/Storage.hpp"
 
@@ -19,14 +20,18 @@ public:
     explicit GameDialog(QWidget *parent = nullptr);
     ~GameDialog();
 //    void getWordsFromServer();
+    unsigned getCurrentProgress();
 
 signals:
     void gameDialogClosing();
     void shutdownServer();
+    void updateProgress(unsigned curProgress);
 
 public slots:
     void closeEvent(QCloseEvent *event);
     void populateGame(QVector<QString>* usernames);
+    void timeoutSlot();
+    void updateCurGameProgress(QVector<unsigned>* progresses);
 
 public:
     void setWordsOnScreen(std::vector<std::string> text);
@@ -37,6 +42,8 @@ private:
     Storage*  st;
     std::vector<std::string> words;
     bool isClient;
+    unsigned currentProgress;
+    QTimer* timer;
 };
 
 #endif // GAMEDIALOG_H
