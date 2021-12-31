@@ -35,13 +35,6 @@ GameEngine::GameEngine(){
 
     openMenu();
 
-    //TOFIX
-    //This will be place where game class will started for testing
-    //------------------------------------------------------------
-        std::string choosenFile = "easy1.txt";
-        Game ourGame(choosenFile,this);
-    //------------------------------------------------------------
-
 }
 
 GameEngine::~GameEngine(){
@@ -64,7 +57,7 @@ void GameEngine::showScore(){
 
 void GameEngine::joinRoom(){
     JoinPopUp joinPopup;
-    connect(&joinPopup,SIGNAL(startClient()),this,SLOT(startClient()),Qt::DirectConnection);
+    connect(&joinPopup,SIGNAL(startClient(QString)),this,SLOT(startClient(QString)),Qt::DirectConnection);
     connect(&joinPopup,SIGNAL(openLobby()),this,SLOT(startLobby()),Qt::DirectConnection);
     joinPopup.setModal(true);
     joinPopup.exec();
@@ -92,10 +85,11 @@ void GameEngine::resizeEvent(QResizeEvent *event){
     fitInView(rect);
 }
 
-void GameEngine::startClient(){
+void GameEngine::startClient(QString key){
     ScoreboardBackend sc;
     std::string username = sc.giveUsername();
     ourClient = new Client(QString::fromStdString(username));
+    ourClient->connectToHost(key);
 
     connect(ourClient,SIGNAL(startGame()),this,SLOT(setGameScene()),Qt::DirectConnection);
 }
