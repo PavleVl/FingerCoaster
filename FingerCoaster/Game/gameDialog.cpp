@@ -51,7 +51,6 @@ void GameDialog::setWordsOnScreen(std::vector<std::string> text){
     for(auto& word:text){
         ui->lwText->addItem(QString::fromStdString(word));
     }
-   // std::cout<<ui->lineEdit->text().toStdString();
 }
 
 GameDialog::~GameDialog()
@@ -59,8 +58,26 @@ GameDialog::~GameDialog()
     delete ui;
 }
 
+//int i = 0;
+
 void GameDialog::keyPressEvent(QKeyEvent* event){
+
     QString str;
+    str = ui->lineEdit->text();
+//    QStringList list = str.split(" ");
+    qDebug()<<str;
+
+    item = ui->lwText->currentItem();
+    QString strItem = item->text();
+    qDebug()<<strItem;
+
+//    if(event->key() == Qt::Key_Space){
+
+//        if(QString::compare(list.last(),strItem) == 0){
+//            ui->lwText->currentItem()->setBackground(Qt::cyan);
+
+//        }
+//    }
 }
 
 bool GameDialog::eventFilter(QObject* obj,QEvent* event){

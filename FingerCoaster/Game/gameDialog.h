@@ -7,6 +7,8 @@
 #include <QKeyEvent>
 #include <QShowEvent>
 #include <QTimer>
+#include <QListWidgetItem>
+
 #include "../Server/Server.hpp"
 #include "../Storage/Storage.hpp"
 
@@ -48,6 +50,8 @@ private:
     bool isClient;
     unsigned currentProgress;
     QTimer* timer;
+    QListWidgetItem* item;
+
 };
 
 #endif // GAMEDIALOG_H

@@ -150,8 +150,8 @@ void GameEngine::setGameScene(){
     if(ourServer != nullptr){
         connect(gameDialog,SIGNAL(shutdownServer()),ourServer,SLOT(forceCloseTheServer()),Qt::DirectConnection);
         connect(ourServer,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
-        connect(gameDialog,SIGNAL(updateProgress(unsigned)),ourServer,SLOT(setMyProgress(unsigned)),Qt::DirectConnection);
-        connect(ourServer,SIGNAL(changeCurGameProgress(QVector<unsigned>*)),gameDialog,SLOT(updateCurGameProgress(QVector<unsigned>*)),Qt::DirectConnection);
+        connect(gameDialog,SIGNAL(updateProgress(uint)),ourServer,SLOT(setMyProgress(uint)),Qt::DirectConnection);
+        connect(ourServer,SIGNAL(changeCurGameProgress(QVector<uint>*)),gameDialog,SLOT(updateCurGameProgress(QVector<uint>*)),Qt::DirectConnection);
 
         ourServer->setGameStarted(true);
         ourServer->initializeGame();
@@ -164,14 +164,10 @@ void GameEngine::setGameScene(){
     if(ourClient != nullptr){
         connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
-        connect(gameDialog,SIGNAL(updateProgress(unsigned)),ourClient,SLOT(updateProgress(unsigned)),Qt::DirectConnection);
+        connect(gameDialog,SIGNAL(updateProgress(uint)),ourClient,SLOT(updateProgress(uint)),Qt::DirectConnection);
 
         ourClient->initGame();
     }
-
-
-
-//    gameDialog->setFocus(Qt::PopupFocusReason);
     gameDialog->setModal(true);
     gameDialog->exec();
 
@@ -186,11 +182,6 @@ void GameEngine::showUsernameInput(){
     eu.exec();
 };
 
-//void playMusic(QString path){
-//    musicPlayer->setMedia(QUrl(path));
-//    musicPlayer->setVolume(100);
-//    musicPlayer->play();
-//}
 
 void GameEngine::reInitServer(){
     ourServer->deleteLater();
