@@ -126,5 +126,3 @@ void Client::updateProgress(unsigned curProgress){
         tcpSocket->flush();
     }
 }
-
-

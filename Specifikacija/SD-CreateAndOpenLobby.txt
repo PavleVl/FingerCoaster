@@ -1,0 +1,92 @@
+===================================================================================
+Kratak opis:
+
+    Host iz glavnog menija pritiskom na dugme "Create lobby" dobija pop-up gde mu se 
+    prikazuje kljuc do njegovog lobby-a, tu takodje ima mogucnost da odabere tezinu 
+    teksta koji ce biti igran u njegovoj igri. Pritiskom na "Create" dugme on se
+    prebacuje u lobby prozor gde ce cekati da pristignu igraci da bi igra zapocela.
+    Kada su svi pristiglo igraci posalju poruku da su spremni tada host moze da 
+    zapocne igru.
+
+===================================================================================
+Akteri: 
+
+    -Host (Otvara lobby)
+    -Client (Ulazi u lobby)
+===================================================================================
+Preduslovi:
+
+    Aplikacija je otvorena i prikazuje glavni meni.
+===================================================================================
+Postuslovi:
+
+    Igraci povezani na serverom, opcije partije su izabrane i partija je inicijalizovana.
+===================================================================================
+Osnovni tok:
+
+    1.  Host bira dugme "Create lobby" iz glavnog menija.
+    ------------------------------------------------------------------------------------
+    2.  Aplikacija izbacuje pop-up za podesavanje lobby-a
+        2.1 Ako host odluci da pozove igrace:
+            2.1.1   Moze kopirati tekst kljuca iz dela u kome se nalazi kljuc.
+
+	2.2 Ako host zeli da podesi maksimalan broj igraca u partiji:
+            2.2.1 Upisivanjem broja u polje odredjeno za to on postavlja broj koji zeli
+            2.2.2 Ako je broj igraca van odredjenih granica odbija se
+                2.2.2.1 Pored polja gde je ukucan broj izbacuje se poruka o gresci
+	
+	2.3 Ako host zeli da promeni tezinu igre:
+            2.3.1   Odabirom na jedno dugme od 3 ponudjene tezine ("Easy","Medium",
+            "Hard") on podesava tezinu partije.
+
+        2.4 Klikom na dugme "Create" korisnik otvara sobu(server) i prelazi na 3.
+    ------------------------------------------------------------------------------------
+    3.	Vrsi se inicijalizacija servera: 
+	3.1 Ako je host izabravao opcije one se koriste za inicijalizaciju.
+	3.2 Ako host nije izabravo opcije koriste se predefinisane.
+	3.3 server je pokrenut   
+    ------------------------------------------------------------------------------------
+    4. Otvara se lobby prozor.		
+    ------------------------------------------------------------------------------------
+    5.  Sve dok se lobby ne popuni ili igrac odluci da prekine ulaz novih clanova
+            
+            5.1 Server slusa na vezi radi primanja novog igraca 
+            
+            5.2 Ako aplikacija dobije zahtev za ulazak novog igraca
+                     5.2.1 Salju se konfiguracione poruke klijentu
+		     5.2.2 Primanje konfiguracione poruke od strane klijenta
+    ------------------------------------------------------------------------------------
+    6.  Aplikacija ceka da svi korisnici posalju poruku o spremnosti
+	5.1 Ako je klijent spreman menja se spremnost u lobby prozoru
+    ------------------------------------------------------------------------------------
+    7.  Host dobija mogucnost pokretanja igre pritiskom na dugme play
+
+===========================================================================================
+Alternativni tokovi:
+
+    A1: Neocekivani izlaz iz otvaranja lobby-a:
+	Ukoliko host odluci da izadje iz otvaranja lobby-a bez otvaranja
+	istog tada, sva vec postavljenja tj zapamcena podesavanja igre se ponistavaju
+	i dolazi do vracana na glavni meni. Tu se slucaj upotrebe zavrsava.
+    
+    ------------------------------------------------------------------------------------
+    A2: Neocekivani izlaz iz lobby-a:
+ 	Ako host pozeli da izadje iz otvorenog lobby-a tada se svim povezanim
+	igracima prekida konekcija, zatvara se lobby i ponistavaju se sacuvane informacije
+	vezane za njega.
+
+===========================================================================================
+Podtokovi: /
+===========================================================================================
+Specijalni zahtevi:
+     
+     Aplikacija je povezana na internet radi komunkacije sa igracima.
+===========================================================================================
+Dodatne informacije:
+   
+    Tokom otvaranja lobby-a, aplikacija pamti podesavanja partije.
+===========================================================================================
+
+
+
+
