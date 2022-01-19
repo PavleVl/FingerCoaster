@@ -1,7 +1,6 @@
 //#include "storage.h"
 
-
-//Storage::Storage(unsigned updatedLevel0,
+// Storage::Storage(unsigned updatedLevel0,
 //        unsigned updatedNumberOfPlayers0,
 //        unsigned long updatedAddressServer0,
 //        vector<string> namesOfTextFiles0)
@@ -11,18 +10,18 @@
 //         namesOfTextFiles(namesOfTextFiles0)
 //        {}
 
-//unsigned short Storage::getMaxNumOfPlayers()const{
+// unsigned short Storage::getMaxNumOfPlayers()const{
 //    return maxNumOfPlayers;
 //}
-//unsigned short Storage::getNumberOfPlayers()const{
+// unsigned short Storage::getNumberOfPlayers()const{
 //    return updatedNumberOfPlayers;
 //}
-//short Storage::getLevel()const{
+// short Storage::getLevel()const{
 //    return level;
 //}
-//void Storage::formatText(string text){
+// void Storage::formatText(string text){
 
 //}
-//unsigned long Storage::getServerAddress()const{
+// unsigned long Storage::getServerAddress()const{
 
 //}

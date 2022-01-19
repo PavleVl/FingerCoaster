@@ -1,43 +1,42 @@
 #ifndef STORAGE_HPP
 #define STORAGE_HPP
 
-#include <vector>
+#include <cstdlib>
 #include <fstream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
-#include <cstdlib>
-#include <sstream>
+#include <vector>
 
-class Storage{
+class Storage {
+ public:
+  inline Storage()
+      : difficulty{0}, numberOfPlayers(1), choosenFile(""), text(""){};
 
-public:
-    inline Storage():
-    difficulty{0},numberOfPlayers(1),choosenFile(""),text(""){};
+  void setDifficulty(unsigned newDifficulty);
 
-    void setDifficulty(unsigned newDifficulty);
+  void setNumberOfPlayers(unsigned newNumberOfPlayer);
 
-    void setNumberOfPlayers(unsigned newNumberOfPlayer);
-    
-    void setChoosenFile(std::string newChoosenFile);
+  void setChoosenFile(std::string newChoosenFile);
 
-    unsigned getDifficulty() const;
+  unsigned getDifficulty() const;
 
-    unsigned getNumberOfPlayers() const;
+  unsigned getNumberOfPlayers() const;
 
-    std::string getChoosenFile() const;
+  std::string getChoosenFile() const;
 
-    void loadText(bool randomTextFlag);
-    
-    std::vector<std::string> formatTextForGame() const;
+  void loadText(bool randomTextFlag);
 
-private:
-    void pickRandomFile();
+  std::vector<std::string> formatTextForGame() const;
 
-private:
-    unsigned difficulty;
-    unsigned numberOfPlayers;
-    std::string choosenFile;
-    std::string text;
+ private:
+  void pickRandomFile();
+
+ private:
+  unsigned difficulty;
+  unsigned numberOfPlayers;
+  std::string choosenFile;
+  std::string text;
 };
 
 #endif

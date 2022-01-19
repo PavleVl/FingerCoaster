@@ -1,121 +1,112 @@
 #include "../Headers/Storage.hpp"
 
-//TOFIX 
-//This path refers from build directory
+// TOFIX
+// This path refers from build directory
 #define PATH "../FingerCoaster/SavedFiles/Texts/"
 
-auto split (const std::string &s, char delim) -> std::vector<std::string> {
-    std::vector<std::string> result;
-    std::stringstream ss (s);
-    std::string item;
+auto split(const std::string& s, char delim) -> std::vector<std::string> {
+  std::vector<std::string> result;
+  std::stringstream ss(s);
+  std::string item;
 
-    while (getline (ss, item, delim)) {
-        result.push_back (item);
-    }
+  while (getline(ss, item, delim)) {
+    result.push_back(item);
+  }
 
-    return result;
+  return result;
 }
 
-//Geters
-auto Storage::getDifficulty() const -> unsigned{
-    return difficulty;
+// Geters
+auto Storage::getDifficulty() const -> unsigned {
+  return difficulty;
 }
 
-auto Storage::getNumberOfPlayers() const -> unsigned{
-    return numberOfPlayers;
+auto Storage::getNumberOfPlayers() const -> unsigned {
+  return numberOfPlayers;
 }
 
-auto Storage::getChoosenFile() const -> std::string{
-    return choosenFile;
+auto Storage::getChoosenFile() const -> std::string {
+  return choosenFile;
 }
 //-----------------------------------------------------------------------------------------------------
 
-//Seters
-void Storage::setDifficulty(unsigned newDifficulty){
-    
-    if(newDifficulty > 2)
-        throw std::invalid_argument("Difficulty is out of range");
+// Seters
+void Storage::setDifficulty(unsigned newDifficulty) {
+  if (newDifficulty > 2)
+    throw std::invalid_argument("Difficulty is out of range");
 
-
-    difficulty = newDifficulty;
+  difficulty = newDifficulty;
 }
 
-void Storage::setNumberOfPlayers(unsigned newNumberOfPlayers){
+void Storage::setNumberOfPlayers(unsigned newNumberOfPlayers) {
+  if (newNumberOfPlayers == 0 || newNumberOfPlayers > 3)
+    throw std::invalid_argument("NumberOfPlayers is out of range");
 
-    if(newNumberOfPlayers == 0 || newNumberOfPlayers > 3)
-        throw std::invalid_argument("NumberOfPlayers is out of range");
-
-    numberOfPlayers = newNumberOfPlayers;
+  numberOfPlayers = newNumberOfPlayers;
 }
 
-void Storage::setChoosenFile(std::string newChoosenFile){
+void Storage::setChoosenFile(std::string newChoosenFile) {
+  if (newChoosenFile == "")
+    throw std::invalid_argument("File name is missing");
 
-    if(newChoosenFile == "")
-        throw std::invalid_argument("File name is missing");
-
-    choosenFile = newChoosenFile;
+  choosenFile = newChoosenFile;
 }
 
 //-----------------------------------------------------------------------------------------------------
 
-void Storage::pickRandomFile(){
+void Storage::pickRandomFile() {
+  std::string fName = "";
+  switch (difficulty) {
+    case 0:
+      fName = "easy";
+      break;
+    case 1:
+      fName = "medium";
+      break;
+    case 2:
+      fName = "hard";
+      break;
+  }
 
-    std::string fName = "";
-    switch(difficulty){
-        case 0:
-            fName = "easy";
-            break;
-        case 1:
-            fName = "medium";
-            break;
-        case 2:
-            fName = "hard";
-            break;
-    }
+  srand(time(nullptr));
+  fName += std::to_string(rand() % 3 + 1);
+  fName += ".txt";
 
-    srand(time(nullptr));
-    fName += std::to_string(rand() % 3 + 1);
-    fName += ".txt";
-
-    choosenFile = fName;
+  choosenFile = fName;
 }
 
-//If we are client we want to set randomTextFlag to false
+// If we are client we want to set randomTextFlag to false
 // and do setChosenPath first and then call this function.
 //--------------------------------------------------------
-//If we are server we are calling this function as with true
-//flag so that we choose random file
-void Storage::loadText(bool randomTextFlag){
+// If we are server we are calling this function as with true
+// flag so that we choose random file
+void Storage::loadText(bool randomTextFlag) {
+  if (randomTextFlag)
+    pickRandomFile();
 
-    if(randomTextFlag)
-        pickRandomFile();
+  if (choosenFile.size() == 0) {
+    // TODO SIGNAL FOR ERROR
+  }
 
-    if(choosenFile.size() == 0){
-        //TODO SIGNAL FOR ERROR
-    }
+  std::string fullPath = PATH + choosenFile;
 
-    std::string fullPath = PATH + choosenFile;
+  std::ifstream inFile;
+  inFile.open(fullPath);
 
-    std::ifstream inFile;
-    inFile.open(fullPath);
+  if (inFile.fail())
+    throw std::ios::failure("File missing or corrupt" + fullPath);
 
-    if(inFile.fail())
-        throw std::ios::failure("File missing or corrupt" + fullPath);
+  text = "";
+  std::string curLine = "";
+  while (getline(inFile, curLine))
+    text += curLine;
 
-    text = "";
-    std::string curLine = "";
-    while(getline(inFile,curLine))
-        text += curLine;
-
-
-    inFile.close();
+  inFile.close();
 }
 
-auto Storage::formatTextForGame() const -> std::vector<std::string>{
+auto Storage::formatTextForGame() const -> std::vector<std::string> {
+  if (text.size() == 0)
+    throw std::invalid_argument("Missing text");
 
-    if(text.size() == 0)
-        throw std::invalid_argument("Missing text");
-
-
-    return split(text,' ');
+  return split(text, ' ');
 }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(FingerCoaster VERSION 1.0.0)
 
-set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=modernize-*;-fix") 
+#set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=modernize-*;-fix") 
 
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

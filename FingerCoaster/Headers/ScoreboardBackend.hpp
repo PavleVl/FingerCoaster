@@ -1,42 +1,40 @@
 #ifndef SCOREBOARDBACKEND_HPP
 #define SCOREBOARDBACKEND_HPP
 
-#include <fstream>
+#include <algorithm>
 #include <filesystem>
+#include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <iostream>
 #include "Result.hpp"
 
-class ScoreboardBackend{
+class ScoreboardBackend {
+ public:
+  inline ScoreboardBackend() {
+    _isFirstTime = false;
+    loadResults();
+  }
 
-public:
-    inline ScoreboardBackend(){
-        _isFirstTime = false;
-        loadResults();
-    }
+  bool isFirstTimeCheck();
 
-    bool isFirstTimeCheck();
+  void updateScoreboard(Result& result);
 
-    void updateScoreboard(Result& result);
+  void writeUsername(std::string& username);
 
-    void writeUsername(std::string& username);
+  std::string giveFormatedScoreboard();
 
-    std::string giveFormatedScoreboard();
+  std::string giveUsername();
 
-    std::string giveUsername();
+  std::vector<Result> giveResults();
 
-    std::vector<Result> giveResults();
+ private:
+  void loadResults();
 
-private:
-    void loadResults();
-
-private:
-    std::string _username;
-    std::vector<Result> _results;
-    bool _isFirstTime;
-
+ private:
+  std::string _username;
+  std::vector<Result> _results;
+  bool _isFirstTime;
 };
 
 #endif
