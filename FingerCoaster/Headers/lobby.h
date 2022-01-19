@@ -28,7 +28,7 @@ signals:
 public slots:
     //Addplayer se koristi za prvo dodavanje u lobby
     void addPlayer(QString username);
-    void on_btStartGame_clicked();
+    void onBtStartGameClicked();
     //Rewriteusernames
     //Brise sva imena iz lobby prozora
     //i upisuje sva imena iz usernames

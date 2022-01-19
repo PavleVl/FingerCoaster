@@ -65,8 +65,8 @@ void GameEngine::joinRoom() {
 
 void GameEngine::createRoom() {
   createroom cr;
-  connect(&cr, SIGNAL(startServer(uint, uint)), this,
-          SLOT(startServer(uint, uint)), Qt::DirectConnection);
+  connect(&cr, SIGNAL(startServer(uint,uint)), this,
+          SLOT(startServer(uint,uint)), Qt::DirectConnection);
   connect(&cr, SIGNAL(openLobby()), this, SLOT(startLobby()),
           Qt::DirectConnection);
 
@@ -171,12 +171,9 @@ void GameEngine::setGameScene() {
     gameDialog->setWordsOnScreen(text);
   }
   if (ourClient != nullptr) {
-    connect(gameDialog, SIGNAL(gameDialogClosing()), this,
-            SLOT(forceCloseTheClientConnection()), Qt::DirectConnection);
-    connect(ourClient, SIGNAL(populateGame(QVector<QString>*)), gameDialog,
-            SLOT(populateGame(QVector<QString>*)), Qt::DirectConnection);
-    connect(gameDialog, SIGNAL(updateProgress(unsigned)), ourClient,
-            SLOT(updateProgress(unsigned)), Qt::DirectConnection);
+    connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()), Qt::DirectConnection);
+    connect(ourClient,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)), Qt::DirectConnection);
+    connect(gameDialog,SIGNAL(updateProgress(unsigned)),ourClient,SLOT(updateProgress(unsigned)), Qt::DirectConnection);
 
     ourClient->initGame();
     Storage* st = ourClient->giveClientStorage();

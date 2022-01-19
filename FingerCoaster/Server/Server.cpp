@@ -44,8 +44,8 @@ void Server::incomingConnection(qintptr socketFd) {
     auto* thread = new Thread(socketFd, this);
     threads.insert(socketFd, thread);
 
-    connect(thread, SIGNAL(setClientsUsername(qintptr, QString)), this,
-            SLOT(setClientsUsername(qintptr, QString)), Qt::DirectConnection);
+    connect(thread, SIGNAL(setClientsUsername(qintptr,QString)), this,
+            SLOT(setClientsUsername(qintptr,QString)), Qt::DirectConnection);
     connect(thread, SIGNAL(deleteThread(qintptr)), this,
             SLOT(deleteThread(qintptr)), Qt::DirectConnection);
     // connect(thread,SIGNAL(updateClientsProgress(qintptr,unsigned)),this,SLOT(updateClientsGameProgress(qintptr,unsigned)),Qt::DirectConnection);
@@ -222,7 +222,7 @@ void Server::broadcastProgress() {
   // std::cout << "Posalo listu progressa " << msgBuff.toStdString() <<
   // std::endl;
   QByteArray byteBuff(msgBuff.toStdString().c_str(), msgBuff.length() - 1);
-  emit sendMessage(QString::fromStdString("PROBA").toUtf8(), 0);
+  emit sendMessage(byteBuff, 0);
 }
 
 void Server::changeGameProgress() {

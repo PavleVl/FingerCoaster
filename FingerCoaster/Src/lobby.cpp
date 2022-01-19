@@ -29,7 +29,7 @@ void Lobby::addPlayer(QString username) {
   ui->playerList->addItem(s);
 }
 
-void Lobby::on_btStartGame_clicked() {
+void Lobby::onBtStartGameClicked() {
   checkCloseFlag = true;
   this->close();
 

@@ -17,7 +17,7 @@ enterUsername::~enterUsername() {
   delete ui;
 }
 
-void enterUsername::on_pushButton_clicked() {
+void enterUsername::onPushButtonClicked() {
   QString username = ui->lineEdit->text();
   if (username.size() == 0) {
     ui->err_label->setText(QString::fromStdString("Username is required"));
