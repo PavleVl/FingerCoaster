@@ -29,7 +29,7 @@ void enterUsername::on_pushButton_clicked()
         return;
     }
 
-    ScoreboardBackend* scoreboardWrite = new ScoreboardBackend();
+    auto* scoreboardWrite = new ScoreboardBackend();
     std::string name = username.toStdString();
     scoreboardWrite->writeUsername(name);
 

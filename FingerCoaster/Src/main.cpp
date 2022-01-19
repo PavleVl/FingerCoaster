@@ -1,10 +1,10 @@
 #include <QApplication>
 #include "../Headers/gameEngine.h"
 #include "../Headers/gameDialog.h"
-int main(int argc, char *argv[])
+auto main(int argc, char *argv[]) -> int
 {
     QApplication a(argc, argv);
-    GameEngine* game = new GameEngine();
+    auto* game = new GameEngine();
     game->show();
 //    GameDialog* gd = new GameDialog();
 //    gd->setModal(true);

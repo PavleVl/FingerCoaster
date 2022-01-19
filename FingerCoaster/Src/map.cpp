@@ -5,9 +5,9 @@ Map::Map(){
     height = MAP_HEIGHT;
 }
 
-int Map::getWidth() const{
+auto Map::getWidth() const -> int{
     return width;
 }
-int Map::getHeight() const{
+auto Map::getHeight() const -> int{
     return height;
 }

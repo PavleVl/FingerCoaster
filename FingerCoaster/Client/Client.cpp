@@ -1,8 +1,9 @@
 #include "Client.hpp"
 #include <QList>
+#include <utility>
 Client::Client(QString name,QObject *parent)
     : QObject{parent},
-      username(name),
+      username(std::move(name)),
       tcpSocket(new QTcpSocket(this)),
       alreadyClosed(false),
       shouldStartGame(false),
@@ -27,7 +28,7 @@ void Client::connectToHost(QString key){
     tcpSocket->connectToHost(list.at(0),list.at(1).toInt());
 }
 
-Storage* Client::giveClientStorage(){
+auto Client::giveClientStorage() -> Storage*{
     return clientStorage;
 }
 

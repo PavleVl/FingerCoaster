@@ -16,7 +16,7 @@ GameEngine::GameEngine(){
 
     menuScene = new mainMenu();
     //Ako smo prvi put usli i nije nam postavljen username
-    ScoreboardBackend* checkUsername = new ScoreboardBackend();
+    auto* checkUsername = new ScoreboardBackend();
     if(checkUsername->isFirstTimeCheck())
         this->showUsernameInput();
 

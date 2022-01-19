@@ -4,7 +4,7 @@
 //This path refers from build directory
 #define PATH "../FingerCoaster/SavedFiles/Texts/"
 
-std::vector<std::string> split (const std::string &s, char delim) {
+auto split (const std::string &s, char delim) -> std::vector<std::string> {
     std::vector<std::string> result;
     std::stringstream ss (s);
     std::string item;
@@ -17,15 +17,15 @@ std::vector<std::string> split (const std::string &s, char delim) {
 }
 
 //Geters
-unsigned Storage::getDifficulty() const{
+auto Storage::getDifficulty() const -> unsigned{
     return difficulty;
 }
 
-unsigned Storage::getNumberOfPlayers() const{
+auto Storage::getNumberOfPlayers() const -> unsigned{
     return numberOfPlayers;
 }
 
-std::string Storage::getChoosenFile() const{
+auto Storage::getChoosenFile() const -> std::string{
     return choosenFile;
 }
 //-----------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ void Storage::pickRandomFile(){
             break;
     }
 
-    srand(time(NULL));
+    srand(time(nullptr));
     fName += std::to_string(rand() % 3 + 1);
     fName += ".txt";
 
@@ -111,7 +111,7 @@ void Storage::loadText(bool randomTextFlag){
     inFile.close();
 }
 
-std::vector<std::string> Storage::formatTextForGame() const{
+auto Storage::formatTextForGame() const -> std::vector<std::string>{
 
     if(text.size() == 0)
         throw std::invalid_argument("Missing text");

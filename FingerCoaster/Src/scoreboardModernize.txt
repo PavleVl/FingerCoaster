@@ -1,0 +1,70 @@
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:5:26: warning: use a trailing return type for this function [modernize-use-trailing-return-type]
+std::vector<std::string> splitStorage (const std::string &s, char delim) {
+~~~~~~~~~~~~~~~~~~~~~~~~ ^
+auto                                                                     -> std::vector<std::string>
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:5:1: note: FIX-IT applied suggested code changes
+std::vector<std::string> splitStorage (const std::string &s, char delim) {
+^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:5:73: note: FIX-IT applied suggested code changes
+std::vector<std::string> splitStorage (const std::string &s, char delim) {
+                                                                        ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:23:25: warning: use a trailing return type for this function [modernize-use-trailing-return-type]
+bool ScoreboardBackend::isFirstTimeCheck(){
+~~~~                    ^
+auto                                       -> bool
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:23:1: note: FIX-IT applied suggested code changes
+bool ScoreboardBackend::isFirstTimeCheck(){
+^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:23:43: note: FIX-IT applied suggested code changes
+bool ScoreboardBackend::isFirstTimeCheck(){
+                                          ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:78:5: warning: use range-based for loop instead [modernize-loop-convert]
+    for(unsigned i=0;i<_results.size();i++)
+    ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       (auto & _result : _results)
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:78:8: note: FIX-IT applied suggested code changes
+    for(unsigned i=0;i<_results.size();i++)
+       ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:79:17: note: FIX-IT applied suggested code changes
+        file << _results[i].formatResultSave();
+                ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:85:40: warning: use a trailing return type for this function [modernize-use-trailing-return-type]
+std::vector<Result> ScoreboardBackend::giveResults(){
+~~~~~~~~~~~~~~~~~~~                    ^
+auto                                                 -> std::vector<Result>
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:85:1: note: FIX-IT applied suggested code changes
+std::vector<Result> ScoreboardBackend::giveResults(){
+^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:85:53: note: FIX-IT applied suggested code changes
+std::vector<Result> ScoreboardBackend::giveResults(){
+                                                    ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:89:32: warning: use a trailing return type for this function [modernize-use-trailing-return-type]
+std::string ScoreboardBackend::giveUsername(){
+~~~~~~~~~~~                    ^
+auto                                          -> std::string
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:89:1: note: FIX-IT applied suggested code changes
+std::string ScoreboardBackend::giveUsername(){
+^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:89:46: note: FIX-IT applied suggested code changes
+std::string ScoreboardBackend::giveUsername(){
+                                             ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:93:32: warning: use a trailing return type for this function [modernize-use-trailing-return-type]
+std::string ScoreboardBackend::giveFormatedScoreboard(){
+~~~~~~~~~~~                    ^
+auto                                                    -> std::string
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:93:1: note: FIX-IT applied suggested code changes
+std::string ScoreboardBackend::giveFormatedScoreboard(){
+^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:93:56: note: FIX-IT applied suggested code changes
+std::string ScoreboardBackend::giveFormatedScoreboard(){
+                                                       ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:97:5: warning: use range-based for loop instead [modernize-loop-convert]
+    for(unsigned i=0;i<_results.size();i++)
+    ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       (auto & _result : _results)
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:97:8: note: FIX-IT applied suggested code changes
+    for(unsigned i=0;i<_results.size();i++)
+       ^
+/home/pavle/Desktop/finger-coaster/FingerCoaster/Src/ScoreboardBackend.cpp:98:19: note: FIX-IT applied suggested code changes
+        output << _results[i].formatResultDisplay();
+                  ^

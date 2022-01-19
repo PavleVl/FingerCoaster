@@ -2,7 +2,7 @@
 #define FPATH "../FingerCoaster/SavedFiles/scoreboard.txt"
 
 
-std::vector<std::string> splitStorage (const std::string &s, char delim) {
+auto splitStorage (const std::string &s, char delim) -> std::vector<std::string> {
     std::vector<std::string> result;
     std::stringstream ss (s);
     std::string item;
@@ -20,7 +20,7 @@ void initFile(){
     file.close();
 }
 
-bool ScoreboardBackend::isFirstTimeCheck(){
+auto ScoreboardBackend::isFirstTimeCheck() -> bool{
     return _isFirstTime;
 }
 
@@ -75,27 +75,27 @@ void ScoreboardBackend::updateScoreboard(Result& result){
     //ILL HARDCODE USERNAME 
     file << "Pavle\n";
 
-    for(unsigned i=0;i<_results.size();i++)
-        file << _results[i].formatResultSave();
+    for(auto & _result : _results)
+        file << _result.formatResultSave();
 
 
     file.close();
 }
 
-std::vector<Result> ScoreboardBackend::giveResults(){
+auto ScoreboardBackend::giveResults() -> std::vector<Result>{
        return _results;
 }
 
-std::string ScoreboardBackend::giveUsername(){
+auto ScoreboardBackend::giveUsername() -> std::string{
     return _username;
 }
 
-std::string ScoreboardBackend::giveFormatedScoreboard(){
+auto ScoreboardBackend::giveFormatedScoreboard() -> std::string{
 
     std::stringstream output;
 
-    for(unsigned i=0;i<_results.size();i++)
-        output << _results[i].formatResultDisplay();
+    for(auto & _result : _results)
+        output << _result.formatResultDisplay();
 
     return output.str();
 }

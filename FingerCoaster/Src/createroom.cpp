@@ -1,6 +1,6 @@
 #include "Headers/createroom.h"
 #include "ui_createroom.h"
-#include <stdlib.h>
+#include <cstdlib>
 #include <QGraphicsScene>
 #include "Headers/mainMenu.h"
 
@@ -21,7 +21,7 @@ createroom::createroom(QWidget *parent) :
     ui->rb_medium->setStyleSheet(QString::fromStdString("font-weight: bold"));
 }
 
-bool createroom::noRBChecked(){
+auto createroom::noRBChecked() -> bool{
 
     if(!ui->rb_easy->isChecked() && !ui->rb_medium->isChecked() && !ui->rb_hard->isChecked())
         return true;
@@ -29,7 +29,7 @@ bool createroom::noRBChecked(){
     return false;
 }
 
-unsigned createroom::choosenDifficulty(){
+auto createroom::choosenDifficulty() -> unsigned{
 
     if(ui->rb_easy->isChecked())
         return 0;

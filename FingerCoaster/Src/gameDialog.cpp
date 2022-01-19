@@ -96,9 +96,9 @@ void GameDialog::cmpWords(){
 }
 
 
-bool GameDialog::eventFilter(QObject* obj,QEvent* event){
+auto GameDialog::eventFilter(QObject* obj,QEvent* event) -> bool{
     if(event->type() == QEvent::KeyPress){
-        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        auto *keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_Space){
             cmpWords();
             return true;

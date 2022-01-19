@@ -44,18 +44,18 @@ mainMenu::~mainMenu(){
     delete createRoomButton;
 }
 
-menuBtn* mainMenu::getQuitButton() const{
+auto mainMenu::getQuitButton() const -> menuBtn*{
     return QuitButton;
 }
 
-menuBtn* mainMenu::getScoreboardButton()const{
+auto mainMenu::getScoreboardButton()const -> menuBtn*{
     return scoreboardButton;
 }
 
-menuBtn* mainMenu::getJoinButton() const{
+auto mainMenu::getJoinButton() const -> menuBtn*{
     return joinButton;
 }
 
-menuBtn* mainMenu::getCreateRoomButton() const{
+auto mainMenu::getCreateRoomButton() const -> menuBtn*{
     return createRoomButton;
 }

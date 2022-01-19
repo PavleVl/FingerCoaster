@@ -23,13 +23,13 @@ JoinPopUp::~JoinPopUp()
     delete ui;
 }
 
-bool JoinPopUp::isValidIp4Address(const std::string& str){
+auto JoinPopUp::isValidIp4Address(const std::string& str) -> bool{
     struct sockaddr_in sa;
     int result = inet_pton(AF_INET,str.c_str(),&(sa.sin_addr));
     return result != 0;
 }
 
-bool JoinPopUp::isValidPort(int port){
+auto JoinPopUp::isValidPort(int port) -> bool{
     if(port >= 0 && port <= 65535)
             return true;
     return false;

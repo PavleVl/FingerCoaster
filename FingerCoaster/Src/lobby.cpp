@@ -70,9 +70,9 @@ void Lobby::setIsClient(){
     ui->btStartGame->hide();
 
     ui->label=new QLabel(this);
-    QMovie *movie=new QMovie(QString::fromStdString(":/images/prefix1/loading.gif"));
+    auto *movie=new QMovie(QString::fromStdString(":/images/prefix1/loading.gif"));
 
-    QLabel *gif_label = new QLabel(this);
+    auto *gif_label = new QLabel(this);
     gif_label->setGeometry(155,140,40,40);
     gif_label->setMovie(movie);
     movie->start();

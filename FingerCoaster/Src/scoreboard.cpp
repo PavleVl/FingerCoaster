@@ -11,7 +11,7 @@ Scoreboard::Scoreboard(QWidget *parent) :
 
 
 
-    Model *Scoreboard = new Model(this);
+    auto *Scoreboard = new Model(this);
     Scoreboard->savedScoreboard = new ScoreboardBackend();
 
     QVector<QString> places;
@@ -68,19 +68,19 @@ _acc = acc.toList();
 return;
 }
 
-int Model::rowCount(const QModelIndex &parent) const
+auto Model::rowCount(const QModelIndex &parent) const -> int
 {
 Q_UNUSED(parent);
   return _place.length();
 }
 
-int Model::columnCount(const QModelIndex &parent) const
+auto Model::columnCount(const QModelIndex &parent) const -> int
 {
 Q_UNUSED(parent);
 return 4;
 }
 
-QVariant Model::data(const QModelIndex &index, int role) const
+auto Model::data(const QModelIndex &index, int role) const -> QVariant
 {
 if (!index.isValid() || role != Qt::DisplayRole) {
     return QVariant();
@@ -98,7 +98,7 @@ if (index.column() == 0) {
 return QVariant();
 }
 
-QVariant Model::headerData(int section, Qt::Orientation orientation, int role) const
+auto Model::headerData(int section, Qt::Orientation orientation, int role) const -> QVariant
 {
 if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
     if (section == 0) {

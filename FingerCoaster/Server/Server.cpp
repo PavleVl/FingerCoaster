@@ -12,7 +12,7 @@ Server::Server(QObject* parent) : QTcpServer(parent),inGame(false){
     usernames.insert(-1,myUsername);
 }
 
-Storage* Server::getServerStorage()const{
+auto Server::getServerStorage()const -> Storage*{
     return serverStorage;
 }
 
@@ -25,7 +25,7 @@ void Server::startServer(){
     }
 }
 
-int Server::numOfClients() const{
+auto Server::numOfClients() const -> int{
     return threads.size();
 }
 
@@ -39,7 +39,7 @@ void Server::setStorageMaxPlayers(unsigned maxPlayers){
 
 void Server::incomingConnection(qintptr socketFd){
     if((unsigned(threads.size()) < serverStorage->getNumberOfPlayers()) && !inGame){
-        Thread* thread = new Thread(socketFd,this);
+        auto* thread = new Thread(socketFd,this);
         threads.insert(socketFd,thread);
 
         connect(thread,SIGNAL(setClientsUsername(qintptr,QString)),this,SLOT(setClientsUsername(qintptr,QString)),Qt::DirectConnection);
