@@ -1,17 +1,15 @@
 #include "Headers/gameEngine.h"
-#include "ui_mainwindow.h"
-#include "Headers/mainwindow.h"
 #include <qwidget.h>
 #include "Headers/createroom.h"
 #include "Headers/joinpopup.h"
 #include "Headers/scoreboard.h"
 #include "Headers/enterusername.h"
-#include "../Game/game.h"
+#include "../Headers/game.h"
 #include <QDebug>
 
 
 GameEngine::GameEngine(){
-    setWindowTitle(TITLE);
+    setWindowTitle(QString::fromStdString(TITLE));
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -128,7 +126,9 @@ void GameEngine::startLobby(){
         connect(this,SIGNAL(forceCloseClient()),ourClient,SLOT(forceCloseClient()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(dontShowLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(rewriteUsernames(QVector<QString>*)),&ourLobby,SLOT(rewriteUsernames(QVector<QString>*)),Qt::DirectConnection);
-        connect(ourClient,SIGNAL(closeClientLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
+        //connect(ourClient,SIGNAL(closeClientLobby()),&ourLobby,SLOT(dontShowLobby()),Qt::DirectConnection);
+        connect(ourClient,&Client::closeClientLobby,&ourLobby,&Lobby::closeLobbyStartGame,Qt::DirectConnection);
+        connect(&ourLobby,SIGNAL(startClientGame()),this,SLOT(setGameScene()),Qt::DirectConnection);
     }
     ourLobby.setModal(true);
     ourLobby.exec();
@@ -137,6 +137,7 @@ void GameEngine::startLobby(){
 void GameEngine::setGameScene(){
     this->hide();
     gameDialog = new GameDialog();
+
     connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(reOpenMainMenu()),Qt::DirectConnection);
 
     if(ourServer != nullptr){
@@ -156,7 +157,7 @@ void GameEngine::setGameScene(){
     if(ourClient != nullptr){
         connect(gameDialog,SIGNAL(gameDialogClosing()),this,SLOT(forceCloseTheClientConnection()),Qt::DirectConnection);
         connect(ourClient,SIGNAL(populateGame(QVector<QString>*)),gameDialog,SLOT(populateGame(QVector<QString>*)),Qt::DirectConnection);
-        connect(gameDialog,SIGNAL(updateProgress(uint)),ourClient,SLOT(updateProgress(uint)),Qt::DirectConnection);
+        connect(gameDialog,SIGNAL(updateProgress(unsigned)),ourClient,SLOT(updateProgress(unsigned)),Qt::DirectConnection);
 
         ourClient->initGame();
         Storage* st = ourClient->giveClientStorage();

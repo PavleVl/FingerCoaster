@@ -6,8 +6,8 @@
 #include <QApplication>
 
 #include <QDialog>
-#include "../Scoreboard/ScoreboardBackend.hpp"
-#include "../Result/Result.hpp"
+#include "ScoreboardBackend.hpp"
+#include "Result.hpp"
 //---------------
 #include<iostream>
 

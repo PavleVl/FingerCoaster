@@ -1,4 +1,4 @@
-#include "Game/gameDialog.h"
+#include "../Headers/gameDialog.h"
 #include "ui_gamedialog.h"
 
 
@@ -15,21 +15,21 @@ GameDialog::GameDialog(QWidget *parent) :
     totalTypedChars(0)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Let's play the game");
-    this->setObjectName("GameWindow");
+    this->setWindowTitle(QString::fromStdString("Let's play the game"));
+    this->setObjectName(QString::fromStdString("GameWindow"));
     this->setStyleSheet(QString::fromUtf8("#GameWindow {border-image: url(:/images/prefix1/board.jpeg) 0 0 0 0 stretch stretch;}"));
 
-    ui->pb1->setObjectName("QProgressBar1");
-    ui->pb2->setObjectName("QProgressBar2");
-    ui->pb3->setObjectName("QProgressBar3");
-    ui->pb4->setObjectName("QProgressBar4");
+    ui->pb1->setObjectName(QString::fromStdString("QProgressBar1"));
+    ui->pb2->setObjectName(QString::fromStdString("QProgressBar2"));
+    ui->pb3->setObjectName(QString::fromStdString("QProgressBar3"));
+    ui->pb4->setObjectName(QString::fromStdString("QProgressBar4"));
 
     ui->pb1->setStyleSheet(QString::fromUtf8("#QProgressBar1 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
     ui->pb2->setStyleSheet(QString::fromUtf8("#QProgressBar2 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
     ui->pb3->setStyleSheet(QString::fromUtf8("#QProgressBar3 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
     ui->pb4->setStyleSheet(QString::fromUtf8("#QProgressBar4 {border: 2px solid grey;border-radius: 5px;background-color: #00FF00;}"));
 
-    ui->lineEdit->setObjectName("lEdit");
+    ui->lineEdit->setObjectName(QString::fromStdString("lEdit"));
     ui->lineEdit->setStyleSheet(QString::fromUtf8("#lEdit {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setStyleSheet(QString::fromUtf8("#lwText {border: 2px solid grey;border-radius: 5px}"));
     ui->lwText->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -48,7 +48,7 @@ GameDialog::GameDialog(QWidget *parent) :
     progressBars[3] = ui->pb4;
 
     ui->lwText->setAttribute(Qt::WA_StyledBackground, true);
-    ui->lwText->setStyleSheet("QListView::item:selected { background: palette(Highlight) }");
+    ui->lwText->setStyleSheet(QString::fromStdString("QListView::item:selected { background: palette(Highlight) }"));
 
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(timeoutSlot()),Qt::DirectConnection);
@@ -153,7 +153,7 @@ void GameDialog::calculateWpm(){
 
     currentWpm = (totalCharacters/5.0)/(seconds/60.0);
     //You update on label here
-    ui->wpm_label->setText("Current WPM: " + QString::number(currentWpm));
+    ui->wpm_label->setText(QString::fromStdString("Current WPM: ") + QString::number(currentWpm));
 }
 
 void GameDialog::saveResult(){

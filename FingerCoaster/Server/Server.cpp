@@ -7,7 +7,8 @@ Server::Server(QObject* parent) : QTcpServer(parent),inGame(false){
     serverStorage->loadText(true);
     serverStorage->setNumberOfPlayers(3);
     ScoreboardBackend sc;
-    myUsername = QString::fromStdString(sc.giveUsername()) + "(host)";
+    std::string sufix = "(host)";
+    myUsername = QString::fromStdString(sc.giveUsername()) + QString::fromStdString(sufix);
     usernames.insert(-1,myUsername);
 }
 
@@ -43,7 +44,7 @@ void Server::incomingConnection(qintptr socketFd){
 
         connect(thread,SIGNAL(setClientsUsername(qintptr,QString)),this,SLOT(setClientsUsername(qintptr,QString)),Qt::DirectConnection);
         connect(thread,SIGNAL(deleteThread(qintptr)),this,SLOT(deleteThread(qintptr)),Qt::DirectConnection);
-        connect(thread,SIGNAL(updateClientsProgress(qintptr,unsigned)),this,SLOT(updateClientsGameProgress(qintptr,unsigned)),Qt::DirectConnection);
+        //connect(thread,SIGNAL(updateClientsProgress(qintptr,unsigned)),this,SLOT(updateClientsGameProgress(qintptr,unsigned)),Qt::DirectConnection);
         connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()),Qt::DirectConnection);
 
         std::cout << "Accepted the socket ";
@@ -110,7 +111,8 @@ void Server::deleteThread(qintptr socketFd){
 
     QVector<QString> usernamesBuffWithoutHost;
     while(it != usernames.end()){
-        if(it.value().contains("(host)"))
+        std::string sufix = "host";
+        if(it.value().contains(QString::fromStdString(sufix)))
             continue;
 
         usernamesBuffWithoutHost.push_back(it.value().first(it.value().size()));
@@ -135,7 +137,8 @@ void Server::broadcastUsernames(){
     }
 
     QByteArray byteBuff(outputMsg.c_str(),outputMsg.length()-1);
-    emit sendMessage(byteBuff,0);
+    QString buff = QString::fromUtf8(byteBuff);
+    emit sendMessage(buff.toUtf8(),0);
 }
 
 void Server::forceCloseTheServer(){
@@ -187,6 +190,7 @@ void Server::initializeGame(){
 
 void Server::setMyProgress(unsigned curProgress){
     std::cout << "Current server progress " << curProgress << std::endl;
+    emit sendMessage("HELLO FROM SERVER",0);
     QPair<qintptr,QString> serverPair = qMakePair(-1,myUsername);
     progress.insert(serverPair,curProgress);
 }
@@ -205,16 +209,18 @@ void Server::updateClientsGameProgress(qintptr socketFd,unsigned curClientProgre
 
 void Server::broadcastProgress(){
 
-    QString msgBuff = "gameProgress:";
+    std::string buff = "gameProgress:";
+    QString msgBuff = QString::fromStdString(buff);
     auto it = progress.begin();
     while(it != progress.end()){
-        msgBuff += it.key().second + "-" + QString::number(it.value()) + ":";
+        msgBuff += it.key().second + QString::fromStdString("-") + QString::number(it.value()) +
+                QString::fromStdString(":");
 
         it++;
     }
-    std::cout << "Posalo listu progressa " << msgBuff.toStdString() << std::endl;
+    //std::cout << "Posalo listu progressa " << msgBuff.toStdString() << std::endl;
     QByteArray byteBuff(msgBuff.toStdString().c_str(),msgBuff.length()-1);
-    emit sendMessage(byteBuff,0);
+    emit sendMessage(QString::fromStdString("PROBA").toUtf8(),0);
 }
 
 void Server::changeGameProgress(){

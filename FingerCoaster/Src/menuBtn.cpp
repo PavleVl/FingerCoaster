@@ -9,5 +9,5 @@ menuBtn::menuBtn(QString text){
     font.setBold(true);
     font.setPixelSize(50);
     this->setFont(font);
-    this->setStyleSheet("background-color:green;border-style: outset;border-width: 2px;border-radius: 10px;border-color: beige;font: bold 30px;padding: 6px;");
+    this->setStyleSheet(QString::fromStdString("background-color:green;border-style: outset;border-width: 2px;border-radius: 10px;border-color: beige;font: bold 30px;padding: 6px;"));
 }

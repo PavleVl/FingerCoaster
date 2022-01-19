@@ -7,7 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
-#include "../Result/Result.hpp"
+#include "Result.hpp"
 
 class ScoreboardBackend{
 

@@ -23,8 +23,9 @@ signals:
     void setGameScene();
     //Game signals
     void startGameForClients();
+    void startClientGame();
 
-private slots:
+public slots:
     //Addplayer se koristi za prvo dodavanje u lobby
     void addPlayer(QString username);
     void on_btStartGame_clicked();
@@ -35,6 +36,8 @@ private slots:
     void rewriteUsernames(QVector<QString>* usernames);
     void closeEvent(QCloseEvent *event);
     void dontShowLobby();
+    void closeLobbyStartGame();
+
 private:
     bool isClient;
     Ui::Lobby *ui;

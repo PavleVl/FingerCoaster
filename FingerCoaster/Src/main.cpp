@@ -1,6 +1,6 @@
 #include <QApplication>
-#include "Headers/gameEngine.h"
-#include "Game/gameDialog.h"
+#include "../Headers/gameEngine.h"
+#include "../Headers/gameDialog.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

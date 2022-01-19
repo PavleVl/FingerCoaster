@@ -1,4 +1,4 @@
-#include "ScoreboardBackend.hpp"
+#include "../Headers/ScoreboardBackend.hpp"
 #define FPATH "../FingerCoaster/SavedFiles/scoreboard.txt"
 
 

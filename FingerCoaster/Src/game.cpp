@@ -1,4 +1,4 @@
-#include "game.h"
+#include "../Headers/game.h"
 
 Game::Game(std::string choosenText,QObject *parent) : QObject{parent}
 {

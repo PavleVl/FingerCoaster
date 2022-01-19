@@ -13,10 +13,10 @@ Lobby::Lobby(QWidget *parent) :
     isClient = false;
     i = 0;
     ui->setupUi(this);
-    this->setWindowTitle("Lobby");
-    this->setObjectName("PopUp");
+    this->setWindowTitle(QString::fromStdString("Lobby"));
+    this->setObjectName(QString::fromStdString("PopUp"));
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
-    ui->label->setStyleSheet("font-weight: bold");
+    ui->label->setStyleSheet(QString::fromStdString("font-weight: bold"));
 }
 
 Lobby::~Lobby()
@@ -27,7 +27,7 @@ Lobby::~Lobby()
 void Lobby::addPlayer(QString username){
     players << username;
     i++;
-    QString s = QString("%1. %2").arg(i).arg(username);
+    QString s = QString(QString::fromStdString("%1. %2")).arg(i).arg(username);
     ui->playerList->addItem(s);
 }
 
@@ -45,12 +45,12 @@ void Lobby::rewriteUsernames(QVector<QString>* usernames){
     ui->playerList->clear();
     i = usernames->size();
     usernames->size();
-    QString buff = "";
+    QString buff = QString::fromStdString("");
     for(int j = 0;j<usernames->size();j++){
 
-        buff += QString::number(j+1) + ". " + usernames->at(j);
+        buff += QString::number(j+1) + QString::fromStdString(". ") + usernames->at(j);
         ui->playerList->addItem(buff);
-        buff = "";
+        buff = QString::fromStdString("");
     }
 }
 
@@ -70,8 +70,7 @@ void Lobby::setIsClient(){
     ui->btStartGame->hide();
 
     ui->label=new QLabel(this);
-    QMovie *movie=new QMovie(":/images/prefix1/loading.gif");
-
+    QMovie *movie=new QMovie(QString::fromStdString(":/images/prefix1/loading.gif"));
 
     QLabel *gif_label = new QLabel(this);
     gif_label->setGeometry(155,140,40,40);
@@ -82,4 +81,10 @@ void Lobby::setIsClient(){
 void Lobby::dontShowLobby(){
     checkCloseFlag = true;
     this->close();
+}
+
+void Lobby::closeLobbyStartGame(){
+    checkCloseFlag = true;
+    this->close();
+    emit startClientGame();
 }

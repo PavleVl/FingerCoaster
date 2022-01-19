@@ -9,10 +9,10 @@ JoinPopUp::JoinPopUp(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Join room");
-    this->setObjectName("PopUp");
+    this->setWindowTitle(QString::fromStdString("Join room"));
+    this->setObjectName(QString::fromStdString("PopUp"));
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
-    ui->key->setStyleSheet("font-weight: bold");
+    ui->key->setStyleSheet(QString::fromStdString("font-weight: bold"));
 
     if(ui->joinButton->isChecked())
             on_joinButton_clicked();
@@ -38,25 +38,25 @@ bool JoinPopUp::isValidPort(int port){
 void JoinPopUp::on_joinButton_clicked()
 {
     QString key = ui->labelInsertKey->text();
-    QStringList list = key.split(":");
+    QStringList list = key.split(QString::fromStdString(":"));
     if(list.size() < 2){
-            ui->lMessage->setText("IP address and port is needed");
-            ui->lMessage->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
+            ui->lMessage->setText(QString::fromStdString("IP address and port is needed"));
+            ui->lMessage->setStyleSheet(QString::fromStdString("QLabel {background-color: rgba(128,195,66,0.5); color: red;}"));
             return;
     }
     bool isIpAddr = isValidIp4Address(list[0].toStdString());
     int isPort = list[1].toInt();
     bool isVPort = isValidPort(isPort);
     if(!isIpAddr){
-            ui->lMessage->setText("IPv4 address is not valid");
-            ui->lMessage->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
+            ui->lMessage->setText(QString::fromStdString("IPv4 address is not valid"));
+            ui->lMessage->setStyleSheet(QString::fromStdString("QLabel {background-color: rgba(128,195,66,0.5); color: red;}"));
     }
     else if(!isVPort){
-            ui->lMessage->setText("Port not valid");
-            ui->lMessage->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
+            ui->lMessage->setText(QString::fromStdString("Port not valid"));
+            ui->lMessage->setStyleSheet(QString::fromStdString("QLabel {background-color: rgba(128,195,66,0.5); color: red;}"));
     }
     else {
-        ui->lMessage->setText("Client is connected.");
+        ui->lMessage->setText(QString::fromStdString("Client is connected."));
         this->close();
         emit startClient(key);
         emit openLobby();

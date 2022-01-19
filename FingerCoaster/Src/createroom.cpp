@@ -11,15 +11,14 @@ createroom::createroom(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Create room");
-    this->setObjectName("PopUp");
+    this->setWindowTitle(QString::fromStdString("Create room"));
+    this->setObjectName(QString::fromStdString("PopUp"));
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
-    ui->diff_label->setStyleSheet("font-weight: bold");
-    ui->num_players_label->setStyleSheet("font-weight: bold");
-    ui->rb_easy->setStyleSheet("font-weight: bold");
-    ui->rb_hard->setStyleSheet("font-weight: bold");
-    ui->rb_medium->setStyleSheet("font-weight: bold");
-
+    ui->diff_label->setStyleSheet(QString::fromStdString("font-weight: bold"));
+    ui->num_players_label->setStyleSheet(QString::fromStdString("font-weight: bold"));
+    ui->rb_easy->setStyleSheet(QString::fromStdString("font-weight: bold"));
+    ui->rb_hard->setStyleSheet(QString::fromStdString("font-weight: bold"));
+    ui->rb_medium->setStyleSheet(QString::fromStdString("font-weight: bold"));
 }
 
 bool createroom::noRBChecked(){
@@ -48,8 +47,9 @@ createroom::~createroom()
 void createroom::on_create_lobby_button_clicked(){
 
     if(noRBChecked()){
-        ui->err_label->setText("You need to select difficulty");
-        ui->err_label->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
+        ui->err_label->setText(QString::fromStdString("You need to select difficulty"));
+        ui->err_label->setStyleSheet(QString::fromStdString("QLabel {background-color: "
+                                                            "rgba(128,195,66,0.5); color: red;}"));
 
         return;
     }

@@ -11,10 +11,10 @@
 #include <ctime>
 #include <time.h>
 #include <QDateTime>
-#include "../Result/Result.hpp"
+#include "../Headers/Result.hpp"
 
 #include "../Server/Server.hpp"
-#include "../Storage/Storage.hpp"
+#include "../Headers/Storage.hpp"
 
 namespace Ui {
 class GameDialog;

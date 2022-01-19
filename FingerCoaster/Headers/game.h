@@ -2,8 +2,8 @@
 #define GAME_H
 
 #include <QObject>
-#include "Storage/Storage.hpp"
-#include "Result/Result.hpp"
+#include "../Headers/Storage.hpp"
+#include "../Headers/Result.hpp"
 #include <vector>
 
 //TOFIX

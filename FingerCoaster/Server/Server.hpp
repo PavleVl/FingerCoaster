@@ -2,13 +2,12 @@
 #define SERVER_HPP
 
 #include "Thread.h"
-#include "../Storage/Storage.hpp"
-#include "../Scoreboard/ScoreboardBackend.hpp"
+#include "../Headers/Storage.hpp"
+#include "../Headers/ScoreboardBackend.hpp"
 #include <QDebug>
 #include <iostream>
 #include <QTcpServer>
 #include <QTcpSocket>
-#include <QtConcurrent>
 #include <QPair>
 
 class Server : public QTcpServer{

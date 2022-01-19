@@ -7,7 +7,7 @@ Scoreboard::Scoreboard(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Scoreboard");
+    this->setWindowTitle(QString::fromStdString("Scoreboard"));
 
 
 
@@ -19,15 +19,15 @@ Scoreboard::Scoreboard(QWidget *parent) :
     QVector<QString> dates;
     QVector<QString> accuracy;
 
-    wpm.fill("-",10);
-    dates.fill("-",10);
-    accuracy.fill("-",10);
+    wpm.fill(QString::fromStdString("-"),10);
+    dates.fill(QString::fromStdString("-"),10);
+    accuracy.fill(QString::fromStdString("-"),10);
     //Unosi se username u tabelu
     ui->vr_user->setText(QString::fromStdString(Scoreboard->savedScoreboard->giveUsername()));
 
     //Popunjavamo redna mesta
     for (int i=1; i<11; i++)
-        places.append(QString::number(i) + ".");
+        places.append(QString::number(i) + QString::fromStdString("."));
 
    int index = 0;
    for(Result result : Scoreboard->savedScoreboard->giveResults()){
@@ -102,13 +102,13 @@ QVariant Model::headerData(int section, Qt::Orientation orientation, int role) c
 {
 if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
     if (section == 0) {
-        return QString("Place");
+        return QString(QString::fromStdString("Place"));
     } else if (section == 1) {
-        return QString("Date");
+        return QString(QString::fromStdString("Date"));
     } else if (section == 2) {
-        return QString("WPM");
+        return QString(QString::fromStdString("WPM"));
     } else if (section == 3) {
-        return QString("Accuracy");
+        return QString(QString::fromStdString("Accuracy"));
     }
 
 }

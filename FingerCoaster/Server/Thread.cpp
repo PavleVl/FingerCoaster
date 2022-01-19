@@ -16,8 +16,7 @@ Thread::Thread(qintptr newSocketFd, QObject *parent) : QThread(parent), threadSo
 }
 
 void Thread::onSendMessage(QByteArray message,qintptr targetSocketFd){
-    if( (targetSocketFd == socketFd || targetSocketFd == 0)){
-        std::cout << "PISEM " << QString(message).toStdString() << std::endl;
+    if(threadSocket->isWritable() && (targetSocketFd == socketFd || targetSocketFd == 0)){
         threadSocket->write(message);
         threadSocket->flush();
     }
@@ -26,19 +25,19 @@ void Thread::onSendMessage(QByteArray message,qintptr targetSocketFd){
 void Thread::readyRead(){
     QByteArray buff = threadSocket->readAll();
 
-    QString text = QString(buff);
+    QString text = QString::fromUtf8(buff);
     //Ispaljujemo signal ako nam je klijent poslao username
-    if(text.contains("clientProgress:")){
+    if(text.contains(QString::fromStdString("clientProgress:"))){
         std::cout << "Usao u clientProgress" << std::endl;
 
-        text = text.split(":").at(1);
-        username = text.split("-").at(0);
-        unsigned curGameProgress = text.split("-").at(1).toUInt();
+        text = text.split(QString::fromStdString(":")).at(1);
+        username = text.split(QString::fromStdString("-")).at(0);
+        unsigned curGameProgress = text.split(QString::fromStdString("-")).at(1).toUInt();
 
         emit updateClientsProgress(socketFd,curGameProgress);
         return;
     }
-    if(text.contains("username:")){
+    if(text.contains(QString::fromStdString("username:"))){
         emit setClientsUsername(socketFd,text.mid(9,text.size() - 9));
         return;
     }

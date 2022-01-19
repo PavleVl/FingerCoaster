@@ -1,6 +1,5 @@
 QT  += core gui
 QT  += network
-QT  += concurrent
 QT  += widgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -11,7 +10,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Game/game.cpp \
+    Src/game.cpp \
     Src/createroom.cpp \
     Src/gameEngine.cpp \
     Src/joinpopup.cpp \
@@ -22,20 +21,20 @@ SOURCES += \
     Src/scoreboard.cpp \
     Src/enterusername.cpp \
     #These are backend libs
-    Scoreboard/ScoreboardBackend.cpp \
-    Storage/Storage.cpp \
+    Src/ScoreboardBackend.cpp \
+    Src/Storage.cpp \
     Server/Server.cpp \
     Server/Thread.cpp   \
     Client/Client.cpp   \
     Src/lobby.cpp \
-    Game/gameDialog.cpp
+    Src/gameDialog.cpp
 #<<<<<<< HEAD
 #=======
 #>>>>>>> added game session
 
 
 HEADERS += \
-    Game/game.h \
+    Headers/game.h \
     Headers/createroom.h \
     Headers/gameEngine.h \
     Headers/joinpopup.h \
@@ -45,23 +44,22 @@ HEADERS += \
     Headers/scoreboard.h \
     Headers/enterusername.h \
     #These are backend libs
-    Scoreboard/ScoreboardBackend.hpp \
-    Storage/Storage.hpp \
+    Headers/ScoreboardBackend.hpp \
+    Headers/Storage.hpp \
     Server/Server.hpp \
     Server/Thread.h     \
     Client/Client.hpp \
     Headers/lobby.h \
-    Game/gameDialog.h
+    Headers/gameDialog.h
 #>>>>>>> added game session
 
 FORMS += \
-    createroom.ui \
-    enterusername.ui \
-    joinpopup.ui \
-    lobby.ui \
-    mainwindow.ui \
-    scoreboard.ui   \
-    gamedialog.ui
+    Forms/createroom.ui \
+    Forms/enterusername.ui \
+    Forms/joinpopup.ui \
+    Forms/lobby.ui \
+    Forms/scoreboard.ui   \
+    Forms/gamedialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

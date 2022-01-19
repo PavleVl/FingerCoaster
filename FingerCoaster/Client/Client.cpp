@@ -5,9 +5,10 @@ Client::Client(QString name,QObject *parent)
       username(name),
       tcpSocket(new QTcpSocket(this)),
       alreadyClosed(false),
+      shouldStartGame(false),
       curGameProgress(0)
 {
-    clientStorage = new Storage();
+   clientStorage = new Storage();
     //treba postaviti putanju do fajla i randomTextFlag na false i pozvati f-ju loadText()
 
     connect(tcpSocket,SIGNAL(connected()),this,SLOT(connectedCl()));
@@ -22,7 +23,7 @@ Client::Client(QString name,QObject *parent)
 }
 
 void Client::connectToHost(QString key){
-    QList<QString> list = key.split(":");
+    QList<QString> list = key.split(QString::fromStdString(":"));
     tcpSocket->connectToHost(list.at(0),list.at(1).toInt());
 }
 
@@ -47,13 +48,13 @@ void Client::bytesWritten(){
 void Client::readyRead(){
 
     QByteArray byteBuff = tcpSocket->readAll();
-    QString buff(byteBuff);
+    QString buff = QString::fromUtf8(byteBuff);
     qDebug() << buff;
     QVector<QString> vUsernames;
-    if(buff.contains("text")){
+    if(buff.contains(QString::fromStdString("text"))){
         std::cout << "I've caught text initialisation " << buff.toStdString() << std::endl;
         std::cout<<"Buffer: "<<buff.toStdString()<< std::endl;
-        std::string filename = buff.split(":").last().toStdString();
+        std::string filename = buff.split(QString::fromStdString(":")).last().toStdString();
         std::cout<<"Filename: "<<filename<<std::endl;
         clientStorage->setChoosenFile(filename);
         clientStorage->loadText(false);
@@ -62,13 +63,13 @@ void Client::readyRead(){
         tcpSocket->write(br);
         return;
     }
-    if(buff.contains("gameProgress:")){
+    if(buff.contains(QString::fromStdString("gameProgress:"))){
         std::cout << buff.toStdString() << std::endl;
         return;
     }
-    if(buff.contains("usernamesList:")){
+    if(buff.contains(QString::fromStdString("usernamesList:"))){
        std::cout <<buff.toStdString()<<std::endl;
-       QStringList usernames = buff.split(":");
+       QStringList usernames = buff.split(QString::fromStdString(":"));
        auto size = 0;
        std::cout<<"Username-ovi: "<<std::endl;
        for(auto it = usernames.begin()+1;it != usernames.end()-1;it++){
@@ -80,15 +81,13 @@ void Client::readyRead(){
            std::cout<<(*it).toStdString()<<" "<<"\n";
        }
         connectedUsers = vUsernames;
-        connectedUsers.push_front(this->username + " (Me)");
+        connectedUsers.push_front(this->username + QString::fromStdString(" (Me)"));
         emit rewriteUsernames(&vUsernames);
     }
-    if(buff.contains("startGame")){
+    if(buff.contains(QString::fromStdString("startGame"))){
         emit closeClientLobby();
-        emit startGame();
     }
         qDebug()<<vUsernames;
-
 }
 
 void Client::printError(QAbstractSocket::SocketError socketError){
@@ -121,8 +120,10 @@ void Client::updateProgress(unsigned curProgress){
     curGameProgress = curProgress;
 
     if(tcpSocket->isWritable()){
-        QString msg = "clientProgress:" + username + "-" + QString::number(curGameProgress);
+        QString msg = QString::fromStdString("clientProgress:") + username +
+                QString::fromStdString("-") + QString::number(curGameProgress);
         tcpSocket->write(msg.toUtf8());
         tcpSocket->flush();
     }
 }
+

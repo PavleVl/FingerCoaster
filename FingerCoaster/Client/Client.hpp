@@ -7,7 +7,7 @@
 #include <QAbstractSocket>
 #include <QDebug>
 #include <iostream>
-#include "../Storage/Storage.hpp"
+#include "../Headers/Storage.hpp"
 
 class Client : public QObject
 {
@@ -17,6 +17,7 @@ public:
     void initGame();
     Storage* giveClientStorage();
     void connectToHost(QString key);
+
 
 signals:
     void dontShowLobby();
@@ -34,6 +35,9 @@ private slots:
     void forceCloseClient();
     void updateProgress(unsigned curProgress);
 
+public:
+    bool shouldStartGame;
+
 private:
     QHostAddress address;
     quint16 port;
@@ -43,6 +47,7 @@ private:
     QVector<QString> connectedUsers;
     bool alreadyClosed;
     unsigned curGameProgress;
+
 };
 
 #endif // CLIENT_H

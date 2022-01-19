@@ -7,10 +7,10 @@ enterUsername::enterUsername(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("Welcome");
-    this->setObjectName("PopUp");
+    this->setWindowTitle(QString::fromStdString("Welcome"));
+    this->setObjectName(QString::fromStdString("PopUp"));
     this->setStyleSheet(QString::fromUtf8("#PopUp {border-image: url(:/images/prefix1/popup.jpg) 0 0 0 0 stretch stretch;}"));
-    ui->label->setStyleSheet("font-weight: bold");
+    ui->label->setStyleSheet(QString::fromStdString("font-weight: bold"));
 
 }
 
@@ -24,8 +24,8 @@ void enterUsername::on_pushButton_clicked()
 {
     QString username = ui->lineEdit->text();
     if(username.size() == 0){
-        ui->err_label->setText("Username is required");
-        ui->err_label->setStyleSheet("QLabel {background-color: rgba(128,195,66,0.5); color: red;}");
+        ui->err_label->setText(QString::fromStdString("Username is required"));
+        ui->err_label->setStyleSheet(QString::fromStdString("QLabel {background-color: rgba(128,195,66,0.5); color: red;}"));
         return;
     }
 

@@ -13,9 +13,9 @@
 #include "mainMenu.h"
 #include "joinpopup.h"
 #include "createroom.h"
-#include "Game/gameDialog.h"
+#include "gameDialog.h"
 #include "map.h"
-#include "../Scoreboard/ScoreboardBackend.hpp"
+#include "ScoreboardBackend.hpp"
 #include "../Server/Server.hpp"
 #include "../Client/Client.hpp"
 
