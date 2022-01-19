@@ -23,7 +23,7 @@ signals:
     void startClient(QString key);
 
 private slots:
-    void on_joinButton_clicked();
+    void onJoinButtonClicked();
 
 private:
     Ui::JoinPopUp *ui;

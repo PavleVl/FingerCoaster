@@ -17,7 +17,7 @@ public:
     ~enterUsername();
 
 private slots:
-    void on_pushButton_clicked();
+    void onPushButtonClicked();
 
 private:
     Ui::enterUsername *ui;

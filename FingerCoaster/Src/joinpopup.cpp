@@ -14,7 +14,7 @@ JoinPopUp::JoinPopUp(QWidget* parent) : QDialog(parent), ui(new Ui::JoinPopUp) {
   ui->key->setStyleSheet(QString::fromStdString("font-weight: bold"));
 
   if (ui->joinButton->isChecked())
-    on_joinButton_clicked();
+    onJoinButtonClicked();
 }
 
 JoinPopUp::~JoinPopUp() {
@@ -33,7 +33,7 @@ auto JoinPopUp::isValidPort(int port) -> bool {
   return false;
 }
 
-void JoinPopUp::on_joinButton_clicked() {
+void JoinPopUp::onJoinButtonClicked() {
   QString key = ui->labelInsertKey->text();
   QStringList list = key.split(QString::fromStdString(":"));
   if (list.size() < 2) {
