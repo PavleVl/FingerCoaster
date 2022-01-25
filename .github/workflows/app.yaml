@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-      
       - name: "Qt install"
         uses: jurplel/install-qt-action@v2
-        
+      - name: "Create build dir"
+        run: "mkdir build"
+      - name: "Build the project"
+        run: "cmake ../FingerCoaster"
+      - name: "Make the project with generated Makefile"
+        run: make
+    
+    
