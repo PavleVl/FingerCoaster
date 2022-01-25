@@ -1,4 +1,9 @@
---- 
+name: "FingerCoaster:build-test"
+
+on:
+  push:
+    branches: [master]
+
 jobs: 
   build-test: 
     runs-on: ubuntu-latest
@@ -9,9 +14,3 @@ jobs:
         name: InstallQt
         uses: jurplel/install-qt-action@v2
         version: "6.2.2"
-
-name: "FingerCoaster:build-test"
-true: 
-  push: 
-    branches: 
-      - master
