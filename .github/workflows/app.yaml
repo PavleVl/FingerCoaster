@@ -2,7 +2,7 @@ name: TestFingerCoaster
 
 on:
     push:
-        branches: [ main ]
+        branches: [ master ]
 
 jobs: 
   buildRunTest: 
