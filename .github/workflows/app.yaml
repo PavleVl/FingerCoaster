@@ -1,26 +1,29 @@
-name: FingerCoaster:build-test
-
-on:
-    push:
-        branches: [master]
-            
-jobs:
-    build-test:
-        runs-on: ubuntu-latest
-        
-        steps:
-            - uses: actions/checkout@master 
-            - name: InstallQt
-              uses: jurplel/install-qt-action@v2
-              with:
-              version: "6.2.2"
-              instal-deps: "true"
-              modules: "qtnetwork"
-            - name: createBuildDir
-              run: mkdir build
-            - name: compile
-              working-directory: ./build
-              run: cmake ../FingerCoaster
-              run: make
-            - name: runGame
-              run: ./FingerCoaster
+--- 
+jobs: 
+  build-test: 
+    runs-on: ubuntu-latest
+    steps: 
+      - 
+        uses: actions/checkout@master
+      - 
+        instal-deps: "true"
+        modules: qtnetwork
+        name: InstallQt
+        uses: jurplel/install-qt-action@v2
+        version: "6.2.2"
+        with: ~
+      - 
+        name: createBuildDir
+        run: "mkdir build"
+      - 
+        name: compile
+        run: make
+        working-directory: ./build
+      - 
+        name: runGame
+        run: ./FingerCoaster
+name: "FingerCoaster:build-test"
+true: 
+  push: 
+    branches: 
+      - master
