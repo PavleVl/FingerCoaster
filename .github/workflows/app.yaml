@@ -1,16 +1,14 @@
-name: "FingerCoaster:build-test"
+name: FingerCoasterTest
 
 on:
-  push:
-    branches: [master]
-
-jobs: 
-  build-test: 
-    runs-on: ubuntu-latest
-    steps: 
-      - 
-        instal-deps: "true"
-        modules: qtnetwork
-        name: InstallQt
-        uses: jurplel/install-qt-action@v2
-        version: "6.2.2"
+    push:
+        branches [ master ]
+        
+jobs:
+    buildRunTest:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            
+            - name: "Qt install"
+              uses: jurplel/install-qt-action@v2
