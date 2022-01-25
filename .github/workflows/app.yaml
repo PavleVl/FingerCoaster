@@ -14,8 +14,8 @@ jobs:
       - name: "Create build dir"
         run: "mkdir build"
       - name: "Build the project"
-        run: "cmake ../FingerCoaster"
         working-directory: build
+        run: "qmake ../FingerCoaster/FingerCoaster.pro"
       - name: "Make the project with generated Makefile"
         run: make
     
