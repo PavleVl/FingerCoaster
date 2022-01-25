@@ -1,14 +1,15 @@
-name: FingerCoasterTest
+name: TestFingerCoaster
 
 on:
     push:
-        branches [ master ]
+        branches: [ main ]
+
+jobs: 
+  buildRunTest: 
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      
+      - name: "Qt install"
+        uses: jurplel/install-qt-action@v2
         
-jobs:
-    buildRunTest:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            
-            - name: "Qt install"
-              uses: jurplel/install-qt-action@v2
