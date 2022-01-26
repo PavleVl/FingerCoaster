@@ -16,7 +16,7 @@ jobs:
       - name: "Build the project"
         working-directory: build
         run: "qmake ../FingerCoaster/FingerCoaster.pro"
-      - name: "Make the project with generated Makefile"
-        run: make
+      - name: "Check whats made"
+        run: "ls -a"
     
     
