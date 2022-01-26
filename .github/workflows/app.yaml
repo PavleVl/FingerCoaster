@@ -19,5 +19,7 @@ jobs:
       - name: "Check whats made"
         working-directory: build
         run: "ls -a"
-    
+      - name: "Make the app"
+        working-directory: build 
+        run: "make"
     
