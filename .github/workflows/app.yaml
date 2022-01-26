@@ -17,6 +17,7 @@ jobs:
         working-directory: build
         run: "qmake ../FingerCoaster/FingerCoaster.pro"
       - name: "Check whats made"
+        working-directory: build
         run: "ls -a"
     
     
